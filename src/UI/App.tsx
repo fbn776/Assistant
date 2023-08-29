@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import "./app.css";
 import { IconCategory, IconSend } from "@tabler/icons-react";
 
@@ -36,8 +36,8 @@ const Message: FC<MessageProps> = ({ type, text, time }) => {
 				className={
 					"max-w-[70%] p-3 shadow-md " +
 					(isBot
-						? "bg-msgBot rounded-[0px_10px_10px_10px]"
-						: "bg-msgUser rounded-[10px_10px_0px_10px]")
+						? "bg-l-secnd text-l-secnd-txt dark:bg-d-secnd dark:text-d-secnd-txt rounded-[0px_10px_10px_10px]"
+						: "bg-l-prim text-l-prim-txt dark:bg-d-prim dark:text-d-prim-txt rounded-[10px_10px_0px_10px]")
 				}
 			>
 				<p>{text}</p>
@@ -48,9 +48,16 @@ const Message: FC<MessageProps> = ({ type, text, time }) => {
 };
 
 export const App: FC = () => {
+
+	useEffect(() => {
+		window.onclick = () => {
+			document.body.classList.toggle("dark");
+		}
+	}, []);
+
 	return (
 		<>
-			<section className="w-full top-0 min-h-[calc(100vh-60px)] bg-slate-50">
+			<section className="w-full top-0 min-h-[calc(100vh-60px)] bg-l-secnd-cont-bg dark:bg-d-secnd-cont-bg">
 				<Message
 					type={MessageType.BOT}
 					text="Hello there how can I help?"
@@ -77,15 +84,17 @@ export const App: FC = () => {
 					time={Date.now()}
 				/>
 			</section>
-			<section className="w-full h-[60px] bg-white bottom-0 border-slate-600 border-t-2">
-				<div className="w-full h-full flex justify-center items-center p-3 gap-1">
-					<IconCategory size={"30px"} />
+			<section className="w-full h-[60px] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
+				<div className="w-full h-full flex justify-center items-center p-3 gap-3">
+					<IconCategory
+						className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
+					/>
 					<input
 						type="text"
-						className="w-full h-full outline-none border-none bg-slate-100 shadow-inner px-3 rounded-2xl"
+						className="w-full h-full outline-none border-none bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt shadow-inner px-3 rounded-2xl"
 						placeholder="Type here.."
 					/>
-					<IconSend />
+					<IconSend className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt" />
 				</div>
 			</section>
 		</>
