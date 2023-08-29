@@ -5,7 +5,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				/**
+				/** Abbreviations:
 				 * l - light mode
 				 * d - dark mode
 				 * prim - primary
@@ -37,7 +37,7 @@ export default {
 						},
 					},
 				},
-				//71 85 105
+				//Dark mode;
 				d: {
 					prim: {
 						DEFAULT: "#0000B8",

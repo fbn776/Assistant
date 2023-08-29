@@ -13,9 +13,7 @@ interface MessageProps {
 }
 
 function convertUnixTime(unixTime: number): string {
-	const currentTimeStamp = Date.now();
-
-	const currentDate = new Date(currentTimeStamp);
+	const currentDate = new Date(unixTime);
 
 	const hours = currentDate.getHours();
 	const minutes = currentDate.getMinutes();
