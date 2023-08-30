@@ -18,7 +18,7 @@ export default {
 				l: {
 					prim: {
 						DEFAULT: "#0070FF",
-						txt: "#000000",
+						txt: "#F0F8FF",
 						variant: "#CED4DA",
 						cont: {
 							bg: "#FFFFFF",

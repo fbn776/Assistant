@@ -1,7 +1,6 @@
 import { FC, useEffect } from "react";
 import "./app.css";
 import { IconSend, IconCommand } from "@tabler/icons-react";
-import fbnLogo from "../../public/fbn776.png";
 
 enum MessageType {
 	USER,
