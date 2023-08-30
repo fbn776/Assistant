@@ -17,7 +17,7 @@ export default {
 				//Light mode;
 				l: {
 					prim: {
-						DEFAULT: "#73C2FB",
+						DEFAULT: "#0070FF",
 						txt: "#000000",
 						variant: "#CED4DA",
 						cont: {
@@ -27,7 +27,7 @@ export default {
 						},
 					},
 					secnd: {
-						DEFAULT: "#7BAFD4",
+						DEFAULT: "#F5F5F5",
 						txt: "#000000",
 						variant: "#B9D9EB",
 						cont: {
@@ -40,7 +40,7 @@ export default {
 				//Dark mode;
 				d: {
 					prim: {
-						DEFAULT: "#0000B8",
+						DEFAULT: "#007FFF",
 						txt: "#FFFFFF",
 						variant: "#475569",
 						cont: {
@@ -50,7 +50,7 @@ export default {
 						},
 					},
 					secnd: {
-						DEFAULT: "#16166B",
+						DEFAULT: "#212529",
 						txt: "#FFFFFF",
 						variant: "#",
 						cont: {
