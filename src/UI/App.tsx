@@ -82,8 +82,9 @@ export const App: FC = () => {
 				/>
 			</section>
 			<section className="w-full h-[var(--btmBarHeight)] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
-				<div className="h-[40%] w-full bg-opacity-70 dark:bg-opacity-70 bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt">
-					Hello
+				<div className="h-[40%] w-full flex">
+					<div className="h-full aspect-square"></div>
+					<div className="flex-1 h-full bg-opacity-70 dark:bg-opacity-70 bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt"></div>
 				</div>
 				<div className="w-full h-[60%] flex justify-center items-center p-3 gap-3">
 					<IconCategory
