@@ -55,23 +55,42 @@ const QuickToolBarItems: Array<QuickToolBarItem> = [
 		name: "/",
 	},
 	{
-		name: "#"
+		name: "#",
 	},
 	{
-		name: "@"
+		name: "@",
 	},
 	{
-		name: "'"
+		name: "'",
 	},
 	{
-		name: '"'
+		name: '"',
 	},
 	{
-		name: "!"
+		name: "!",
 	},
 	{
-		name: "?"
-	}
+		name: "?",
+	},
+	{
+		name: "*",
+	},
+	{
+		name: "&",
+	},
+	{
+		name: "|",
+	},
+	{
+		name: ">",
+	},
+	{
+		name: "<",
+	},
+	{
+		name: "\\",
+	},
+	
 ];
 
 export const App: FC = () => {
