@@ -10,3 +10,14 @@ body {
 	margin: 0px;
 	height: 100dvh;
 }
+
+
+/* Hide scrollbar css class */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
