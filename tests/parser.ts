@@ -1,29 +1,5 @@
+import { flushSync } from "react-dom";
 import { Log, Benchmark } from "./test_utils";
-
-//function benchMark
-
-/**
- * Basic splitting; splits the string based on the given delimiter. No additional process done.
- * Could be replaced by `string.split(delimiter)` but that would be cheating 😉
- * @param str string to be splitted (input)
- * @param delimiter delimiter to split the string on
- * @returns the splitted string as an array
- */
-function basicSplitter(str: string, delimiter: string = " "): string[] {
-	let result: string[] = [];
-	let temp = "";
-	for (let i = 0; i < str.length; i++) {
-		if (str[i] == delimiter) {
-			result.push(temp);
-			temp = "";
-		} else {
-			temp += str[i];
-		}
-	}
-	temp && result.push(temp);
-
-	return result;
-}
 
 /**
  * A more advanced splitter that splits the string based on the given `delimiter` and also splits the string if there is quotes (', ", `) in the string.
@@ -31,7 +7,7 @@ function basicSplitter(str: string, delimiter: string = " "): string[] {
  * @param delimiter delimiter to split the string on
  * @returns the splitted string as an array
  */
-function stringSplitter(str: string, delimiter: string = " "): string[] {
+export function stringSplitter(str: string, delimiter: string = " "): string[] {
 	let result: string[] = [];
 	let temp = "";
 	for (let i = 0; i < str.length; i++) {
@@ -75,7 +51,7 @@ function stringSplitter(str: string, delimiter: string = " "): string[] {
  * @param input
  * @returns An array of the splitted according to the brackets
  */
-function bracketSplitter(input: string): any[] {
+export function bracketSplitter(input: string): any[] {
 	const result: any[] = [];
 	let currentChunk = "";
 	const stack: any[] = [result];
@@ -170,18 +146,20 @@ function bracketSplitter(input: string): any[] {
 	return result;
 }
 
-/******Testing********/
-Log("Bracket wise splitting (1)", () => bracketSplitter("a (b (cd) e)"));
-Log("Bracket wise splitting (2)", () =>
-	bracketSplitter("add 1 2 3 (sum 1 2 3) (avg 10 10)")
-);
-Log("Bracket wise splitting (3)", () =>
-	bracketSplitter("concat hello 'Hello there howdy'")
-);
-Log("Bracket wise splitting (3)", () =>
-	bracketSplitter("lower (concat Hello World 'Im someone')")
-);
+function combinedSplit(input: any[]) {
+	let result: any[] = [];
 
-Benchmark("Benchmarking bracket splitter", () =>
-	bracketSplitter("lower (concat Hello World 'Im someone')")
-);
+	for (let item of input) {
+		if (typeof item === "string") {
+			result.push(...stringSplitter(item));
+		} else {
+			result.push(combinedSplit(item));
+		}
+	}
+
+	return result;
+}
+
+export function secondaryParser(input: string): any[] {
+	return combinedSplit(bracketSplitter(input));
+}
