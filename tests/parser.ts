@@ -35,11 +35,6 @@ function basicSplitter(str: string, delimiter: string = " "): string[] {
 	return result;
 }
 
-
-function getBrackets(str: string, start: string, end: string) {
-
-}
-
 /**
  * A more advanced splitter that splits the string based on the given `delimiter` and also splits the string if there is quotes (', ", `) in the string.
  * @param str input string
@@ -82,23 +77,79 @@ function stringSplitter(str: string, delimiter: string = " "): string[] {
 	return result;
 }
 
-function bracketSplitter(str: string, delimiter: string = " "): any {
-	let result: any = [];
+function splitStringToArray(input: string, autoclose = true): any[] {
+	const result: any[] = [];
+	let currentChunk = "";
+	const stack: any[] = [result];
+	let inString = false;
+	let stringChar = "";
+	let Counts = {
+		openBracket: 0,
+		closeBracket: 0,
+		singleQuotes: 0,
+		doubleQuotes: 0,
+	};
 
-	for(let i=0; i < str.length; i++) {
-		
+	for (let i = 0; i < input.length; i++) {
+		const char = input[i];
+		if (inString) {
+			if (char === stringChar) {
+				if (i < input.length - 1 && input[i + 1] !== " ")
+					throw new Error("Invalid quote");
+				currentChunk += char;
+				inString = false;
+			} else {
+				currentChunk += char;
+			}
+		} else if (char === "'" || char === '"') {
+			char == "'" ? Counts.singleQuotes++ : Counts.doubleQuotes++;
+
+			if (i > 0 && input[i - 1] !== " ") throw new Error("Invalid quote");
+			inString = true;
+			stringChar = char;
+			currentChunk += char;
+		} else if (char === "(") {
+			if (i > 0 && input[i - 1] !== " ") throw new Error("Space not found");
+			if (!Array.isArray(stack[stack.length - 1]))
+				throw new Error("Empty bracket");
+
+			Counts.openBracket++;
+			if (currentChunk.trim() !== "") {
+				stack[stack.length - 1].push(currentChunk.trim());
+				currentChunk = "";
+			}
+			const subarray: any[] = [];
+			stack[stack.length - 1].push(subarray);
+			stack.push(subarray);
+		} else if (char === ")") {
+			if (i < input.length - 1 && input[i + 1] !== " ")
+				throw new Error("Space not found");
+			Counts.closeBracket++;
+
+			if (currentChunk.trim() !== "") {
+				stack[stack.length - 1].push(currentChunk.trim());
+				currentChunk = "";
+			}
+			stack.pop();
+		} else {
+			currentChunk += char;
+		}
 	}
 
+	if (currentChunk.trim() !== "") {
+		stack[stack.length - 1].push(currentChunk.trim());
+	}
+
+	if (Counts.openBracket !== Counts.closeBracket)
+		throw new Error("Bracket mismatch");
+
+	if(Counts.singleQuotes % 2 !== 0 || Counts.doubleQuotes % 2 !== 0) {
+		throw new Error("Quote mismatch");
+	}
+	
 	return result;
 }
 
-// Testing;
-Log("add 10 15 ", basicSplitter, "basic splitter");
-
-Log(
-	"concat 10 20 15 'and some text' 'and some more text' 10 argN",
-	stringSplitter,
-	"string splitter"
-);
-
-Log("add 10 20 (sum 10 (add 10 20) 20) 10", bracketSplitter, "bracket splitter");
+const input = `a ")`;
+const result = splitStringToArray(input);
+console.log(result);
