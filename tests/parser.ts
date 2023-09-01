@@ -1,16 +1,6 @@
-/**
- * A printer/logger function
- */
-function Log<T>(
-	input: string,
-	testFunc: (arg0: string) => Array<T>,
-	title: string = ""
-) {
-	console.log(`\n\x1b[4;1m\x1b[34;1m${title}\x1b[0m`);
-	console.time(title);
-	console.log(testFunc(input));
-	console.timeEnd(title);
-}
+import { Log, Benchmark } from "./test_utils";
+
+//function benchMark
 
 /**
  * Basic splitting; splits the string based on the given delimiter. No additional process done.
@@ -77,12 +67,21 @@ function stringSplitter(str: string, delimiter: string = " "): string[] {
 	return result;
 }
 
-function splitStringToArray(input: string, autoclose = true): any[] {
+/**
+ * This takes in a string and splits it based on the brackets. It also checks for errors like mismatched brackets, quotes, etc.
+ * This respects quotes. ie it treats quotes as a single unit and does not split contents inside it.
+ * Splitting is only done for brackets and no other characters. The processed array then needs to be splitted using other potential functions
+ * TODO Refactor this function to make it more readable;
+ * @param input
+ * @returns An array of the splitted according to the brackets
+ */
+function bracketSplitter(input: string): any[] {
 	const result: any[] = [];
 	let currentChunk = "";
 	const stack: any[] = [result];
 	let inString = false;
 	let stringChar = "";
+	//Keeps count of quotes and brackets for error corrections
 	let Counts = {
 		openBracket: 0,
 		closeBracket: 0,
@@ -94,36 +93,56 @@ function splitStringToArray(input: string, autoclose = true): any[] {
 		const char = input[i];
 		if (inString) {
 			if (char === stringChar) {
-				if (i < input.length - 1 && input[i + 1] !== " ")
+				//Counts the quotes
+				char == "'" ? Counts.singleQuotes++ : Counts.doubleQuotes++;
+
+				//Check for invalid quotes in the closing part. Eg: "Hello"World"
+				if (
+					i < input.length - 1 &&
+					input[i + 1] !== " " &&
+					input[i + 1] !== ")"
+				)
 					throw new Error("Invalid quote");
+
 				currentChunk += char;
 				inString = false;
 			} else {
 				currentChunk += char;
 			}
 		} else if (char === "'" || char === '"') {
+			//Counts the quotes
 			char == "'" ? Counts.singleQuotes++ : Counts.doubleQuotes++;
 
-			if (i > 0 && input[i - 1] !== " ") throw new Error("Invalid quote");
+			//Checks for invalid quotes in the opening part. Eg: Hello"World"
+			if (i > 0 && input[i - 1] !== " " && input[i - 1] !== "(")
+				throw new Error("Invalid quote");
+
 			inString = true;
 			stringChar = char;
 			currentChunk += char;
 		} else if (char === "(") {
-			if (i > 0 && input[i - 1] !== " ") throw new Error("Space not found");
+			//Checks for space/(bracket?) before opening bracket;
+			if (i > 0 && input[i - 1] !== " " && input[i - 1] !== "(")
+				throw new Error("Space not found");
+
+			//Checks for "rouge" brackets. That is, if there are closing brackets without opening brackets;
 			if (!Array.isArray(stack[stack.length - 1]))
-				throw new Error("Empty bracket");
+				throw new Error("Empty brackets found");
 
 			Counts.openBracket++;
 			if (currentChunk.trim() !== "") {
 				stack[stack.length - 1].push(currentChunk.trim());
 				currentChunk = "";
 			}
+
 			const subarray: any[] = [];
 			stack[stack.length - 1].push(subarray);
 			stack.push(subarray);
 		} else if (char === ")") {
-			if (i < input.length - 1 && input[i + 1] !== " ")
+			//Checks for space/(bracket?) after closing bracket;
+			if (i < input.length - 1 && input[i + 1] !== " " && input[i + 1] !== ")")
 				throw new Error("Space not found");
+
 			Counts.closeBracket++;
 
 			if (currentChunk.trim() !== "") {
@@ -143,13 +162,26 @@ function splitStringToArray(input: string, autoclose = true): any[] {
 	if (Counts.openBracket !== Counts.closeBracket)
 		throw new Error("Bracket mismatch");
 
-	if(Counts.singleQuotes % 2 !== 0 || Counts.doubleQuotes % 2 !== 0) {
+	//Checks for quote mismatch, ie the same number of quotes should be present;
+	if (Counts.singleQuotes % 2 !== 0 || Counts.doubleQuotes % 2 !== 0) {
 		throw new Error("Quote mismatch");
 	}
-	
+
 	return result;
 }
 
-const input = `a ")`;
-const result = splitStringToArray(input);
-console.log(result);
+/******Testing********/
+Log("Bracket wise splitting (1)", () => bracketSplitter("a (b (cd) e)"));
+Log("Bracket wise splitting (2)", () =>
+	bracketSplitter("add 1 2 3 (sum 1 2 3) (avg 10 10)")
+);
+Log("Bracket wise splitting (3)", () =>
+	bracketSplitter("concat hello 'Hello there howdy'")
+);
+Log("Bracket wise splitting (3)", () =>
+	bracketSplitter("lower (concat Hello World 'Im someone')")
+);
+
+Benchmark("Benchmarking bracket splitter", () =>
+	bracketSplitter("lower (concat Hello World 'Im someone')")
+);
