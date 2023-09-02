@@ -1,55 +1,7 @@
 import { IconCommand, IconSend } from "@tabler/icons-react";
 import { FC, useContext } from "react";
-import { MessageControllerContext } from "../../data/controllers/MessageContext";
-
-
-interface QuickToolBarItem {
-	name: string;
-	onClick?: () => void;
-	icons?: JSX.Element[];
-}
-const QuickToolBarItems: Array<QuickToolBarItem> = [
-	{
-		name: "/",
-	},
-	{
-		name: "#",
-	},
-	{
-		name: "@",
-	},
-	{
-		name: "'",
-	},
-	{
-		name: '"',
-	},
-	{
-		name: "!",
-	},
-	{
-		name: "?",
-	},
-	{
-		name: "*",
-	},
-	{
-		name: "&",
-	},
-	{
-		name: "|",
-	},
-	{
-		name: ">",
-	},
-	{
-		name: "<",
-	},
-	{
-		name: "\\",
-	},
-];
-
+import { MessageControllerContext } from "../context/MessageContext";
+import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
 
 export const LowerSection: FC = () => {
 	const msgController = useContext(MessageControllerContext);
@@ -85,13 +37,13 @@ export const LowerSection: FC = () => {
 				<IconSend
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
-					onClick={() => { 
+					onClick={() => {
 						msgController.addMessage({
 							source: 0,
 							text: "Hello",
 							unixTime: Date.now(),
 							id: Date.now().toString(),
-						})
+						});
 					}}
 				/>
 			</div>
