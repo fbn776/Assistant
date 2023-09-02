@@ -103,7 +103,7 @@ export const App: FC = () => {
 	return (
 		<>
 			<section className="w-full top-0 min-h-[calc(100dvh-var(--btmBarHeight))] bg-l-secnd-cont-bg dark:bg-d-secnd-cont-bg">
-				<Message
+				{/* <Message
 					type={MessageType.BOT}
 					text="Hello there how can I help?"
 					time={Date.now()}
@@ -126,6 +126,11 @@ export const App: FC = () => {
 				<Message
 					type={MessageType.BOT}
 					text="The news is that I'm a  terrible programmer"
+					time={Date.now()}
+				/> */}
+				<Message
+					type={MessageType.USER}
+					text="Hello"
 					time={Date.now()}
 				/>
 			</section>

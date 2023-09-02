@@ -163,3 +163,23 @@ function combinedSplit(input: any[]) {
 export function secondaryParser(input: string): any[] {
 	return combinedSplit(bracketSplitter(input));
 }
+
+class Parser {
+	static parse(input: string): any[] {
+
+	}
+}
+
+class SyntaxNode {
+	args: any[];
+	constructor(public name: string, ...rest: any[]) {
+		this.name = name;
+		this.args = rest;
+	}
+}
+
+class SyntaxTree {
+	constructor(public root: SyntaxNode) {
+		this.root = root;
+	}
+}
