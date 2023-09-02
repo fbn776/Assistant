@@ -1,13 +1,15 @@
 import { IconCommand, IconSend } from "@tabler/icons-react";
-import { FC, useContext } from "react";
+import { FC, useContext, useRef } from "react";
 import { MessageControllerContext } from "../context/MessageContext";
 import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
 
 export const LowerSection: FC = () => {
+	const inputRef: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
+
 	const msgController = useContext(MessageControllerContext);
 
 	return (
-		<section className="w-full h-[var(--btmBarHeight)] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
+		<section className="w-full fixed h-[var(--btmBarHeight)] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
 			<div className="h-[40%] w-full flex">
 				<div className="h-full aspect-square flex items-center justify-center">
 					<IconCommand
@@ -33,6 +35,7 @@ export const LowerSection: FC = () => {
 					type="text"
 					className="w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt"
 					placeholder="Type here.."
+					ref = {inputRef}
 				/>
 				<IconSend
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
@@ -40,7 +43,7 @@ export const LowerSection: FC = () => {
 					onClick={() => {
 						msgController.addMessage({
 							source: 0,
-							text: "Hello",
+							text: inputRef.current?.value || 'Seems empty',
 							unixTime: Date.now(),
 							id: Date.now().toString(),
 						});
