@@ -1,32 +1,16 @@
 import { FC } from "react";
+import { convertUnixTime } from "../utils/utils";
+import { MESSAGE_SOURCE, MessageInterface } from "../../data/structures/s_message";
 
-export enum MessageType {
-	USER,
-	BOT,
-}
 
-interface MessageProps {
-	type: MessageType;
-	text: string;
-	time: number;
-}
-
-function convertUnixTime(unixTime: number): string {
-	const currentDate = new Date(unixTime);
-
-	const hours = currentDate.getHours();
-	const minutes = currentDate.getMinutes();
-
-	const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
-	const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-
-	return `${formattedHours}:${formattedMinutes}`;
-}
-
-export const Message: FC<MessageProps> = ({ type, text, time }) => {
-	const isBot = type === MessageType.BOT;
+/**
+ * The message component
+ * TODO Implement ID/key prop
+ */
+export const Message: FC<MessageInterface> = ({ source, text, unixTime, id }) => {
+	const isBot = source === MESSAGE_SOURCE.BOT;
 	return (
-		<div className={"w-full px-3 pt-3 flex" + (isBot ? "" : " justify-end")}>
+		<div id={id} className={"w-full px-3 pt-3 flex" + (isBot ? "" : " justify-end")}>
 			<div
 				className={
 					"max-w-[70%] p-3 shadow-md " +
@@ -37,7 +21,7 @@ export const Message: FC<MessageProps> = ({ type, text, time }) => {
 			>
 				<p>{text}</p>
 				<div className="w-full opacity-50 text-[0.60rem] text-right pt-2">
-					{convertUnixTime(time)}
+					{convertUnixTime(unixTime)}
 				</div>
 			</div>
 		</div>

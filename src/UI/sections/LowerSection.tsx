@@ -1,5 +1,6 @@
 import { IconCommand, IconSend } from "@tabler/icons-react";
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { MessageControllerContext } from "../../data/controllers/MessageContext";
 
 
 interface QuickToolBarItem {
@@ -51,6 +52,8 @@ const QuickToolBarItems: Array<QuickToolBarItem> = [
 
 
 export const LowerSection: FC = () => {
+	const msgController = useContext(MessageControllerContext);
+
 	return (
 		<section className="w-full h-[var(--btmBarHeight)] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
 			<div className="h-[40%] w-full flex">
@@ -82,6 +85,14 @@ export const LowerSection: FC = () => {
 				<IconSend
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
+					onClick={() => { 
+						msgController.addMessage({
+							source: 0,
+							text: "Hello",
+							unixTime: Date.now(),
+							id: Date.now().toString(),
+						})
+					}}
 				/>
 			</div>
 		</section>

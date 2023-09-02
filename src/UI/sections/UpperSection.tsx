@@ -1,35 +1,17 @@
-import { FC } from "react";
-import { Message, MessageType } from "../components/Messages";
+import { FC, useContext } from "react";
+import { Message } from "../components/Messages";
+import { MessageControllerContext } from "../../data/controllers/MessageContext";
 
 export const UpperSection: FC = () => {
+	const msgController = useContext(MessageControllerContext);
+	let messages = msgController.getAllMessages();
 	return (
 		<section className="w-full top-0 min-h-[calc(100dvh-var(--btmBarHeight))] bg-l-secnd-cont-bg dark:bg-d-secnd-cont-bg">
-			{/* <Message
-					type={MessageType.BOT}
-					text="Hello there how can I help?"
-					time={Date.now()}
-				/>
-				<Message
-					type={MessageType.USER}
-					text="Great! whats the time?"
-					time={Date.now()}
-				/>
-				<Message
-					type={MessageType.USER}
-					text="And whats the news?"
-					time={Date.now()}
-				/>
-				<Message
-					type={MessageType.BOT}
-					text="The time is 12:40pm"
-					time={Date.now()}
-				/>
-				<Message
-					type={MessageType.BOT}
-					text="The news is that I'm a  terrible programmer"
-					time={Date.now()}
-				/> */}
-			<Message type={MessageType.USER} text="Hello" time={Date.now()} />
+			{
+				messages.map((msg) => {
+					return <Message key={msg.id} source={msg.source} text={msg.text} unixTime={msg.unixTime} id={msg.id} />
+				})
+			}
 		</section>
 	);
 };
