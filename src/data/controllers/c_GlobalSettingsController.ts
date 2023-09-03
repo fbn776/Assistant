@@ -40,7 +40,8 @@ export class GlobalSettingsController implements I_ControllerBase {
 	}
 
 	/**Runs when any of the settings change.
-	 * **`NOTE: Use this only inside of a React component.`**
+	 * 
+	 *   **`NOTE: Use this only inside of a React component.`**
 	 */
 	onSettingsChange(callback: () => void) {
 		useEffect(callback, [this.settings]);
