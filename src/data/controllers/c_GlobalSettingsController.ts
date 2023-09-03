@@ -20,14 +20,18 @@ export class GlobalSettingsController implements I_ControllerBase {
 		[this.settings, this.setSettings] = state;
 	}
 
-	/**Returns the value of the specified setting */
+	/**Returns the value of the specified setting
+	 * ? Open to name changes
+	 */
 	getValue(
 		name: keyof I_GlobalSettings
 	): I_GlobalSettings[keyof I_GlobalSettings] {
 		return this.settings[name];
 	}
 
-	/**Sets the value of the specified setting */
+	/**Sets the value of the specified setting 
+	 * ? Open to name changes
+	*/
 	setValue(
 		name: keyof I_GlobalSettings,
 		value: I_GlobalSettings[keyof I_GlobalSettings]
