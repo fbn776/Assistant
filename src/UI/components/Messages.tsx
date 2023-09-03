@@ -1,16 +1,21 @@
-import { FC } from "react";
+import React, { FC, useRef } from "react";
 import { convertUnixTime } from "../utils/utils";
-import { MESSAGE_SOURCE, MessageInterface } from "../../data/structures/s_message";
-
+import { MESSAGE_SOURCE, I_Message } from "../../data/structures/s_message";
 
 /**
  * The message component
  * TODO Implement ID/key prop
  */
-export const Message: FC<MessageInterface> = ({ source, text, unixTime, id }) => {
+export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
+	const msgCont: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+
 	const isBot = source === MESSAGE_SOURCE.BOT;
 	return (
-		<div id={id} className={"w-full px-3 pt-3 flex" + (isBot ? "" : " justify-end")}>
+		<div
+			id={id}
+			className={"w-full px-3 pt-3 flex" + (isBot ? "" : " justify-end")}
+			ref={msgCont}
+		>
 			<div
 				className={
 					"max-w-[70%] p-3 shadow-md " +

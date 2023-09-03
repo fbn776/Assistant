@@ -8,8 +8,7 @@ export enum MESSAGE_SOURCE {
 	BOT = 1,
 }
 
-
-export interface MessageInterface {
+export interface I_Message {
 	id: string;
 	source: MESSAGE_SOURCE;
 	unixTime: number;

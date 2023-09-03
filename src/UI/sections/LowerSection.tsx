@@ -1,12 +1,15 @@
 import { IconCommand, IconSend } from "@tabler/icons-react";
 import { FC, useContext, useRef } from "react";
-import { MessageControllerContext } from "../context/MessageContext";
+import { ControllersContext } from "../providers/contexts";
 import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
 
 export const LowerSection: FC = () => {
-	const inputRef: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
+	const inputRef: React.MutableRefObject<HTMLInputElement | null> =
+		useRef(null);
 
-	const msgController = useContext(MessageControllerContext);
+	const globalController = useContext(ControllersContext);
+	const msgController = globalController.messageController;
+	const settingsController = globalController.globalSettingsController;
 
 	return (
 		<section className="w-full fixed h-[var(--btmBarHeight)] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
@@ -30,12 +33,23 @@ export const LowerSection: FC = () => {
 				</div>
 			</div>
 			<div className="w-full h-[60%] flex justify-center items-center p-3 gap-3">
-				<div className="h-[90%] aspect-square bg-[url(../../fbn776.png)] bg-cover rounded-full border-l-prim-variant dark:border-d-prim-variant border-2"></div>
+				<div
+					className="h-[90%] aspect-square bg-[url(../../fbn776.png)] bg-cover rounded-full border-l-prim-variant dark:border-d-prim-variant border-2"
+					onClick={() => {
+						// !! Remove this later
+						settingsController.setValue(
+							"theme",
+							settingsController.getValue("theme") === "dark"
+								? "light"
+								: "dark"
+						);
+					}}
+				></div>
 				<input
 					type="text"
 					className="w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt"
 					placeholder="Type here.."
-					ref = {inputRef}
+					ref={inputRef}
 				/>
 				<IconSend
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
@@ -43,7 +57,7 @@ export const LowerSection: FC = () => {
 					onClick={() => {
 						msgController.addMessage({
 							source: 0,
-							text: inputRef.current?.value || 'Seems empty',
+							text: inputRef.current?.value || "Seems empty",
 							unixTime: Date.now(),
 							id: Date.now().toString(),
 						});
