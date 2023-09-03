@@ -50,6 +50,4 @@ export class MessageController {
 		}
 		return null;
 	}
-
-
 }

@@ -8,6 +8,7 @@ export enum MESSAGE_SOURCE {
 	BOT = 1,
 }
 
+
 export interface MessageInterface {
 	id: string;
 	source: MESSAGE_SOURCE;
