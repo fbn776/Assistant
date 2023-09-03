@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import "./app.css";
 import { UpperSection } from "./sections/UpperSection";
 import { LowerSection } from "./sections/LowerSection";
