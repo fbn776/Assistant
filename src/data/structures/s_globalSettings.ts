@@ -7,4 +7,13 @@ export interface I_GlobalSettings {
 	/**Controls weather the date of the message is shown*/
 	showMessageDate: boolean;
 
+	/**Controls message submission on enter */
+	submitOnEnter: boolean;
 }
+
+export const DefaultGlobalSettings: I_GlobalSettings = {
+	scrollToNewMessage: true,
+	showMessageDate: true,
+	theme: "light",
+	submitOnEnter: true,
+};

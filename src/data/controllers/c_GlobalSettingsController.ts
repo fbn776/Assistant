@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { I_ControllerBase } from "../structures/s_controllers";
-import { I_GlobalSettings } from "../structures/s_globalSettings";
+import { DefaultGlobalSettings, I_GlobalSettings } from "../structures/s_globalSettings";
 
 export class GlobalSettingsController implements I_ControllerBase {
 	private settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
-	private setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> =
-		() => {};
+	private setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> = () => {};
 
 	/**
 	 * This initializes the message state.
@@ -53,10 +52,6 @@ export class GlobalSettingsController implements I_ControllerBase {
 
 	/**Base settings getter */
 	static get BaseSettings(): I_GlobalSettings {
-		return {
-			scrollToNewMessage: true,
-			showMessageDate: true,
-			theme: "light",
-		};
+		return DefaultGlobalSettings;
 	}
 }

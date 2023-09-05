@@ -6,7 +6,7 @@ export const UpperSection: FC = () => {
 	const msgController = useContext(ControllersContext).messageController;
 	let messages = msgController.getAllMessages();
 	return (
-		<section className="w-full fixed top-0 min-h-[calc(100dvh-var(--btmBarHeight))] bottom-[var(--btmBarHeight)] bg-l-secnd-cont-bg dark:bg-d-secnd-cont-bg upper-section-scrollbar overflow-y-scroll pb-5">
+		<section className="w-full fixed top-0 min-h-[calc(100dvh-var(--btmBarHeight))] bottom-[var(--btmBarHeight)] bg-l-secnd-cont-bg dark:bg-d-secnd-cont-bg upper-section-scrollbar overflow-x-hidden overflow-y-scroll pb-5">
 			{messages.map((msg) => {
 				return (
 					<Message

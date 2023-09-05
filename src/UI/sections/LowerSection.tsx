@@ -61,6 +61,13 @@ export const LowerSection: FC = () => {
 							unixTime: Date.now(),
 							id: Date.now().toString(),
 						});
+
+						msgController.addMessage({
+							source: 1,
+							text: "This is an automated message",
+							unixTime: Date.now(),
+							id: (Date.now() + Math.random() * 100).toString(),
+						});
 					}}
 				/>
 			</div>

@@ -12,9 +12,9 @@ export class GlobalController implements I_ControllerBase {
 
 	private controllerList: I_ControllerBase[];
 
-	constructor() {
-		this.messageController = new MessageController();
-		this.globalSettingsController = new GlobalSettingsController();
+	constructor(messageController: MessageController, globalSettingsController: GlobalSettingsController) {
+		this.messageController = messageController;
+		this.globalSettingsController = globalSettingsController;
 
 		this.controllerList = [
 			this.messageController,
