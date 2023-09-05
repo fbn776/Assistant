@@ -1,4 +1,5 @@
 import { I_ControllerBase } from "../data/structures/s_controllers";
+import { MESSAGE_SOURCE } from "../data/structures/s_message";
 import { GlobalSettingsController } from "./c_GlobalSettingsController";
 import { MessageController } from "./c_MessageController";
 
@@ -38,30 +39,40 @@ export class GlobalController implements I_ControllerBase {
 			if (controller.deleteLocalData) controller.deleteLocalData();
 		}
 	}
+	
+	//! Could be refactored to a better way; but currently too lazy, I guess.
+	readonly uiEvents: I_UIEvents = {
+		input: {
+			getInputText: () => {
+				if (this.dependencies.mainInputRef?.current)
+					return this.dependencies.mainInputRef.current.value;
 
-	hello = "hoi";
+				return "";
+			},
 
-	readonly uiEvents: I_UI_Events = {
-		clearInput: () => {
-			if (this.dependencies.mainInputRef?.current)
-				this.dependencies.mainInputRef.current.value = "";
-		},
+			clearInput: () => {
+				if (this.dependencies.mainInputRef?.current)
+					this.dependencies.mainInputRef.current.value = "";
+			},
 
-		submitInput: () => {
-			console.log("Working", this);
-			console.log(this.uiEvents.getInputText());
-		},
+			submitInput: () => {
+				this.messageController.addMessage({
+					id: Date.now().toString(),
+					text: this.uiEvents.input.getInputText(),
+					source: MESSAGE_SOURCE.USER,
+					unixTime: Date.now(),
+				});
 
-		getInputText: () => {
-			if (this.dependencies.mainInputRef?.current)
-				return this.dependencies.mainInputRef.current.value;
-			else return null;
+				//If the `clearOnSubmit` setting is set to true, then clear the input;
+				if (this.globalSettingsController.getValue("clearOnSubmit"))
+					this.uiEvents.input.clearInput();
+			},
 		},
 	};
 
 	/**Dependencies object for storing different dependencies to which the different events the controller depends on.
 	 *
-	 * **NOTE: This needs to set to the different dependencies else things might not work properly.**
+	 * **NOTE: This needs to set at first to the different dependencies else things might not work properly.**
 	 */
 	readonly dependencies: I_dependencies = {
 		mainInputRef: null,
@@ -73,11 +84,15 @@ interface I_dependencies {
 	mainInputRef: React.MutableRefObject<HTMLInputElement | null> | null;
 }
 
-interface I_UI_Events {
+interface I_UIEvents {
+	/**Input events */
+	input: I_UI_Events_Input;
+}
+interface I_UI_Events_Input {
 	/**Clears the main input */
 	clearInput: () => void;
 	/**Submits the main input text to the submission work */
 	submitInput: () => void;
 	/**Gets the main input text */
-	getInputText: () => string | null;
+	getInputText: () => string;
 }

@@ -53,7 +53,7 @@ export const LowerSection: FC = () => {
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
 					onClick={() => {
-						globalController.uiEvents.submitInput();
+						globalController.uiEvents.input.submitInput();
 					}}
 				/>
 			</div>

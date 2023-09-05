@@ -28,14 +28,14 @@ export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
 		>
 			<p
 				className={
-					"min-w-[100px] max-w-[70%] px-3 shadow-md flex justify-between gap-2 " +
+					"min-w-[100px] max-w-[70%] pl-3 pr-3 pt-3 pb-2 shadow-md flex justify-between gap-2 " +
 					(isBot
 						? "bg-l-secnd text-l-secnd-txt dark:bg-d-secnd dark:text-d-secnd-txt rounded-[0px_10px_10px_10px]"
 						: "bg-l-prim text-l-prim-txt dark:bg-d-prim dark:text-d-prim-txt rounded-[10px_10px_0px_10px]")
 				}
 			>
-				<p className="py-3">{text}</p>
-				<span className="py-2 h-full opacity-50 text-[0.60rem] text-right flex items-end">
+				{text}
+				<span className="h-full opacity-50 text-[0.60rem] text-right flex items-end">
 					{convertUnixTime(unixTime)}
 				</span>
 			</p>
