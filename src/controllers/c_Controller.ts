@@ -1,4 +1,4 @@
-import { I_ControllerBase } from "../structures/s_controllers";
+import { I_ControllerBase } from "../data/structures/s_controllers";
 import { GlobalSettingsController } from "./c_GlobalSettingsController";
 import { MessageController } from "./c_MessageController";
 
@@ -12,7 +12,10 @@ export class GlobalController implements I_ControllerBase {
 
 	private controllerList: I_ControllerBase[];
 
-	constructor(messageController: MessageController, globalSettingsController: GlobalSettingsController) {
+	constructor(
+		messageController = new MessageController(),
+		globalSettingsController = new GlobalSettingsController()
+	) {
 		this.messageController = messageController;
 		this.globalSettingsController = globalSettingsController;
 
@@ -25,7 +28,8 @@ export class GlobalController implements I_ControllerBase {
 	/**Removes all the locally stored data*/
 	deleteLocalData() {
 		for (let controller of this.controllerList) {
-			controller.deleteLocalData();
+			if(controller.deleteLocalData)
+				controller.deleteLocalData();
 		}
 	}
 }

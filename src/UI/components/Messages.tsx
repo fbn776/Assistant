@@ -10,6 +10,7 @@ export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
 	const msgCont: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
 	const isBot = source === MESSAGE_SOURCE.BOT;
 
+	//For entry animation;
 	useEffect(() => {
 		setTimeout(() => {
 			if (msgCont.current) msgCont.current.style.transform = "translateX(0px)";

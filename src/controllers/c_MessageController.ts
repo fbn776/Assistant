@@ -1,5 +1,5 @@
-import { I_ControllerBase } from "../structures/s_controllers";
-import { I_Message } from "../structures/s_message";
+import { I_ControllerBase } from "../data/structures/s_controllers";
+import { I_Message } from "../data/structures/s_message";
 
 /**
  * This is a controller class for handling everything related to messages.

@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-import { I_ControllerBase } from "../structures/s_controllers";
-import { DefaultGlobalSettings, I_GlobalSettings } from "../structures/s_globalSettings";
+import { I_ControllerBase } from "../data/structures/s_controllers";
+import {
+	DefaultGlobalSettings,
+	I_GlobalSettings,
+} from "../data/structures/s_globalSettings";
 
 export class GlobalSettingsController implements I_ControllerBase {
 	private settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
-	private setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> = () => {};
+	private setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> =
+		() => {};
 
 	/**
 	 * This initializes the message state.
@@ -28,9 +32,9 @@ export class GlobalSettingsController implements I_ControllerBase {
 		return this.settings[name];
 	}
 
-	/**Sets the value of the specified setting 
+	/**Sets the value of the specified setting
 	 * ? Open to name changes
-	*/
+	 */
 	setValue(
 		name: keyof I_GlobalSettings,
 		value: I_GlobalSettings[keyof I_GlobalSettings]
@@ -43,7 +47,7 @@ export class GlobalSettingsController implements I_ControllerBase {
 	}
 
 	/**Runs when any of the settings change.
-	 * 
+	 *
 	 *   **`NOTE: Use this only inside of a React component.`**
 	 */
 	onSettingsChange(callback: () => void) {
