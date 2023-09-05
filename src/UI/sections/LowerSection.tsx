@@ -4,11 +4,8 @@ import { ControllersContext } from "../providers/contexts";
 import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
 
 export const LowerSection: FC = () => {
-	const inputRef: React.MutableRefObject<HTMLInputElement | null> =
-		useRef(null);
-
 	const globalController = useContext(ControllersContext);
-	const msgController = globalController.messageController;
+	//const msgController = globalController.messageController;
 	const settingsController = globalController.globalSettingsController;
 
 	return (
@@ -39,9 +36,7 @@ export const LowerSection: FC = () => {
 						// !! Remove this later
 						settingsController.setValue(
 							"theme",
-							settingsController.getValue("theme") === "dark"
-								? "light"
-								: "dark"
+							settingsController.getValue("theme") === "dark" ? "light" : "dark"
 						);
 					}}
 				></div>
@@ -49,25 +44,16 @@ export const LowerSection: FC = () => {
 					type="text"
 					className="w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt"
 					placeholder="Type here.."
-					ref={inputRef}
+					ref={
+						(globalController.dependencies.mainInputRef =
+							useRef<HTMLInputElement>(null))
+					}
 				/>
 				<IconSend
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
 					onClick={() => {
-						msgController.addMessage({
-							source: 0,
-							text: inputRef.current?.value || "Seems empty",
-							unixTime: Date.now(),
-							id: Date.now().toString(),
-						});
-
-						msgController.addMessage({
-							source: 1,
-							text: "This is an automated message",
-							unixTime: Date.now(),
-							id: (Date.now() + Math.random() * 100).toString(),
-						});
+						globalController.uiEvents.submitInput();
 					}}
 				/>
 			</div>

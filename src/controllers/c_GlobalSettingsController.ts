@@ -6,6 +6,8 @@ import {
 } from "../data/structures/s_globalSettings";
 
 export class GlobalSettingsController implements I_ControllerBase {
+	CONTROLLER_NAME = "GlobalSettingsController";
+	
 	private settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
 	private setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> =
 		() => {};

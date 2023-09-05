@@ -6,6 +6,8 @@ import { I_Message } from "../data/structures/s_message";
  * This makes sure that the messages are handled in a centralized manner, ie this forms a single point of truth for the messages;
  */
 export class MessageController implements I_ControllerBase {
+	CONTROLLER_NAME = "MessageController";
+	
 	private messages: I_Message[] = [];
 	private setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
 		() => {};
