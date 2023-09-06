@@ -16,16 +16,14 @@ class QuickToolBarItem {
 }
 
 function insertText(c?: GlobalController, txt?: string) {
-	if (!c?.dependencies.mainInputRef?.current) return;
+	if (!c?.uiController.dependencies.mainInputRef?.current) return;
 
 	// c.dependencies.mainInputRef.current.focus();
-	c.uiEvents.input.insertTextAt(txt ?? "");
+	c.uiController.input.insertTextAt(txt ?? "");
 }
 
 export const QuickToolBarItems: Array<QuickToolBarItem> = [
-	new QuickToolBarItem("#", (c) => {
-		c?.uiEvents.input.insertTextAt("#");
-	}),
+	new QuickToolBarItem("#", insertText),
 	new QuickToolBarItem("<", insertText),
 	new QuickToolBarItem(">", insertText),
 	new QuickToolBarItem("/", insertText),

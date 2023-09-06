@@ -1,5 +1,5 @@
 import { I_Message } from "../data/structures/s_message";
-import { BaseController } from "./BaseController";
+import { BaseController } from "./c_BaseController";
 import { GlobalController } from "./c_Controller";
 
 /**
@@ -14,7 +14,6 @@ export class MessageController extends BaseController {
 	private setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
 		() => {};
 
-	
 	/**
 	 * This initializes the message state.
 	 * @param state The return value of a useState() hook of type Array of messages

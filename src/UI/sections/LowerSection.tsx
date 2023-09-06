@@ -45,7 +45,7 @@ export const LowerSection: FC = () => {
 					className="w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt"
 					placeholder="Type here.."
 					ref={
-						(globalController.dependencies.mainInputRef =
+						(globalController.uiController.dependencies.mainInputRef =
 							useRef<HTMLInputElement>(null))
 					}
 				/>
@@ -53,7 +53,7 @@ export const LowerSection: FC = () => {
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
 					onClick={() => {
-						globalController.uiEvents.input.submit();
+						globalController.uiController.input.submit();
 					}}
 				/>
 			</div>

@@ -3,11 +3,11 @@ import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
 } from "../data/structures/s_globalSettings";
-import { BaseController } from "./BaseController";
+import { BaseController } from "./c_BaseController";
 
 export class GlobalSettingsController extends BaseController {
 	CONTROLLER_NAME = "GlobalSettingsController";
-	
+
 	private settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
 	private setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> =
 		() => {};
