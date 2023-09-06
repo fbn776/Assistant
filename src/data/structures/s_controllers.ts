@@ -6,7 +6,6 @@ export interface I_ControllerBase {
 	deleteLocalData?: () => void;
 }
 
-
 /**
  * Interface containing dependencies for the controller.
  */
@@ -33,12 +32,17 @@ export interface I_UIEventsInput {
 	submit: () => void;
 	/**Gets the main input text */
 	getText: () => string;
+	/**Sets the value of the input text box to the given text value. This removes any previous text */
+	setText: (text: string) => void;
 	/**Insert a piece of text at the given position; if no position is given then, it inputs text at the current cursor position*/
-	insertText: (text: string, position?: number) => void;
-	/**Returns the caret (cursor) position of the specified text field (oField)*/
+	insertTextAt: (text: string, position?: number) => void;
+	/**Returns the caret (cursor) position of the input; in case of an error this returns -1*/
 	getCursorPosition: () => number;
+	/**Sets the cursor position of the input to the specified position. This also focuses the input.
+	 *
+	 * **NOTE: Has doubt regarding the compatibility of this function.**
+	 */
+	setCursorPosition: (position: number) => void;
 }
 
-export interface I_UIEventsMessages {
-	
-}
+export interface I_UIEventsMessages {}

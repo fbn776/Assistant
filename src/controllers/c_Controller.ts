@@ -12,11 +12,11 @@ import { MessageController } from "./c_MessageController";
  *
  * This controller has access to different events. These events are used to communicate with the UI.
  * For these events to occur the UI needs to submit some dependencies to the controller.
- * 
+ *
  * NOTE: This is a controller class; this is supposed to provide a singular source of control, so the UI doesn't have any behavior logic build into it.
  * This modularize the code more. This means certain events, functions, operations are available as simple functions, so usage of those events, operations are abstracted away.
- * 
- ** This might need some refactoring, better structure or other stuff. This is open to changes;  
+ *
+ ** This might need some refactoring, better structure or other stuff. This is open to changes;
  */
 export class GlobalController implements I_ControllerBase {
 	CONTROLLER_NAME = "GlobalController";
@@ -58,6 +58,11 @@ export class GlobalController implements I_ControllerBase {
 				return this.uiEvents.input.getText() === "";
 			},
 
+			clear: () => {
+				if (this.dependencies.mainInputRef?.current)
+					this.dependencies.mainInputRef.current.value = "";
+			},
+
 			getText: () => {
 				if (this.dependencies.mainInputRef?.current)
 					return this.dependencies.mainInputRef.current.value;
@@ -65,9 +70,36 @@ export class GlobalController implements I_ControllerBase {
 				return "";
 			},
 
-			clear: () => {
-				if (this.dependencies.mainInputRef?.current)
-					this.dependencies.mainInputRef.current.value = "";
+			setText: (text) => {
+				if(this.dependencies.mainInputRef?.current)
+					this.dependencies.mainInputRef.current.value = text;
+			},
+
+			insertTextAt: (text, position?) => {
+				console.time("insertTextAt");
+				const inputElm = this.dependencies.mainInputRef?.current;
+				if (!inputElm) return;
+
+				let pos = position ? position : this.uiEvents.input.getCursorPosition(),
+					val = this.uiEvents.input.getText();
+
+				this.uiEvents.input.setText(val.substring(0, pos) + text + val.substring(pos));
+				this.uiEvents.input.setCursorPosition(pos + 1);
+				inputElm.focus();
+			},
+
+			getCursorPosition: () => {
+				if (!this.dependencies.mainInputRef?.current) return -1;
+				return this.dependencies.mainInputRef.current.selectionStart ?? -1;
+			},
+
+			setCursorPosition: (caretPos) => {
+				var elem = this.dependencies.mainInputRef?.current;
+				if (!elem) return;
+				if (elem.selectionStart) {
+					elem.focus();
+					elem.setSelectionRange(caretPos, caretPos);
+				} else elem.focus();
 			},
 
 			submit: () => {
@@ -84,17 +116,6 @@ export class GlobalController implements I_ControllerBase {
 				//If the `clearOnSubmit` setting is set to true, then clear the input;
 				if (this.globalSettingsController.getValue("clearOnSubmit"))
 					this.uiEvents.input.clear();
-			},
-
-			insertText: (text, position?) => {
-				if (!this.dependencies.mainInputRef?.current) return;
-				console.log(position);
-				this.dependencies.mainInputRef.current.value += text;
-			},
-
-			getCursorPosition: () => {
-				// TODO
-				return -1;
 			},
 		},
 
