@@ -1,6 +1,18 @@
+import { GlobalController } from "../../controllers/c_Controller";
+
 export interface I_ControllerBase {
 	/**Name of the controller class; used to identify the controller class*/
 	CONTROLLER_NAME: string;
+
+	/**Represents the parent/global controller class; this is set by the bind method */
+	parent: GlobalController;
+
+	/** Binds a controller to its parent controller;
+	 * 
+	 *  This is **very important** as the a child controller access the globalController and every other controller registered with the globalController from here.
+	 * 
+	 * This should be called inside the globalController's constructor*/
+	bind: (parent: GlobalController) => void;
 
 	/**Some controllers may stores some data locally, thus this function can be used to delete that data.*/
 	deleteLocalData?: () => void;

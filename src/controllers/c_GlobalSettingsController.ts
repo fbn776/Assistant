@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { I_ControllerBase } from "../data/structures/s_controllers";
 import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
 } from "../data/structures/s_globalSettings";
+import { BaseController } from "./BaseController";
 
-export class GlobalSettingsController implements I_ControllerBase {
+export class GlobalSettingsController extends BaseController {
 	CONTROLLER_NAME = "GlobalSettingsController";
 	
 	private settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;

@@ -1,8 +1,9 @@
+import { UIController } from './c_UIController';
 import { I_UIEvents, I_dependencies } from "./../data/structures/s_controllers";
-import { I_ControllerBase } from "../data/structures/s_controllers";
 import { MESSAGE_SOURCE } from "../data/structures/s_message";
 import { GlobalSettingsController } from "./c_GlobalSettingsController";
 import { MessageController } from "./c_MessageController";
+import { BaseController } from './BaseController';
 
 /**
  * This is a global controller class for handling most of the things in the app. This also is an access point accessing for every other controller.
@@ -18,33 +19,33 @@ import { MessageController } from "./c_MessageController";
  *
  ** This might need some refactoring, better structure or other stuff. This is open to changes;
  */
-export class GlobalController implements I_ControllerBase {
-	CONTROLLER_NAME = "GlobalController";
-
+export class GlobalController {
 	messageController: MessageController;
 	globalSettingsController: GlobalSettingsController;
+	uiController: UIController;
 
-	private _controllerList: I_ControllerBase[];
+	private _controllerList: BaseController[];
 
 	constructor(
 		messageController = new MessageController(),
-		globalSettingsController = new GlobalSettingsController()
+		globalSettingsController = new GlobalSettingsController(),
+		uiController = new UIController(),
 	) {
 		this.messageController = messageController;
 		this.globalSettingsController = globalSettingsController;
-
+		this.uiController = uiController;
+		
 		this._controllerList = [
 			this.messageController,
 			this.globalSettingsController,
+			this.uiController
 		];
-	}
 
-	/**Removes all the locally stored data*/
-	deleteLocalData() {
-		for (let controller of this._controllerList) {
-			if (controller.deleteLocalData) controller.deleteLocalData();
+		for(let controller of this._controllerList) {
+			controller.bind(this);
 		}
 	}
+
 
 	/**
 	 * Controller for handling different UI events.
