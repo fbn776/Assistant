@@ -1,13 +1,15 @@
-import { I_ControllerBase } from "../data/structures/s_controllers";
 import { I_Message } from "../data/structures/s_message";
+import { BaseController } from "./c_BaseController";
+import { GlobalController } from "./c_Controller";
 
 /**
  * This is a controller class for handling everything related to messages.
  * This makes sure that the messages are handled in a centralized manner, ie this forms a single point of truth for the messages;
  */
-export class MessageController implements I_ControllerBase {
+export class MessageController extends BaseController {
 	CONTROLLER_NAME = "MessageController";
-	
+	parent: GlobalController = null as any;
+
 	private messages: I_Message[] = [];
 	private setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
 		() => {};
