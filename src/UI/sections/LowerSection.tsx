@@ -2,10 +2,9 @@ import { IconCommand, IconSend } from "@tabler/icons-react";
 import { FC, useContext, useRef } from "react";
 import { ControllersContext } from "../providers/contexts";
 import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
-
+//Function to get current cursor position of an input element
 export const LowerSection: FC = () => {
 	const globalController = useContext(ControllersContext);
-	//const msgController = globalController.messageController;
 	const settingsController = globalController.globalSettingsController;
 
 	return (
@@ -22,9 +21,10 @@ export const LowerSection: FC = () => {
 					{QuickToolBarItems.map((item, index) => (
 						<div
 							key={index}
-							className="font-medium aspect-square flex justify-center items-center"
+							className="font-semibold cursor-pointer aspect-square flex justify-center items-center "
+							onClick={() => {item.onClick(globalController, item.displayItem as string)}}
 						>
-							{item.name}
+							{item.displayItem}
 						</div>
 					))}
 				</div>
@@ -53,7 +53,7 @@ export const LowerSection: FC = () => {
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
 					onClick={() => {
-						globalController.uiEvents.input.submitInput();
+						globalController.uiEvents.input.submit();
 					}}
 				/>
 			</div>

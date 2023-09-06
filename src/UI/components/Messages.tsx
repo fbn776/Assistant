@@ -6,7 +6,8 @@ import { MESSAGE_SOURCE, I_Message } from "../../data/structures/s_message";
  * The message component
  * TODO Implement ID/key prop
  */
-export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
+export const Message: FC<I_Message> = ({ source, text, unixTime, id}) => {
+
 	const msgCont: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
 	const isBot = source === MESSAGE_SOURCE.BOT;
 

@@ -1,3 +1,4 @@
+import { I_UIEvents, I_dependencies } from "./../data/structures/s_controllers";
 import { I_ControllerBase } from "../data/structures/s_controllers";
 import { MESSAGE_SOURCE } from "../data/structures/s_message";
 import { GlobalSettingsController } from "./c_GlobalSettingsController";
@@ -39,60 +40,68 @@ export class GlobalController implements I_ControllerBase {
 			if (controller.deleteLocalData) controller.deleteLocalData();
 		}
 	}
-	
-	//! Could be refactored to a better way; but currently too lazy, I guess.
+
+	/**
+	 * Controller for handling different UI events.
+	 *
+	 * ! Could be refactored to a better way; but currently too lazy, I guess.
+	 * @see I_UIEvents for adding new methods
+	 */
 	readonly uiEvents: I_UIEvents = {
 		input: {
-			getInputText: () => {
+			isEmpty: () => {
+				return this.uiEvents.input.getText() === "";
+			},
+
+			getText: () => {
 				if (this.dependencies.mainInputRef?.current)
 					return this.dependencies.mainInputRef.current.value;
 
 				return "";
 			},
 
-			clearInput: () => {
+			clear: () => {
 				if (this.dependencies.mainInputRef?.current)
 					this.dependencies.mainInputRef.current.value = "";
 			},
 
-			submitInput: () => {
+			submit: () => {
+				if (this.uiEvents.input.isEmpty()) return;
+
+				//When submitting, first display the message as user message;
 				this.messageController.addMessage({
 					id: Date.now().toString(),
-					text: this.uiEvents.input.getInputText(),
+					text: this.uiEvents.input.getText(),
 					source: MESSAGE_SOURCE.USER,
 					unixTime: Date.now(),
 				});
 
 				//If the `clearOnSubmit` setting is set to true, then clear the input;
 				if (this.globalSettingsController.getValue("clearOnSubmit"))
-					this.uiEvents.input.clearInput();
+					this.uiEvents.input.clear();
+			},
+
+			insertText: (text, position?) => {
+				if (!this.dependencies.mainInputRef?.current) return;
+				console.log(position);
+				this.dependencies.mainInputRef.current.value += text;
+			},
+
+			getCursorPosition: () => {
+				return -1;
 			},
 		},
+
+		messages: {},
 	};
 
 	/**Dependencies object for storing different dependencies to which the different events the controller depends on.
 	 *
 	 * **NOTE: This needs to set at first to the different dependencies else things might not work properly.**
+	 * @see I_dependencies for adding new methods
 	 */
 	readonly dependencies: I_dependencies = {
 		mainInputRef: null,
+		messageContainer: null,
 	};
-}
-
-interface I_dependencies {
-	/**The main input ref object */
-	mainInputRef: React.MutableRefObject<HTMLInputElement | null> | null;
-}
-
-interface I_UIEvents {
-	/**Input events */
-	input: I_UI_Events_Input;
-}
-interface I_UI_Events_Input {
-	/**Clears the main input */
-	clearInput: () => void;
-	/**Submits the main input text to the submission work */
-	submitInput: () => void;
-	/**Gets the main input text */
-	getInputText: () => string;
 }
