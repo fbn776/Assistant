@@ -12,6 +12,8 @@ import { MessageController } from "./c_MessageController";
  *
  * This controller has access to different events. These events are used to communicate with the UI.
  * For these events to occur the UI needs to submit some dependencies to the controller.
+ * 
+ * 
  */
 export class GlobalController implements I_ControllerBase {
 	CONTROLLER_NAME = "GlobalController";
@@ -88,6 +90,7 @@ export class GlobalController implements I_ControllerBase {
 			},
 
 			getCursorPosition: () => {
+				// TODO
 				return -1;
 			},
 		},

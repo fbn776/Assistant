@@ -1,7 +1,8 @@
 export interface I_ControllerBase {
+	/**Name of the controller class; used to identify the controller class*/
 	CONTROLLER_NAME: string;
 
-	//Some controllers may stores some data locally, thus this function can be used to delete that data.
+	/**Some controllers may stores some data locally, thus this function can be used to delete that data.*/
 	deleteLocalData?: () => void;
 }
 
@@ -39,5 +40,5 @@ export interface I_UIEventsInput {
 }
 
 export interface I_UIEventsMessages {
-
+	
 }
