@@ -22,5 +22,5 @@ export const DefaultGlobalSettings: I_GlobalSettings = {
 	showMessageDate: true,
 	theme: "light",
 	submitOnEnter: true,
-	clearOnSubmit: true,
+	clearOnSubmit: false,
 };

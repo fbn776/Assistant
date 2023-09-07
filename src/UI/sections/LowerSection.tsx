@@ -2,7 +2,7 @@ import { IconCommand, IconSend } from "@tabler/icons-react";
 import { FC, useContext, useRef } from "react";
 import { ControllersContext } from "../providers/contexts";
 import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
-//Function to get current cursor position of an input element
+
 export const LowerSection: FC = () => {
 	const globalController = useContext(ControllersContext);
 	const settingsController = globalController.globalSettingsController;
@@ -12,7 +12,7 @@ export const LowerSection: FC = () => {
 			<div className="h-[40%] w-full flex">
 				<div className="h-full aspect-square flex items-center justify-center">
 					<IconCommand
-						className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
+						className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt cursor-pointer primary-color-on-hover"
 						size={30}
 						stroke={1.5}
 					/>
@@ -21,7 +21,7 @@ export const LowerSection: FC = () => {
 					{QuickToolBarItems.map((item, index) => (
 						<div
 							key={index}
-							className="font-semibold cursor-pointer aspect-square flex justify-center items-center "
+							className="font-semibold cursor-pointer aspect-square flex justify-center items-center quick-toolbar-items primary-color-on-hover"
 							onClick={() => {
 								item.onClick(globalController, item.displayItem as string);
 							}}

@@ -8,7 +8,7 @@
 
 body {
 	margin: 0px;
-	height: 100dvh;
+	height: min(100dvh 100vh);
 }
 
 /* Hide scrollbar css class */
@@ -27,4 +27,12 @@ body {
 .disable-default-search-style::-webkit-search-results-button,
 .disable-default-search-style::-webkit-search-results-decoration {
 	-webkit-appearance: none;
+}
+
+/*A utility class to change text color and stroke color to the primary colors*/
+.primary-color-on-hover {
+	transition: color 0.1s, stroke 0.1s;
+}
+.primary-color-on-hover:hover {
+	@apply text-l-prim dark:text-d-prim stroke-l-prim dark:stroke-d-prim;
 }
