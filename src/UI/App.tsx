@@ -7,7 +7,7 @@ import { ControllersContext } from "./providers/contexts";
 import { GlobalController } from "../controllers/c_Controller";
 import { GlobalSettingsController } from "../controllers/c_GlobalSettingsController";
 import { MessageController } from "../controllers/c_MessageController";
-import { UIController } from "../controllers/c_UIController";
+import { UIController } from "../controllers/uiController/c_UIController";
 
 //Global controller for the app;
 const globalController = new GlobalController(
@@ -23,7 +23,6 @@ export const App: FC = () => {
 	globalController.globalSettingsController.init(
 		useState(GlobalSettingsController.BaseSettings)
 	);
-	
 
 	//For the theme toggling
 	globalController.globalSettingsController.onSettingsChange(() => {

@@ -17,7 +17,7 @@ export const LowerSection: FC = () => {
 						stroke={1.5}
 					/>
 				</div>
-				<div className="no-scrollbar flex flex-grow overflow-x-scroll h-full bg-opacity-70 dark:bg-opacity-70 bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt">
+				<div className="no-scrollbar flex flex-grow overflow-x-scroll overflow-y-hidden h-full bg-opacity-70 dark:bg-opacity-70 bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt">
 					{QuickToolBarItems.map((item, index) => (
 						<div
 							key={index}
