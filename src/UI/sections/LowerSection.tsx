@@ -21,7 +21,7 @@ export const LowerSection: FC = () => {
 					{QuickToolBarItems.map((item, index) => (
 						<div
 							key={index}
-							className="font-semibold cursor-pointer aspect-square flex justify-center items-center quick-toolbar-items primary-color-on-hover"
+							className="font-semibold cursor-pointer aspect-square flex justify-center items-center quick-toolbar-items primary-color-on-hover hover:scale-125"
 							onClick={() => {
 								item.onClick(globalController, item.displayItem as string);
 							}}

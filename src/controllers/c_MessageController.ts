@@ -3,7 +3,7 @@ import { BaseController } from "./c_BaseController";
 import { GlobalController } from "./c_Controller";
 
 /**
- * This is a controller class for handling everything related to messages.
+ * This is a controller class for handling related to messages storing, retrieving, deletion and addition.
  * This makes sure that the messages are handled in a centralized manner, ie this forms a single point of truth for the messages;
  */
 export class MessageController extends BaseController {

@@ -81,6 +81,14 @@ export class UIController extends BaseController {
 				unixTime: Date.now(),
 			});
 
+			this.parent.messageController.addMessage({
+				id: (Date.now() + 1).toString(),
+				text: `The message is ${this.input.getText()}`,
+				source: MESSAGE_SOURCE.BOT,
+				unixTime: Date.now(),
+			});
+
+
 			//If the `clearOnSubmit` setting is set to true, then clear the input;
 			if (this.parent.globalSettingsController.getValue("clearOnSubmit"))
 				this.input.clear();

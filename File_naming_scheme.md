@@ -10,5 +10,6 @@ eg: `d_settings.ts`<br>
 Here `d_` is the prefix.<br>
 #### Types
 - `d` - Used to represent data files. ie they store some type of data like configs etc.
-- `s` - Used to specify the structure of a data. They are interfaces, enums etc
-- `c` - Used to specify controller functions
+- `s` - Used to specify the structure of a data. They are interfaces, enums etc.
+- `c` - Used to specify controller classes.
+- `h` - To specify handlers to controller classes.
