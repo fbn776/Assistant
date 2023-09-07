@@ -22,7 +22,9 @@ export const LowerSection: FC = () => {
 						<div
 							key={index}
 							className="font-semibold cursor-pointer aspect-square flex justify-center items-center "
-							onClick={() => {item.onClick(globalController, item.displayItem as string)}}
+							onClick={() => {
+								item.onClick(globalController, item.displayItem as string);
+							}}
 						>
 							{item.displayItem}
 						</div>
@@ -41,8 +43,10 @@ export const LowerSection: FC = () => {
 					}}
 				></div>
 				<input
-					type="text"
-					className="w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt"
+					type="search"
+					autoComplete="off"
+					aria-label="Main input box"
+					className="disable-default-search-style w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt resize-none"
 					placeholder="Type here.."
 					ref={
 						(globalController.uiController.dependencies.mainInputRef =

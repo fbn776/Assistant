@@ -11,13 +11,20 @@ body {
 	height: 100dvh;
 }
 
-
 /* Hide scrollbar css class */
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* Disable default search style */
+.disable-default-search-style::-webkit-search-decoration,
+.disable-default-search-style::-webkit-search-cancel-button,
+.disable-default-search-style::-webkit-search-results-button,
+.disable-default-search-style::-webkit-search-results-decoration {
+	-webkit-appearance: none;
 }
