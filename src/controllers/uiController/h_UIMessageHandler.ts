@@ -6,4 +6,8 @@ export class UIMessageHandler {
 	constructor(parent: UIController) {
 		this._parent = parent;
 	}
+
+	doSometing() {
+		console.log(this._parent)
+	}
 }
