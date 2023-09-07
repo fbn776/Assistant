@@ -1,3 +1,9 @@
+/**
+ * Controllers are class that are used to control the UI and the data flow of the application.
+ * Controller may or may not depend on handlers.
+ * These handlers are used to handle different events. For example; the UIController has a handler for handling input events.
+ * These handlers are used to abstract away the logic of the events.
+ */
 import { GlobalController } from "../../controllers/c_Controller";
 
 export interface I_ControllerBase {
@@ -28,13 +34,14 @@ export interface I_dependencies {
 	messageContainer: React.MutableRefObject<HTMLDivElement | null> | null;
 }
 
-export interface I_UIEvents {
-	/**Input events */
-	input: I_UIEventsInput;
-	/**Messages events */
-	messages: I_UIEventsMessages;
-}
-
+/**
+ * Interface for documenting the different UI events.
+ * This is purely for documentation purposes, as commenting on the handlerClass itself make it a bit ugly.
+ * 
+ * Interface for `UIInputHandler` class.
+ * 
+ * This could be removed.
+ */
 export interface I_UIEventsInput {
 	/**Checks if the input is empty or not */
 	isEmpty: () => boolean;
@@ -56,5 +63,3 @@ export interface I_UIEventsInput {
 	 */
 	setCursorPosition: (position: number) => void;
 }
-
-export interface I_UIEventsMessages {}
