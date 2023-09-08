@@ -203,10 +203,10 @@ export class UIInputHandler {
 	}
 
 	pasteText(onSuccess: () => void, onError: (e: any) => void) {
+		this.focus();
 		navigator.clipboard
 			.readText()
 			.then((clipText) => {
-				this.focus();
 				this.insertTextAt(clipText);
 				onSuccess();
 			})
