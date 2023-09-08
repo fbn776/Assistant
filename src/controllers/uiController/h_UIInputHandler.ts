@@ -78,10 +78,12 @@ export class UIInputHandler {
 		this.setCursorPosition(pos);
 	}
 
-	/**Submission event; pushes a new message to the message controller, the executes and then push the result message 
+	/**Submission event; pushes a new message to the message controller, the executes and then push the result message
 	 * @param text An optional parameter; The text to be submitted; if not given then the text in the input is used; (Used mainly for testing purposes)
-	*/
+	 */
 	submit(text?: string) {
+		if (text) this.setText(text);
+
 		if (this.isEmpty()) return;
 
 		//When submitting, first display the message as user message;
@@ -108,34 +110,54 @@ export class UIInputHandler {
 			/*Used a timeout here; because the message added above are not instantly added, they take some time (due to state management by react).
 			So a timeout is used to access the above added message*/
 			setTimeout(() => this._parent.message.scrollToLatest(), 0);
+
+		this._historyIndex = -1;
 	}
 
 	/**
-	 * 
-	*/
-	private _historyIndex = 0;
-	getPreviousHistory() {
-		this._historyIndex ++;
+	 * Controls the backward and forward history of the input; Used to get previously typed messages.
+	 * The _historyIndex is used to keep track of the current index of the history. A higher value means an older message and a lower value means a newer message.
+	 * ie 0 means the last typed, 1 means the second last typed and so on...
+	 * *It is important to reset the _historyIndex to -1 when a new message is submitted.
+	 * @see setToPreviousHistory
+	 * @see setToNextHistory
+	 */
+	private _historyIndex = -1;
 
-		if(this._historyIndex > this._globCtrl.messageController.userCount) {
-			this._historyIndex = this._globCtrl.messageController.userCount;
+	/**Sets the previous item in history to the input box
+	 * @returns true if it is able to go to previous; false if the start of the history is reached
+	 */
+	setToPreviousHistory() {
+		this._historyIndex++;
+
+		if (this._historyIndex > this._globCtrl.messageController.userCount - 1) {
+			this._historyIndex = this._globCtrl.messageController.userCount - 1;
+			return false;
 		}
 
-		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(this._historyIndex);
-		this.setText(msg?.text ?? "")
+		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(
+			this._historyIndex
+		);
+		this.setText(msg?.text ?? "");
 
-		console.log(this._historyIndex);
+		return true;
 	}
 
-	getNextHistory() {
-		this._historyIndex --;
+	/**Sets the next item in history to the input box
+	 * @returns true if it is able to go to next; false if the end of the history is reached
+	 */
+	setToNextHistory() {
+		this._historyIndex--;
 
-		if(this._historyIndex < 0) {
+		if (this._historyIndex < 0) {
 			this._historyIndex = 0;
+			return false;
 		}
 
-		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(this._historyIndex);
+		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(
+			this._historyIndex
+		);
 		this.setText(msg?.text ?? "");
-		console.log(this._historyIndex)
+		return true
 	}
 }

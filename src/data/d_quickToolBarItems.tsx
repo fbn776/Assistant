@@ -10,9 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { GlobalController } from "../controllers/c_Controller";
 
-
-
-import {Benchmark} from "../../tests/test_utils";
+import { Benchmark } from "../../tests/test_utils";
 
 class QuickToolBarItem {
 	/**Text/Element to be displayed in the tool bar;*/
@@ -36,27 +34,57 @@ function insertText(c?: GlobalController, txt?: string) {
 	c.uiController.input.insertTextAt(txt ?? "");
 }
 
-const specialCharacters = ["(", ")", "{", "}", "[", "]", "<", ">", "'", '"', ",", ".", "=", "+", "-", "*", ";", ":", "/", "|", "&", "!", "?", "@", "#", "%", "^", "~", "_", "$"];
+const specialCharacters = [
+	"(",
+	")",
+	"{",
+	"}",
+	"[",
+	"]",
+	"<",
+	">",
+	"'",
+	'"',
+	",",
+	".",
+	"=",
+	"+",
+	"-",
+	"*",
+	";",
+	":",
+	"/",
+	"|",
+	"&",
+	"!",
+	"?",
+	"@",
+	"#",
+	"%",
+	"^",
+	"~",
+	"_",
+	"$",
+];
 
 export const QuickToolBarItems: Array<QuickToolBarItem> = [
 	...specialCharacters.map((char) => new QuickToolBarItem(char, insertText)),
 
-
 	/**Controls */
 	new QuickToolBarItem(<IconCaretLeft stroke={1.5} />, (c) => {
-		c?.uiController.input.offsetCursor(-1)
+		c?.uiController.input.offsetCursor(-1);
 	}),
 	new QuickToolBarItem(<IconCaretRight stroke={1.5} />, (c) => {
 		c?.uiController.input.offsetCursor(1);
 	}),
 	new QuickToolBarItem(<IconCaretUp stroke={1.5} />, (c) => {
-		c?.uiController.input.getPreviousHistory();
+		c?.uiController.input.setToPreviousHistory();
 	}),
 	new QuickToolBarItem(<IconCaretDown stroke={1.5} />, (c) => {
-		c?.uiController.input.getNextHistory();
+		c?.uiController.input.setToNextHistory();
 	}),
-	new QuickToolBarItem(<IconArrowBackUp size={22}/>, (c) => {
-		c?.uiController.input.submit()
+	new QuickToolBarItem(<IconArrowBackUp size={22} />, (c) => {
+		for (let i = 0; i < 10; i++) c?.uiController.input.submit(`message ${i}`);
 	}),
 	new QuickToolBarItem(<IconCopy size={20} />, () => {}),
 	new QuickToolBarItem(<IconCut size={20} />, () => {}),
