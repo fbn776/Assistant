@@ -30,4 +30,14 @@ export class UIController extends BaseController {
 		this.input = new UIInputHandler(this);
 		this.message = new UIMessageHandler(this);
 	}
+
+	/**Plays a success animation and tick icon; for quick utils 
+	 * This automatically plays and then removes the animation;
+	*/
+	initSuccessAnimation(elm: HTMLElement) {
+		elm.classList.add("play-success-animation");
+		elm.addEventListener("animationend", () => {
+			elm.classList.remove("play-success-animation");
+		});
+	}
 }

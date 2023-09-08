@@ -7,20 +7,27 @@ import {
 	IconCopy,
 	IconCut,
 	IconTrash,
+	IconClipboard,
 } from "@tabler/icons-react";
 import { GlobalController } from "../controllers/c_Controller";
-
-import { Benchmark } from "../../tests/test_utils";
 
 class QuickToolBarItem {
 	/**Text/Element to be displayed in the tool bar;*/
 	displayItem: string | JSX.Element;
 	/**Determines what happens when user clicks on this particular tool bar item */
-	onClick: (controller?: GlobalController, txt?: string) => void;
+	onClick: (
+		controller?: GlobalController,
+		txt?: string,
+		ref?: React.RefObject<HTMLDivElement>
+	) => void;
 
 	constructor(
 		item: string | JSX.Element,
-		onClick: (c?: GlobalController, txt?: string) => void
+		onClick: (
+			c?: GlobalController,
+			txt?: string,
+			ref?: React.RefObject<HTMLDivElement>
+		) => void
 	) {
 		this.displayItem = item;
 		this.onClick = onClick;
@@ -84,12 +91,34 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 		c?.uiController.input.setToNextHistory();
 	}),
 	new QuickToolBarItem(<IconArrowBackUp size={22} />, (c) => {
-		c?.uiController.input.setToLastMessage()
+		c?.uiController.input.setToLastMessage();
 	}),
-	new QuickToolBarItem(<IconCopy size={20} />, () => {}),
-	new QuickToolBarItem(<IconCut size={20} />, () => {}),
-	
-	new QuickToolBarItem(<IconTrash size={20} />, (c) => {
+	new QuickToolBarItem(<IconCopy size={20} />, (c, _txt, ref) => {
+		c?.uiController.input.copyText();
+		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
+	}),
+	new QuickToolBarItem(<IconCut size={20} />, (c, _txt, ref) => {
+		c?.uiController.input.cutText();
+		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
+	}),
+
+	new QuickToolBarItem(<IconClipboard size={20} />, (c, _txt, ref) => {
+		c?.uiController.input.pasteText(
+			() => {
+				if (ref?.current) {
+					ref.current.classList.remove("disabled");
+					c.uiController.initSuccessAnimation(ref.current);
+				}
+			},
+			(e) => {
+				console.error(e);
+				if (ref?.current) ref.current.classList.add("disabled");
+			}
+		);
+	}),
+
+	new QuickToolBarItem(<IconTrash size={20} />, (c, _txt, ref) => {
 		c?.uiController.input.clear();
+		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
 	}),
 ];

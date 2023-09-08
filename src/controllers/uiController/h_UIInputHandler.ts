@@ -46,7 +46,7 @@ export class UIInputHandler {
 			val = this.getText();
 
 		this.setText(val.substring(0, pos) + text + val.substring(pos));
-		this.setCursorPosition(pos + 1);
+		this.setCursorPosition(pos + text.length);
 		inputElm.focus();
 	}
 
@@ -158,11 +158,50 @@ export class UIInputHandler {
 			this._historyIndex
 		);
 		this.setText(msg?.text ?? "");
-		return true
+		return true;
 	}
 
 	/**Sets the input value to the last user message */
 	setToLastMessage() {
-		this.setText(this._globCtrl.messageController.getLastUserMessage()?.text ?? "");
+		this.setText(
+			this._globCtrl.messageController.getLastUserMessage()?.text ?? ""
+		);
+	}
+
+	/**Selects the all the text in the main input text box */
+	selectAllText() {
+		if(!this._mainInputRef?.current) return;
+
+		this._mainInputRef.current.select();
+		this._mainInputRef.current.setSelectionRange(0, 99999);
+	}
+
+	/**Copies text from the main input to the clipboard */
+	async copyText() {
+		if (!this.isEmpty() && !navigator.clipboard) return;
+
+		try {
+			await navigator.clipboard.writeText(this.getText());
+			this.selectAllText()
+		} catch (err) {
+			console.error("Failed to copy: ", err);
+		}
+	}
+
+	/** Cuts text from the main input to the clipboard */
+	async cutText() {
+		this.copyText();
+		this.clear();
+	}
+
+	pasteText(onSuccess: () => void, onError: (e: any) => void) {
+		navigator.clipboard
+			.readText()
+			.then(
+				(clipText) => {
+					this.insertTextAt(clipText);
+					onSuccess();
+				}
+			).catch(onError);
 	}
 }
