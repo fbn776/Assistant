@@ -119,6 +119,7 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 
 	new QuickToolBarItem(<IconTrash size={20} />, (c, _txt, ref) => {
 		c?.uiController.input.clear();
+		c?.uiController.input.focus();
 		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
 	}),
 ];
