@@ -10,6 +10,10 @@ import {
 } from "@tabler/icons-react";
 import { GlobalController } from "../controllers/c_Controller";
 
+
+
+import {Benchmark} from "../../tests/test_utils";
+
 class QuickToolBarItem {
 	/**Text/Element to be displayed in the tool bar;*/
 	displayItem: string | JSX.Element;
@@ -45,9 +49,15 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 	new QuickToolBarItem(<IconCaretRight stroke={1.5} />, (c) => {
 		c?.uiController.input.offsetCursor(1);
 	}),
-	new QuickToolBarItem(<IconCaretUp stroke={1.5} />, () => {}),
-	new QuickToolBarItem(<IconCaretDown stroke={1.5} />, () => {}),
-	new QuickToolBarItem(<IconArrowBackUp size={22}/>, () => {}),
+	new QuickToolBarItem(<IconCaretUp stroke={1.5} />, (c) => {
+		c?.uiController.input.getPreviousHistory();
+	}),
+	new QuickToolBarItem(<IconCaretDown stroke={1.5} />, (c) => {
+		c?.uiController.input.getNextHistory();
+	}),
+	new QuickToolBarItem(<IconArrowBackUp size={22}/>, (c) => {
+		c?.uiController.input.submit()
+	}),
 	new QuickToolBarItem(<IconCopy size={20} />, () => {}),
 	new QuickToolBarItem(<IconCut size={20} />, () => {}),
 	new QuickToolBarItem(<IconTrash size={20} />, () => {}),

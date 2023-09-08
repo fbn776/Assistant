@@ -78,8 +78,10 @@ export class UIInputHandler {
 		this.setCursorPosition(pos);
 	}
 
-	/**Submission event; pushes a new message to the message controller, the executes and then push the result message */
-	submit() {
+	/**Submission event; pushes a new message to the message controller, the executes and then push the result message 
+	 * @param text An optional parameter; The text to be submitted; if not given then the text in the input is used; (Used mainly for testing purposes)
+	*/
+	submit(text?: string) {
 		if (this.isEmpty()) return;
 
 		//When submitting, first display the message as user message;
@@ -106,5 +108,34 @@ export class UIInputHandler {
 			/*Used a timeout here; because the message added above are not instantly added, they take some time (due to state management by react).
 			So a timeout is used to access the above added message*/
 			setTimeout(() => this._parent.message.scrollToLatest(), 0);
+	}
+
+	/**
+	 * 
+	*/
+	private _historyIndex = 0;
+	getPreviousHistory() {
+		this._historyIndex ++;
+
+		if(this._historyIndex > this._globCtrl.messageController.userCount) {
+			this._historyIndex = this._globCtrl.messageController.userCount;
+		}
+
+		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(this._historyIndex);
+		this.setText(msg?.text ?? "")
+
+		console.log(this._historyIndex);
+	}
+
+	getNextHistory() {
+		this._historyIndex --;
+
+		if(this._historyIndex < 0) {
+			this._historyIndex = 0;
+		}
+
+		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(this._historyIndex);
+		this.setText(msg?.text ?? "");
+		console.log(this._historyIndex)
 	}
 }
