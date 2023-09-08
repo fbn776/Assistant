@@ -160,4 +160,9 @@ export class UIInputHandler {
 		this.setText(msg?.text ?? "");
 		return true
 	}
+
+	/**Sets the input value to the last user message */
+	setToLastMessage() {
+		this.setText(this._globCtrl.messageController.getLastUserMessage()?.text ?? "");
+	}
 }

@@ -84,9 +84,12 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 		c?.uiController.input.setToNextHistory();
 	}),
 	new QuickToolBarItem(<IconArrowBackUp size={22} />, (c) => {
-		for (let i = 0; i < 10; i++) c?.uiController.input.submit(`message ${i}`);
+		c?.uiController.input.setToLastMessage()
 	}),
 	new QuickToolBarItem(<IconCopy size={20} />, () => {}),
 	new QuickToolBarItem(<IconCut size={20} />, () => {}),
-	new QuickToolBarItem(<IconTrash size={20} />, () => {}),
+	
+	new QuickToolBarItem(<IconTrash size={20} />, (c) => {
+		c?.uiController.input.clear();
+	}),
 ];
