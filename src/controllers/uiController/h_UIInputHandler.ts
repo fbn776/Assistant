@@ -16,6 +16,12 @@ export class UIInputHandler {
 		this._parent = parent;
 	}
 
+	/**Focuses the main input */
+	focus() {
+		this._mainInputRef?.current?.focus();
+	}
+
+	/**Checks if the main input felid is empty */
 	isEmpty() {
 		return this.getText() === "";
 	}
@@ -170,7 +176,7 @@ export class UIInputHandler {
 
 	/**Selects the all the text in the main input text box */
 	selectAllText() {
-		if(!this._mainInputRef?.current) return;
+		if (!this._mainInputRef?.current) return;
 
 		this._mainInputRef.current.select();
 		this._mainInputRef.current.setSelectionRange(0, 99999);
@@ -180,9 +186,11 @@ export class UIInputHandler {
 	async copyText() {
 		if (!this.isEmpty() && !navigator.clipboard) return;
 
+		this.focus();
+
 		try {
 			await navigator.clipboard.writeText(this.getText());
-			this.selectAllText()
+			this.selectAllText();
 		} catch (err) {
 			console.error("Failed to copy: ", err);
 		}
@@ -197,11 +205,11 @@ export class UIInputHandler {
 	pasteText(onSuccess: () => void, onError: (e: any) => void) {
 		navigator.clipboard
 			.readText()
-			.then(
-				(clipText) => {
-					this.insertTextAt(clipText);
-					onSuccess();
-				}
-			).catch(onError);
+			.then((clipText) => {
+				this.focus();
+				this.insertTextAt(clipText);
+				onSuccess();
+			})
+			.catch(onError);
 	}
 }

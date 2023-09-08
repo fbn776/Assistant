@@ -34,7 +34,6 @@
 
 .play-success-animation {
 	position: relative;
-	/* animation: play-success 1s ease-in-out; */
 }
 
 .play-success-animation:before {
