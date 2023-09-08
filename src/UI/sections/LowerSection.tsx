@@ -56,7 +56,8 @@ export const LowerSection: FC = () => {
 				<IconSend
 					className="stroke-l-prim-cont-txt dark:stroke-d-prim-cont-txt"
 					size={35}
-					onClick={() => {
+					onClick={(e) => {
+						e.preventDefault()
 						globalController.uiController.input.submit();
 					}}
 				/>

@@ -33,33 +33,3 @@ export interface I_dependencies {
 	/**Ref object for the message container*/
 	messageContainer: React.MutableRefObject<HTMLDivElement | null> | null;
 }
-
-/**
- * Interface for documenting the different UI events.
- * This is purely for documentation purposes, as commenting on the handlerClass itself make it a bit ugly.
- * 
- * Interface for `UIInputHandler` class.
- * 
- * This could be removed.
- */
-export interface I_UIEventsInput {
-	/**Checks if the input is empty or not */
-	isEmpty: () => boolean;
-	/**Clears the main input */
-	clear: () => void;
-	/**Submits the main input text to the submission work */
-	submit: () => void;
-	/**Gets the main input text */
-	getText: () => string;
-	/**Sets the value of the input text box to the given text value. This removes any previous text */
-	setText: (text: string) => void;
-	/**Insert a piece of text at the given position; if no position is given then, it inputs text at the current cursor position*/
-	insertTextAt: (text: string, position?: number) => void;
-	/**Returns the caret (cursor) position of the input; in case of an error this returns -1*/
-	getCursorPosition: () => number;
-	/**Sets the cursor position of the input to the specified position. This also focuses the input.
-	 *
-	 * **NOTE: Has doubt regarding the compatibility of this function.**
-	 */
-	setCursorPosition: (position: number) => void;
-}

@@ -7,7 +7,7 @@ This a hobby project. I also learned typescript while building this, thats a plu
 .....
 
 ### Want to understand namings?
-Try reading the [file naming scheme](file_naming_scheme.md)
+Try reading the [file naming scheme](./docs/file_naming_scheme.md)
 
 ## Local installations
 git clone/download this project, then open the terminal and cd into this project. Then in the terminal run;

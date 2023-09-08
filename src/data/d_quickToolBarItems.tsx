@@ -39,8 +39,12 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 
 
 	/**Controls */
-	new QuickToolBarItem(<IconCaretLeft stroke={1.5} />, () => {}),
-	new QuickToolBarItem(<IconCaretRight stroke={1.5} />, () => {}),
+	new QuickToolBarItem(<IconCaretLeft stroke={1.5} />, (c) => {
+		c?.uiController.input.offsetCursor(-1)
+	}),
+	new QuickToolBarItem(<IconCaretRight stroke={1.5} />, (c) => {
+		c?.uiController.input.offsetCursor(1);
+	}),
 	new QuickToolBarItem(<IconCaretUp stroke={1.5} />, () => {}),
 	new QuickToolBarItem(<IconCaretDown stroke={1.5} />, () => {}),
 	new QuickToolBarItem(<IconArrowBackUp size={22}/>, () => {}),
