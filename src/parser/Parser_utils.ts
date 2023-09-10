@@ -1,3 +1,5 @@
+
+
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.
  * But currently they work and its all that matter; (guess I'm too lazy :P)
@@ -116,9 +118,10 @@ export default class ParserUtils {
 					i < input.length - 1 &&
 					input[i + 1] !== " " &&
 					input[i + 1] !== ")"
-				)
+				) {
+					console.log("Error at: ", i)
 					throw new Error("Space not found");
-
+				}
 				Counts.closeBracket++;
 
 				if (currentChunk.trim() !== "") {
@@ -135,8 +138,9 @@ export default class ParserUtils {
 			stack[stack.length - 1].push(currentChunk.trim());
 		}
 
-		if (Counts.openBracket !== Counts.closeBracket)
+		if (Counts.openBracket !== Counts.closeBracket) {
 			throw new Error("Bracket mismatch");
+		}
 
 		//Checks for quote mismatch, ie the same number of quotes should be present;
 		if (Counts.singleQuotes % 2 !== 0 || Counts.doubleQuotes % 2 !== 0) {

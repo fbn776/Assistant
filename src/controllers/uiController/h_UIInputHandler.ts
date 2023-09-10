@@ -1,4 +1,4 @@
-import { MESSAGE_SOURCE } from "../../data/structures/s_message";
+import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
 import { Parser } from "../../parser/Parser";
 import { UIController } from "./c_UIController";
 
@@ -101,6 +101,7 @@ export class UIInputHandler {
 			text: this.getText(),
 			source: MESSAGE_SOURCE.USER,
 			unixTime: Date.now(),
+			type: MESSAGE_TYPE.TEXT,
 		});
 
 		this._globCtrl.messageController.addMessage({
@@ -108,6 +109,7 @@ export class UIInputHandler {
 			text: `The message is ${this.getText()}`,
 			source: MESSAGE_SOURCE.BOT,
 			unixTime: Date.now(),
+			type: MESSAGE_TYPE.TEXT,
 		});
 
 		//If the `clearOnSubmit` setting is set to true, then clear the input;

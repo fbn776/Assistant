@@ -11,6 +11,16 @@ import ParserUtils from "./Parser_utils";
 // 	}
 // });
 
+class Cs extends Error {
+	line: number;
+	constructor(name: string, line: number) {
+		super(name);
+		this.line = line;
+	}
+}
+
+import { Benchmark, Log } from "../../tests/test_utils";
+
 export class Parser {
 	public static parse(input: string) {
 		let stage1 = ParserUtils.tertiaryParser(input);
