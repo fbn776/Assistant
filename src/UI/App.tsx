@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import "./app.css";
 import { UpperSection } from "./sections/UpperSection";
 import { LowerSection } from "./sections/LowerSection";
@@ -31,6 +31,18 @@ export const App: FC = () => {
 			globalController.globalSettingsController.getValue("theme") === "dark"
 		);
 	});
+
+	//! REMOVE THIS;
+	useEffect(() => {
+		window.onkeydown = (e) => {
+			if(e.key === 'Enter') {
+				if (document.activeElement === globalController.uiController.dependencies.mainInputRef?.current) {
+					globalController.uiController.input.submit();
+				}
+			}
+		}
+	}, []);
+
 
 	return (
 		<ControllersContext.Provider value={globalController}>

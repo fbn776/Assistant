@@ -1,5 +1,8 @@
 import { MESSAGE_SOURCE } from "../../data/structures/s_message";
+import { Parser } from "../../parser/Parser";
 import { UIController } from "./c_UIController";
+
+
 
 export class UIInputHandler {
 	private _parent;
@@ -118,6 +121,8 @@ export class UIInputHandler {
 			setTimeout(() => this._parent.message.scrollToLatest(), 0);
 
 		this._historyIndex = -1;
+
+		Parser.parse(this.getText());
 	}
 
 	/**

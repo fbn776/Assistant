@@ -1,5 +1,3 @@
-import { flushSync } from "react-dom";
-import { Log, Benchmark } from "./test_utils";
 
 /**
  * A more advanced splitter that splits the string based on the given `delimiter` and also splits the string if there is quotes (', ", `) in the string.
@@ -24,7 +22,7 @@ export function stringSplitter(str: string, delimiter: string = " "): string[] {
 
 				if (nextIndex === -1) throw new Error("No closing quote found");
 
-				result.push(str.substring(i + 1, nextIndex));
+				result.push(str[i] + str.substring(i + 1, nextIndex) + str[i]);
 				i = nextIndex + 1;
 
 				if (i < str.length && str[i] != " ") throw new Error("Space not found");
@@ -67,11 +65,11 @@ export function bracketSplitter(input: string): any[] {
 
 	for (let i = 0; i < input.length; i++) {
 		const char = input[i];
+
 		if (inString) {
 			if (char === stringChar) {
 				//Counts the quotes
 				char == "'" ? Counts.singleQuotes++ : Counts.doubleQuotes++;
-
 				//Check for invalid quotes in the closing part. Eg: "Hello"World"
 				if (
 					i < input.length - 1 &&
@@ -79,7 +77,7 @@ export function bracketSplitter(input: string): any[] {
 					input[i + 1] !== ")"
 				)
 					throw new Error("Invalid quote");
-
+				
 				currentChunk += char;
 				inString = false;
 			} else {
@@ -162,24 +160,4 @@ function combinedSplit(input: any[]) {
 
 export function secondaryParser(input: string): any[] {
 	return combinedSplit(bracketSplitter(input));
-}
-
-class Parser {
-	static parse(input: string): any[] {
-
-	}
-}
-
-class SyntaxNode {
-	args: any[];
-	constructor(public name: string, ...rest: any[]) {
-		this.name = name;
-		this.args = rest;
-	}
-}
-
-class SyntaxTree {
-	constructor(public root: SyntaxNode) {
-		this.root = root;
-	}
 }
