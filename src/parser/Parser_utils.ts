@@ -1,4 +1,4 @@
-
+import { SyntaxTree } from "./syntax";
 
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.
@@ -119,7 +119,7 @@ export default class ParserUtils {
 					input[i + 1] !== " " &&
 					input[i + 1] !== ")"
 				) {
-					console.log("Error at: ", i)
+					console.log("Error at: ", i);
 					throw new Error("Space not found");
 				}
 				Counts.closeBracket++;
@@ -168,12 +168,18 @@ export default class ParserUtils {
 	/**This is the stage 1 parsing of the string;
 	 * This combines quotes splitting, bracket splitting.
 	 * For eg;
-	 * 
+	 *
 	 * For a given string "add 10 20 (add 30 40) 30"
-	 * 
+	 *
 	 * This returns ["add", "10", "20", ["add", "30", "40"], "30"]
 	 */
 	static tertiaryParser(input: string): any[] {
 		return this.combinedSplit(this.splitByBracket(input));
+	}
+
+	static primaryParser(input: any[]) {
+		let tree = new SyntaxTree();
+		SyntaxTree.makeTree(input, tree);
+		return tree;
 	}
 }
