@@ -6,8 +6,8 @@ import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
 import { GlobalController } from "../controllers/c_Controller";
 import { GlobalSettingsController } from "../controllers/c_GlobalSettingsController";
-import { MessageController } from "../controllers/c_MessageController";
-import { UIController } from "../controllers/uiController/c_UIController";
+import { MessageController } from "../controllers/messages/c_MessageController";
+import { UIController } from "../controllers/UI/c_UIController";
 
 //Global controller for the app;
 const globalController = new GlobalController(
@@ -35,14 +35,16 @@ export const App: FC = () => {
 	//! REMOVE THIS;
 	useEffect(() => {
 		window.onkeydown = (e) => {
-			if(e.key === 'Enter') {
-				if (document.activeElement === globalController.uiController.dependencies.mainInputRef?.current) {
+			if (e.key === "Enter") {
+				if (
+					document.activeElement ===
+					globalController.uiController.dependencies.mainInputRef?.current
+				) {
 					globalController.uiController.input.submit();
 				}
 			}
-		}
+		};
 	}, []);
-
 
 	return (
 		<ControllersContext.Provider value={globalController}>

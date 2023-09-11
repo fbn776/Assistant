@@ -1,7 +1,7 @@
 import { GlobalSettingsController } from "./c_GlobalSettingsController";
-import { MessageController } from "./c_MessageController";
+import { MessageController } from "./messages/c_MessageController";
 import { BaseController } from "./c_BaseController";
-import { UIController } from "./uiController/c_UIController";
+import { UIController } from "./UI/c_UIController";
 
 /**
  * This is a global controller class for handling most of the things in the app. This also is an access point accessing for every other controller.

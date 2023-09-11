@@ -1,7 +1,7 @@
-import { I_Message, MESSAGE_SOURCE } from "../data/structures/s_message";
-import { BaseController } from "./c_BaseController";
-import { GlobalController } from "./c_Controller";
-
+import { I_Message, MESSAGE_SOURCE } from "../../data/structures/s_message";
+import { BaseController } from "../c_BaseController";
+import { GlobalController } from "../c_Controller";
+import MessageStorageHandler from "./h_MessageStorageHandler";
 /**
  * This is a controller class for handling related to messages storing, retrieving, deletion and addition.
  * This makes sure that the messages are handled in a centralized manner, ie this forms a single point of truth for the messages;
@@ -13,6 +13,8 @@ export class MessageController extends BaseController {
 	private messages: I_Message[] = [];
 	private setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
 		() => {};
+
+	storage = new MessageStorageHandler(this);
 
 	/**
 	 * This initializes the message state.

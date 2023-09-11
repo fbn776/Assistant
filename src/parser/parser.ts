@@ -11,18 +11,54 @@ import ParserUtils from "./Parser_utils";
 // 	}
 // });
 
-class Cs extends Error {
-	line: number;
-	constructor(name: string, line: number) {
-		super(name);
-		this.line = line;
+enum E_SyntaxTypes {
+	literal,
+	command,
+}
+type T_SyntaxCommandArgument = Array<SyntaxLiteral | SyntaxCommand>;
+
+
+class SyntaxLiteral {
+	public value: string;
+	public type: E_SyntaxTypes = E_SyntaxTypes.literal;
+
+	constructor(value: string) {
+		this.value = value;
 	}
 }
 
-import { Benchmark, Log } from "../../tests/test_utils";
+class SyntaxCommand {
+	public name: string;
+	public type: E_SyntaxTypes = E_SyntaxTypes.command;
+	public arguments: T_SyntaxCommandArgument = [];
+
+	constructor(name: string, commandArgs: T_SyntaxCommandArgument) {
+		this.name = name;
+		this.arguments = commandArgs;
+	}
+}
+
+
+//sum 10 30 (add 10 30) 40
+
+let a = new SyntaxCommand("sum", [
+	new SyntaxLiteral("10"),
+	new SyntaxLiteral("30"),
+	new SyntaxCommand("add", [
+		new SyntaxLiteral("10"),
+		new SyntaxLiteral("30"),
+	]),
+	new SyntaxLiteral("40"),
+])
+
+
+console.log(a);
+
 
 export class Parser {
 	public static parse(input: string) {
 		let stage1 = ParserUtils.tertiaryParser(input);
+
+		console.log(stage1);
 	}
 }
