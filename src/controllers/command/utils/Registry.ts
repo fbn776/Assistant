@@ -1,7 +1,7 @@
 import { Command } from "./Command";
 import Documentation from "./documentation/Documentation";
-import { ArgumentsData } from "./utils/arguments";
-import { CommandNameError, hasDuplicates } from "./utils/command_utils";
+import { ArgumentsData } from "./arguments";
+import { CommandNameError, hasDuplicates } from "./command_utils";
 
 // Commands.register({
 // 	name: ["add", "addition", "plus"],
@@ -43,10 +43,10 @@ export class CommandRegistry {
 		this._addCommand(cmd);
 	}
 
-	/**Adds the given command to the command registry 
+	/**Adds the given command to the command registry
 	 * This takes in a command and then loops though each name and adds it to the registry;
 	 * This doesn't check for any errors, so make sure to check for errors before calling this function;
-	*/
+	 */
 	private _addCommand(cmd: Command) {
 		for (let name of cmd.names) {
 			this._commands.set(name, cmd);
@@ -64,14 +64,17 @@ export class CommandRegistry {
 			throw new Error("Invalid name; there needs be at least one name.");
 
 		let dup = hasDuplicates(data.name);
-		if(dup !== false)
-			throw new CommandNameError("Command alias duplicate found", dup as string);
-		
+		if (dup !== false)
+			throw new CommandNameError(
+				"Command alias duplicate found",
+				dup as string
+			);
+
 		for (let name of data.name) {
 			//Validates the name pattern;
 			Command.ValidateCommandName(name);
 
-			if(this.exists(name))
+			if (this.exists(name))
 				throw new CommandNameError("The command already exists.", name);
 		}
 	}
