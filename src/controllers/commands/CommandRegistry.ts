@@ -3,16 +3,6 @@ import Documentation from "./utils/documentation/Documentation";
 import { ArgumentsData } from "./utils/arguments";
 import { CommandNameError, hasDuplicates } from "./utils/command_utils";
 
-// Commands.register({
-// 	name: ["add", "addition", "plus"],
-// 	arguments: ArgumentTypes(),
-// 	metadata: new Documentation(
-// 		"Adds two numbers together",
-// 	),
-// 	exec: (a, b) => {
-// 		return a + b;
-// 	}
-// });
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
@@ -27,7 +17,6 @@ export interface I_CommandRegistryFormat {
 }
 
 /**
- *
  * _commands stores the key value pair in the format <command_name>: <Command_class>
  * Each alias of the command takes occupies a separate space in the map;
  */
