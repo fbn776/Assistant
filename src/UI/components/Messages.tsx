@@ -4,11 +4,10 @@ import { MESSAGE_SOURCE, I_Message } from "../../data/structures/s_message";
 
 /**
  * The message component
- * TODO Implement ID/key prop
  */
-export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
+export const Message: FC<I_Message> = (props) => {
 	const msgCont: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
-	const isBot = source === MESSAGE_SOURCE.BOT;
+	const isBot = props.source === MESSAGE_SOURCE.BOT;
 
 	//For entry animation;
 	useEffect(() => {
@@ -19,7 +18,7 @@ export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
 
 	return (
 		<div
-			id={id}
+			id={props.id}
 			className={
 				"w-full px-3 pt-3 flex transition-transform" +
 				(isBot ? " translate-x-[-100%]" : " justify-end translate-x-[100%]")
@@ -34,9 +33,9 @@ export const Message: FC<I_Message> = ({ source, text, unixTime, id }) => {
 						: "bg-l-prim text-l-prim-txt dark:bg-d-prim dark:text-d-prim-txt rounded-[10px_10px_0px_10px]")
 				}
 			>
-				{text}
+				{props.text}
 				<span className="h-full opacity-50 text-[0.60rem] text-right flex items-end">
-					{convertUnixTime(unixTime)}
+					{convertUnixTime(props.unixTime)}
 				</span>
 			</p>
 		</div>

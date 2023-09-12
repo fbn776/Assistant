@@ -1,4 +1,7 @@
+import { BracketMismatchError, EmptyBracketsError, InvalidQuotesError, NoClosingQuoteFoundError, QuotesMismatchError, SpaceNotFoundError } from "./errors";
 import { SyntaxTree } from "./syntax";
+
+
 
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.
@@ -19,17 +22,17 @@ export default class ParserUtils {
 				str[i] === "`"
 			) {
 				if (str[i] != delimiter) {
-					if (i > 0 && str[i - 1] != " ") throw new Error("Space not found");
+					if (i > 0 && str[i - 1] != " ") throw new SpaceNotFoundError(i);
 
 					let nextIndex = str.indexOf(str[i], i + 1);
 
-					if (nextIndex === -1) throw new Error("No closing quote found");
+					if (nextIndex === -1) throw new NoClosingQuoteFoundError(i);
 
 					result.push(str[i] + str.substring(i + 1, nextIndex) + str[i]);
 					i = nextIndex + 1;
 
 					if (i < str.length && str[i] != " ")
-						throw new Error("Space not found");
+						throw new SpaceNotFoundError(i);
 
 					continue;
 				}
@@ -76,7 +79,7 @@ export default class ParserUtils {
 						input[i + 1] !== " " &&
 						input[i + 1] !== ")"
 					)
-						throw new Error("Invalid quote");
+						throw new InvalidQuotesError(i);
 
 					currentChunk += char;
 					inString = false;
@@ -89,7 +92,7 @@ export default class ParserUtils {
 
 				//Checks for invalid quotes in the opening part. Eg: Hello"World"
 				if (i > 0 && input[i - 1] !== " " && input[i - 1] !== "(")
-					throw new Error("Invalid quote");
+					throw new InvalidQuotesError(i);
 
 				inString = true;
 				stringChar = char;
@@ -97,11 +100,11 @@ export default class ParserUtils {
 			} else if (char === "(") {
 				//Checks for space/(bracket?) before opening bracket;
 				if (i > 0 && input[i - 1] !== " " && input[i - 1] !== "(")
-					throw new Error("Space not found");
+					throw new SpaceNotFoundError(i);
 
 				//Checks for "rouge" brackets. That is, if there are closing brackets without opening brackets;
 				if (!Array.isArray(stack[stack.length - 1]))
-					throw new Error("Empty brackets found");
+					throw new EmptyBracketsError(i);
 
 				Counts.openBracket++;
 				if (currentChunk.trim() !== "") {
@@ -119,8 +122,7 @@ export default class ParserUtils {
 					input[i + 1] !== " " &&
 					input[i + 1] !== ")"
 				) {
-					console.log("Error at: ", i);
-					throw new Error("Space not found");
+					throw new SpaceNotFoundError(i);
 				}
 				Counts.closeBracket++;
 
@@ -139,12 +141,12 @@ export default class ParserUtils {
 		}
 
 		if (Counts.openBracket !== Counts.closeBracket) {
-			throw new Error("Bracket mismatch");
+			throw new BracketMismatchError(input.length - 1);
 		}
 
 		//Checks for quote mismatch, ie the same number of quotes should be present;
 		if (Counts.singleQuotes % 2 !== 0 || Counts.doubleQuotes % 2 !== 0) {
-			throw new Error("Quote mismatch");
+			throw new QuotesMismatchError(input.length - 1);
 		}
 
 		return result;
@@ -156,6 +158,7 @@ export default class ParserUtils {
 
 		for (let item of input) {
 			if (typeof item === "string") {
+				//Split the string; this splitting shouldn't split spaces inside the quotes. So splitByQuotes is used.
 				result.push(...this.splitByQuotes(item));
 			} else {
 				result.push(this.combinedSplit(item));

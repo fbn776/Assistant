@@ -1,6 +1,7 @@
 import { I_Message, MESSAGE_SOURCE } from "../../data/structures/s_message";
 import { BaseController } from "../c_BaseController";
 import { GlobalController } from "../c_Controller";
+import { MessageQuickiesHandler } from "./h_MessageQuickies";
 import MessageStorageHandler from "./h_MessageStorageHandler";
 /**
  * This is a controller class for handling related to messages storing, retrieving, deletion and addition.
@@ -14,7 +15,10 @@ export class MessageController extends BaseController {
 	private _setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
 		() => {};
 
+	/**Storage handler */
 	storage = new MessageStorageHandler(this);
+	/**Some quick message functions */
+	quickies = new MessageQuickiesHandler(this);
 
 	/**
 	 * This initializes the message state.
@@ -175,5 +179,23 @@ export class MessageController extends BaseController {
 	 */
 	deleteLocalData() {
 		//TODO
+	}
+
+	/**Generates a random string
+	 * Working: 
+	 * Gets the current unixTime as a string, then generates a random integer between 0 and the unixTime's length.
+	 * Then generates a random integer b/w 100 and some large enough number.
+	 * Then inserts this large random number b/w the unixTime at the first generated random number
+	 * 
+	 * This is a quick and dirty implementation of a random string generator.
+	 * Highly improbable to generate the same string twice, but not impossible.
+	 * Could be better; open to future changes
+	 */
+	generateRandomID(): string {
+		let time = Date.now().toString(),
+			pos = Math.floor(Math.random() * (time.length - 1)),
+			randomStr = Math.floor((Math.random() * 10000) + 100);
+
+		return time.substring(0, pos) + randomStr + time.substring(pos);
 	}
 }

@@ -1,5 +1,5 @@
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
-import { Parser } from "../../parser/parser";
+import { Parser } from "../../compiler/parser/parser";
 import { UIController } from "./c_UIController";
 
 
@@ -95,21 +95,9 @@ export class UIInputHandler {
 		if (this.isEmpty()) return;
 
 		//When submitting, first display the message as user message;
-		this._globCtrl.messageController.addMessage({
-			id: Date.now().toString(),
-			text: this.getText(),
-			source: MESSAGE_SOURCE.USER,
-			unixTime: Date.now(),
-			type: MESSAGE_TYPE.TEXT,
-		});
+		this._globCtrl.messageController.quickies.userMessage(this.getText())
 
-		this._globCtrl.messageController.addMessage({
-			id: (Date.now() + 1).toString(),
-			text: `The message is ${this.getText()}`,
-			source: MESSAGE_SOURCE.BOT,
-			unixTime: Date.now(),
-			type: MESSAGE_TYPE.TEXT,
-		});
+		this._globCtrl.messageController.quickies.botTextReply(`The message is => ${this.getText()}`);
 
 		//If the `clearOnSubmit` setting is set to true, then clear the input;
 		if (this._globCtrl.globalSettingsController.getValue("clearOnSubmit"))
@@ -122,10 +110,6 @@ export class UIInputHandler {
 			setTimeout(() => this._parent.message.scrollToLatest(), 0);
 
 		this._historyIndex = -1;
-
-
-		console.log(this._globCtrl.commandController.registry)
-
 
 		Parser.parse(this.getText());
 	}
