@@ -1,8 +1,4 @@
-import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
-import { Parser } from "../../compiler/parser/parser";
 import { UIController } from "./c_UIController";
-import ParseError from "../../compiler/parser/errors";
-
 
 export class UIInputHandler {
 	private _parent;

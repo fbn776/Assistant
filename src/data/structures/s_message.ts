@@ -11,7 +11,6 @@ export enum MESSAGE_SOURCE {
 /**
  * Represents the type of the message;
  */
-
 export enum MESSAGE_TYPE {
 	/**A simple text message; the message only contains simple simple text */
 	TEXT,

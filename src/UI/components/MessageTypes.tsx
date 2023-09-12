@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { I_Message, MESSAGE_SOURCE } from "../../data/structures/s_message";
+import { I_Message } from "../../data/structures/s_message";
 import { convertUnixTime } from "../utils/utils";
 export interface I_MessageTypeProp {
 	data: I_Message;

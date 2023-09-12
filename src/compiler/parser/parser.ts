@@ -1,5 +1,4 @@
 import { GlobalController } from "../../controllers";
-import ParseError from "./errors";
 import ParserUtils from "./parserUtils";
 import { SyntaxTree } from "./syntax";
 
@@ -14,6 +13,8 @@ export class Parser {
 			let stage1 = ParserUtils.tertiaryParser(input);
 			let stage2 = ParserUtils.primaryParser(stage1);
 
+			console.log(this._globalController)
+			
 			return stage2;
 		} catch (error) {
 			return error as Error;
