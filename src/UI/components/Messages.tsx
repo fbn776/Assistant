@@ -1,13 +1,28 @@
 import React, { FC, useEffect, useRef } from "react";
-import { convertUnixTime } from "../utils/utils";
-import { MESSAGE_SOURCE, I_Message } from "../../data/structures/s_message";
+import {
+	MESSAGE_SOURCE,
+	I_Message,
+	MESSAGE_TYPE,
+} from "../../data/structures/s_message";
+import { ErrorMessage, I_MessageProps, TextMessage } from "./MessageTypes";
+
+function conditionalMessageRender(data: I_Message) {
+	switch (data.type) {
+		default:
+		case MESSAGE_TYPE.TEXT:
+			return <TextMessage data={data} />;
+		case MESSAGE_TYPE.ERROR:
+			return <ErrorMessage data={data} />;
+	}
+}
 
 /**
  * The message component
  */
-export const Message: FC<I_Message> = (props) => {
+export const Message: FC<I_MessageProps> = (props) => {
+	const data = props.data;
 	const msgCont: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
-	const isBot = props.source === MESSAGE_SOURCE.BOT;
+	const isBot = data.source === MESSAGE_SOURCE.BOT;
 
 	//For entry animation;
 	useEffect(() => {
@@ -18,26 +33,14 @@ export const Message: FC<I_Message> = (props) => {
 
 	return (
 		<div
-			id={props.id}
+			id={data.id}
 			className={
 				"w-full px-3 pt-3 flex transition-transform" +
 				(isBot ? " translate-x-[-100%]" : " justify-end translate-x-[100%]")
 			}
 			ref={msgCont}
 		>
-			<p
-				className={
-					"min-w-[100px] max-w-[70%] pl-3 pr-3 py-2 shadow-md flex justify-between gap-2 " +
-					(isBot
-						? "bg-l-secnd text-l-secnd-txt dark:bg-d-secnd dark:text-d-secnd-txt rounded-[0px_10px_10px_10px]"
-						: "bg-l-prim text-l-prim-txt dark:bg-d-prim dark:text-d-prim-txt rounded-[10px_10px_0px_10px]")
-				}
-			>
-				{props.text}
-				<span className="h-full opacity-50 text-[0.60rem] text-right flex items-end">
-					{convertUnixTime(props.unixTime)}
-				</span>
-			</p>
+			{conditionalMessageRender(data)}
 		</div>
 	);
 };

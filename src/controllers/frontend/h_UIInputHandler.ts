@@ -111,7 +111,7 @@ export class UIInputHandler {
 
 		this._historyIndex = -1;
 
-		Parser.parse(this.getText());
+		this._globCtrl.parser.parse(this.getText());
 	}
 
 	/**

@@ -17,12 +17,8 @@ export const UpperSection: FC = () => {
 				{messages.map((msg) => {
 					return (
 						<Message
-							key={msg.id}
-							source={msg.source}
-							text={msg.text}
-							unixTime={msg.unixTime}
-							id={msg.id}
-							type={msg.type}
+							data = {msg}
+							key = {msg.id}
 						/>
 					);
 				})}

@@ -31,12 +31,18 @@ export class MessageQuickiesHandler {
 		});
 	}
 
-	/**This message represents a error message.
-	 * This message is used when there is an error/typo in the command
-	 * This displays the position along with the command at which the error occurred.
+	/**Represents an error message.
+	 * This is used when there is an error/typo in the command
+	 * This displays the position along with the command at which the error occurred. This is sent by the bot
 	 */
 	commandError() {
-
+		
 	}
 
+	/**The same as command error, but has additional formatting */
+	commandTypo(command: string, error: string, pos: number) {
+		
+				
+
+	}
 }
