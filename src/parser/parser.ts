@@ -1,4 +1,4 @@
-import ParserUtils from "./Parser_utils";
+import ParserUtils from "./parser_utils";
 
 export class Parser {
 	public static parse(input: string) {

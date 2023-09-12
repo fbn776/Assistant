@@ -1,5 +1,5 @@
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
-import { Parser } from "../../parser/Parser";
+import { Parser } from "../../parser/parser";
 import { UIController } from "./c_UIController";
 
 
