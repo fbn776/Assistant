@@ -123,6 +123,10 @@ export class UIInputHandler {
 
 		this._historyIndex = -1;
 
+
+		console.log(this._globCtrl.commandController.registry)
+
+
 		Parser.parse(this.getText());
 	}
 

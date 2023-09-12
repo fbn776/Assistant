@@ -1,7 +1,7 @@
-import { Command } from "./Command";
-import Documentation from "./documentation/Documentation";
-import { ArgumentsData } from "./arguments";
-import { CommandNameError, hasDuplicates } from "./command_utils";
+import { Command } from "./utils/Command";
+import Documentation from "./utils/documentation/Documentation";
+import { ArgumentsData } from "./utils/arguments";
+import { CommandNameError, hasDuplicates } from "./utils/command_utils";
 
 // Commands.register({
 // 	name: ["add", "addition", "plus"],

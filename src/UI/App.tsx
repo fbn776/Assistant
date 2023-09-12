@@ -1,20 +1,22 @@
-import { FC, useEffect, useState } from "react";
 import "./app.css";
-import { UpperSection } from "./sections/UpperSection";
-import { LowerSection } from "./sections/LowerSection";
+import { FC, useEffect, useState } from "react";
+import { LowerSection, UpperSection } from "./sections";
 import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
-import { GlobalController } from "../controllers/c_Controller";
-import { GlobalSettingsController } from "../controllers/settings/c_GlobalSettingsController";
-import { MessageController } from "../controllers/messages/c_MessageController";
-import { UIController } from "../controllers/frontend/c_UIController";
+import { CommandController, GlobalController, GlobalSettingsController, MessageController, UIController } from "../controllers";
+import command_registry_instance from "../command_lists/registry_instance";
+import "../command_lists";
+
 
 //Global controller for the app;
 const globalController = new GlobalController(
 	new MessageController(),
 	new GlobalSettingsController(),
-	new UIController()
+	new UIController(),
+	new CommandController()
 );
+globalController.commandController.initRegistry(command_registry_instance);
+
 
 export const App: FC = () => {
 	//Sets the state controller for the messages;

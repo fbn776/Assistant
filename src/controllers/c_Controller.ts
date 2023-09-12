@@ -2,6 +2,7 @@ import { GlobalSettingsController } from "./settings/c_GlobalSettingsController"
 import { MessageController } from "./messages/c_MessageController";
 import { BaseController } from "./c_BaseController";
 import { UIController } from "./frontend/c_UIController";
+import { CommandController } from './command/c_CommandController';
 
 /**
  * This is a global controller class for handling most of the things in the app. This also is an access point accessing for every other controller.
@@ -21,22 +22,26 @@ export class GlobalController {
 	messageController: MessageController;
 	globalSettingsController: GlobalSettingsController;
 	uiController: UIController;
+	commandController: CommandController;
 
 	private _controllerList: BaseController[];
 
 	constructor(
 		messageController = new MessageController(),
 		globalSettingsController = new GlobalSettingsController(),
-		uiController = new UIController()
+		uiController = new UIController(),
+		commandController = new CommandController()
 	) {
 		this.messageController = messageController;
 		this.globalSettingsController = globalSettingsController;
 		this.uiController = uiController;
+		this.commandController = commandController;
 
 		this._controllerList = [
 			this.messageController,
 			this.globalSettingsController,
 			this.uiController,
+			this.commandController
 		];
 
 		for (let controller of this._controllerList) {
