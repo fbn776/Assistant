@@ -92,3 +92,41 @@
 	border-radius: 10px;
 	@apply bg-l-prim dark:bg-d-prim;
 }
+
+/**All message have this style**/
+.message-general {
+	@apply  min-w-[100px] max-w-[70%] pl-3 pr-3 py-2 shadow-md flex justify-between gap-2;
+}
+
+/**Only text (plain) messages have these*/
+.message-text.user-message {
+	@apply bg-l-prim text-l-prim-txt dark:bg-d-prim dark:text-d-prim-txt rounded-[10px_10px_0px_10px];
+}
+
+.message-text.bot-message {
+	@apply bg-l-secnd dark:bg-d-secnd rounded-[0px_10px_10px_10px];
+}
+
+.message-text.user-message , .message-text.user-message .message-time {
+	@apply text-l-prim-txt dark:text-d-prim-txt;
+}
+
+.message-text.bot-message, .message-text.bot-message .message-time {
+	@apply text-l-secnd-txt dark:text-d-secnd-txt;
+}
+
+.message-time {
+	@apply h-full opacity-50 text-[0.60rem] text-right flex items-end;
+}
+
+.message-error-text {
+	@apply text-l-prim-error dark:text-d-prim-error;
+}
+
+.message-error.user-message {
+	@apply rounded-[10px_10px_0px_10px]
+}
+
+.message-error.bot-message {
+	@apply rounded-[0px_10px_10px_10px];
+}

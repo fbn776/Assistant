@@ -1,6 +1,7 @@
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
 import { Parser } from "../../compiler/parser/parser";
 import { UIController } from "./c_UIController";
+import ParseError from "../../compiler/parser/errors";
 
 
 export class UIInputHandler {
@@ -85,35 +86,6 @@ export class UIInputHandler {
 
 		this.setCursorPosition(pos);
 	}
-
-	/**Submission event; pushes a new message to the message controller, the executes and then push the result message
-	 * @param text An optional parameter; The text to be submitted; if not given then the text in the input is used; (Used mainly for testing purposes)
-	 */
-	submit(text?: string) {
-		if (text) this.setText(text);
-
-		if (this.isEmpty()) return;
-
-		//When submitting, first display the message as user message;
-		this._globCtrl.messageController.quickies.userMessage(this.getText())
-
-		this._globCtrl.messageController.quickies.botTextReply(`The message is => ${this.getText()}`);
-
-		//If the `clearOnSubmit` setting is set to true, then clear the input;
-		if (this._globCtrl.globalSettingsController.getValue("clearOnSubmit"))
-			this.clear();
-
-		//Scroll to the last message element
-		if (this._globCtrl.globalSettingsController.getValue("scrollToNewMessage"))
-			/*Used a timeout here; because the message added above are not instantly added, they take some time (due to state management by react).
-			So a timeout is used to access the above added message*/
-			setTimeout(() => this._parent.message.scrollToLatest(), 0);
-
-		this._historyIndex = -1;
-
-		this._globCtrl.parser.parse(this.getText());
-	}
-
 	/**
 	 * Controls the backward and forward history of the input; Used to get previously typed messages.
 	 * The _historyIndex is used to keep track of the current index of the history. A higher value means an older message and a lower value means a newer message.
@@ -205,5 +177,41 @@ export class UIInputHandler {
 				onSuccess();
 			})
 			.catch(onError);
+	}
+
+	/**Submission event; pushes a new message to the message controller, the executes and then push the result message
+	 * @param text An optional parameter; The text to be submitted; if not given then the text in the input is used; (Used mainly for testing purposes)
+	 */
+	submit() {	
+		const text = this.getText();
+		if (this.isEmpty()) return;
+		const _msgCtrl = this._globCtrl.messageController;
+
+		//When submitting, first display the message as user message;
+		this._globCtrl.messageController.quickies.userMessage(text);
+
+		let parsed = this._globCtrl.parser.parse(text);
+
+		//If the parsed is an error, then display the error message; else do the rest;
+		if(parsed instanceof Error) {
+			// if(parsed instanceof ParseError)
+			// 	_msgCtrl.quickies.commandTypo(text, parsed.message, parsed.position);
+			// else 
+				_msgCtrl.quickies.commandError(parsed.message);
+		} else {
+			_msgCtrl.quickies.botTextReply(JSON.stringify(parsed));
+		}
+
+		//If the `clearOnSubmit` setting is set to true, then clear the input;
+		if (this._globCtrl.globalSettingsController.getValue("clearOnSubmit"))
+			this.clear();
+
+		//Scroll to the last message element
+		if (this._globCtrl.globalSettingsController.getValue("scrollToNewMessage"))
+			/*Used a timeout here; because the message added above are not instantly added, they take some time (due to state management by react).
+			So a timeout is used to access the above added message*/
+			setTimeout(() => this._parent.message.scrollToLatest(), 0);
+
+		this._historyIndex = -1;
 	}
 }

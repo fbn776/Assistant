@@ -1,18 +1,25 @@
-import React, { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import {
 	MESSAGE_SOURCE,
 	I_Message,
 	MESSAGE_TYPE,
 } from "../../data/structures/s_message";
-import { ErrorMessage, I_MessageProps, TextMessage } from "./MessageTypes";
+import { ErrorMessage, FormattedErrorMessage, TextMessage } from "./MessageTypes";
+
+export interface I_MessageProps {
+	data: I_Message;
+}
 
 function conditionalMessageRender(data: I_Message) {
+	let isBot = data.source === MESSAGE_SOURCE.BOT;
 	switch (data.type) {
 		default:
 		case MESSAGE_TYPE.TEXT:
-			return <TextMessage data={data} />;
+			return <TextMessage data={data} isBot={isBot} />;
 		case MESSAGE_TYPE.ERROR:
-			return <ErrorMessage data={data} />;
+			return <ErrorMessage data={data} isBot={isBot} />;
+		case MESSAGE_TYPE.FORMATTED_ERROR:
+			return <FormattedErrorMessage data={data} isBot={isBot} />;
 	}
 }
 

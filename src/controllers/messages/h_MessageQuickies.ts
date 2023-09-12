@@ -35,14 +35,28 @@ export class MessageQuickiesHandler {
 	 * This is used when there is an error/typo in the command
 	 * This displays the position along with the command at which the error occurred. This is sent by the bot
 	 */
-	commandError() {
-		
+	commandError(error: string) {
+		this._parent.addMessage({
+			source: MESSAGE_SOURCE.BOT,
+			text: error,
+			type: MESSAGE_TYPE.ERROR,
+			unixTime: Date.now(),
+			id: this._parent.generateRandomID(),
+		});
 	}
 
 	/**The same as command error, but has additional formatting */
 	commandTypo(command: string, error: string, pos: number) {
-		
-				
+		let message = `Command:<br> ${command}\n`;
+		message += " ".repeat(pos) + "^" + "\n";
+		message += `Error: ${error}`;
 
+		this._parent.addMessage({
+			source: MESSAGE_SOURCE.BOT,
+			text: message,
+			type: MESSAGE_TYPE.ERROR,
+			unixTime: Date.now(),
+			id: this._parent.generateRandomID(),
+		});
 	}
 }

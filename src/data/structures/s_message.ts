@@ -11,11 +11,14 @@ export enum MESSAGE_SOURCE {
 /**
  * Represents the type of the message;
  */
+
 export enum MESSAGE_TYPE {
 	/**A simple text message; the message only contains simple simple text */
 	TEXT,
 	/**An error message; usually from the BOT, when then user sends some message containing error */
 	ERROR,
+	/**Same as error, but the message text, will be in JSON and contains information about the error */
+	FORMATTED_ERROR
 }
 
 export interface I_Message {

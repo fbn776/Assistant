@@ -1,6 +1,7 @@
 import { GlobalController } from "../../controllers";
 import ParseError from "./errors";
 import ParserUtils from "./parserUtils";
+import { SyntaxTree } from "./syntax";
 
 export class Parser {
 	private _globalController: GlobalController;
@@ -8,23 +9,14 @@ export class Parser {
 		this._globalController = globalController;
 	}
 
-	parse(input: string) {
+	parse(input: string): SyntaxTree | Error {
 		try {
 			let stage1 = ParserUtils.tertiaryParser(input);
 			let stage2 = ParserUtils.primaryParser(stage1);
 
-			console.log(stage2);
+			return stage2;
 		} catch (error) {
-			
-			if (error instanceof ParseError) {
-				this._globalController.messageController.quickies.botTextReply(
-					error.message
-				);
-			} else {
-				this._globalController.messageController.quickies.botTextReply(
-					"An unknown error occurred"
-				);
-			}
+			return error as Error;
 		}
 	}
 }
