@@ -1,6 +1,8 @@
-import { ArgumentsData } from "../../controllers/command/utils/arguments";
-import Documentation from "../../controllers/command/utils/documentation/Documentation";
-import { E_ArgumentTypes as types } from "../../controllers/command/utils/arguments";
+import {
+	ArgumentsData,
+	Documentation,
+	E_ArgumentTypes as types,
+} from "../../controllers/command";
 import command_registry_instance from "../registry_instance";
 
 command_registry_instance.register({
