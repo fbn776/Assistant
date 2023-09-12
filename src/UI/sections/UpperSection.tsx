@@ -22,6 +22,7 @@ export const UpperSection: FC = () => {
 							text={msg.text}
 							unixTime={msg.unixTime}
 							id={msg.id}
+							type={msg.type}
 						/>
 					);
 				})}
