@@ -10,8 +10,8 @@ export class MessageController extends BaseController {
 	CONTROLLER_NAME = "MessageController";
 	parent: GlobalController = null as any;
 
-	private messages: I_Message[] = [];
-	private setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
+	private _messages: I_Message[] = [];
+	private _setMessages: React.Dispatch<React.SetStateAction<I_Message[]>> =
 		() => {};
 
 	storage = new MessageStorageHandler(this);
@@ -23,12 +23,12 @@ export class MessageController extends BaseController {
 	init(
 		state: [I_Message[], React.Dispatch<React.SetStateAction<I_Message[]>>]
 	) {
-		[this.messages, this.setMessages] = state;
+		[this._messages, this._setMessages] = state;
 	}
 
 	/** The length or number of messages stored */
 	get count() {
-		return this.messages.length;
+		return this._messages.length;
 	}
 
 	/**The length or number of user sourced messages stored */
@@ -45,35 +45,35 @@ export class MessageController extends BaseController {
 	 * @param message The message object to be added
 	 */
 	addMessage(message: I_Message) {
-		this.setMessages((messages) => [...messages, message]);
+		this._setMessages((messages) => [...messages, message]);
 	}
 
 	/**Returns the list of all messages */
 	getAllMessages() {
-		return this.messages;
+		return this._messages;
 	}
 
 	/**Returns the message at a given index */
 	getMessageAtIndex(index: number) {
-		if (index < 0 || index >= this.messages.length) return null;
-		return this.messages[index];
+		if (index < 0 || index >= this._messages.length) return null;
+		return this._messages[index];
 	}
 
 	/**Returns the message at a given index; but indexing is reversed. ie the last message is at index 0.
 	 */
 	getMessageAtIndexFromLast(index: number) {
-		if (index < 0 || index >= this.messages.length) return null;
-		return this.messages[this.messages.length - index - 1];
+		if (index < 0 || index >= this._messages.length) return null;
+		return this._messages[this._messages.length - index - 1];
 	}
 
 	/**Returns the i-th user message from the beginning*/
 	getUserMessageAtIndex(index: number) {
-		if (index < 0 || index >= this.messages.length) return null;
+		if (index < 0 || index >= this._messages.length) return null;
 		let i = 0,
 			j = 0;
-		while (i < this.messages.length) {
-			if (this.messages[i].source === MESSAGE_SOURCE.USER) {
-				if (j === index) return this.messages[i];
+		while (i < this._messages.length) {
+			if (this._messages[i].source === MESSAGE_SOURCE.USER) {
+				if (j === index) return this._messages[i];
 				j++;
 			}
 			i++;
@@ -83,12 +83,12 @@ export class MessageController extends BaseController {
 
 	/**Returns the i-th user message from the last. That is last user message is at index 0 and so on. */
 	getUserMessageAtIndexFromLast(index: number) {
-		let l = this.messages.length,
+		let l = this._messages.length,
 			j = 0;
 		if (index < 0 || index >= l) return null;
 		while (l--) {
-			if (this.messages[l].source === MESSAGE_SOURCE.USER) {
-				if (j === index) return this.messages[l];
+			if (this._messages[l].source === MESSAGE_SOURCE.USER) {
+				if (j === index) return this._messages[l];
 				j++;
 			}
 		}
@@ -101,7 +101,7 @@ export class MessageController extends BaseController {
 	 * @returns returns the message object if found else null
 	 */
 	getMessage(id: string): I_Message | null {
-		for (let message of this.messages) {
+		for (let message of this._messages) {
 			if (message.id === id) return message;
 		}
 		return null;
@@ -109,14 +109,14 @@ export class MessageController extends BaseController {
 
 	/**Gets all the message of source BOT */
 	getAllBotMessages() {
-		return this.messages.filter(
+		return this._messages.filter(
 			(message) => message.source === MESSAGE_SOURCE.BOT
 		);
 	}
 
 	/**Gets all the message of source USER */
 	getAllUserMessages() {
-		return this.messages.filter(
+		return this._messages.filter(
 			(message) => message.source === MESSAGE_SOURCE.USER
 		);
 	}
@@ -141,7 +141,7 @@ export class MessageController extends BaseController {
 
 	/**Returns the last message data in the messages array */
 	getLastMessage() {
-		return this.messages[this.messages.length - 1];
+		return this._messages[this._messages.length - 1];
 	}
 
 	/**Gets the last user message data
@@ -149,10 +149,10 @@ export class MessageController extends BaseController {
 	 * This could be written another using the `getLastUserMessage()` function, but performance wise this is better;
 	 */
 	getLastUserMessage() {
-		let l = this.messages.length;
+		let l = this._messages.length;
 		while (l--) {
-			if (this.messages[l].source === MESSAGE_SOURCE.USER)
-				return this.messages[l];
+			if (this._messages[l].source === MESSAGE_SOURCE.USER)
+				return this._messages[l];
 		}
 		return null;
 	}
@@ -162,10 +162,10 @@ export class MessageController extends BaseController {
 	 * This could be written another using the `getLastUserMessage()` function, but performance wise this is better;
 	 */
 	getLastBotMessage() {
-		let l = this.messages.length;
+		let l = this._messages.length;
 		while (l--) {
-			if (this.messages[l].source === MESSAGE_SOURCE.BOT)
-				return this.messages[l];
+			if (this._messages[l].source === MESSAGE_SOURCE.BOT)
+				return this._messages[l];
 		}
 		return null;
 	}

@@ -3,7 +3,6 @@ import { Parser } from "../../parser/Parser";
 import { UIController } from "./c_UIController";
 
 
-
 export class UIInputHandler {
 	private _parent;
 

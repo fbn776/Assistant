@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
-} from "../data/structures/s_globalSettings";
-import { BaseController } from "./c_BaseController";
+} from "../../data/structures/s_globalSettings";
+import { BaseController } from "../c_BaseController";
 
 export class GlobalSettingsController extends BaseController {
 	CONTROLLER_NAME = "GlobalSettingsController";
@@ -19,7 +19,7 @@ export class GlobalSettingsController extends BaseController {
 	init(
 		state: [
 			I_GlobalSettings,
-			React.Dispatch<React.SetStateAction<I_GlobalSettings>>
+			React.Dispatch<React.SetStateAction<I_GlobalSettings>>,
 		]
 	) {
 		[this.settings, this.setSettings] = state;

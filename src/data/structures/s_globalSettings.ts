@@ -1,10 +1,6 @@
 export interface I_GlobalSettings {
-	//---------Styling related options-----------//
-
 	/** Controls the theme */
 	theme: "light" | "dark";
-
-	//---------Functionality related options-----------//
 
 	/**Controls weather the date of the message is shown*/
 	showMessageDate: boolean;
@@ -12,8 +8,6 @@ export interface I_GlobalSettings {
 	scrollToNewMessage: boolean;
 	/**Controls scroll behavior */
 	scrollToMessageBehavior: "smooth" | "instant" | "auto";
-
-	//---------Submission related options-----------//
 
 	/**Controls message submission on enter */
 	submitOnEnter: boolean;

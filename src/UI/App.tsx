@@ -5,9 +5,9 @@ import { LowerSection } from "./sections/LowerSection";
 import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
 import { GlobalController } from "../controllers/c_Controller";
-import { GlobalSettingsController } from "../controllers/c_GlobalSettingsController";
+import { GlobalSettingsController } from "../controllers/settings/c_GlobalSettingsController";
 import { MessageController } from "../controllers/messages/c_MessageController";
-import { UIController } from "../controllers/UI/c_UIController";
+import { UIController } from "../controllers/frontend/c_UIController";
 
 //Global controller for the app;
 const globalController = new GlobalController(

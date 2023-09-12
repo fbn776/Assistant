@@ -1,7 +1,6 @@
-import { I_ControllerBase } from "../data/structures/s_controllers";
 import { GlobalController } from "./c_Controller";
 
-export class BaseController implements I_ControllerBase {
+export class BaseController {
 	CONTROLLER_NAME: string = "BaseController";
 
 	parent: GlobalController = null as any;

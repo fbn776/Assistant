@@ -9,7 +9,7 @@ export class UIController extends BaseController {
 	/**Dependencies object for storing different dependencies to which the different events the controller depends on.
 	 *
 	 * **NOTE: This needs to set at first to the different dependencies else things might not work properly.**
-	 * @see I_dependencies for adding new methods
+	 * @see I_dependencies for adding new dependencies
 	 */
 	readonly dependencies: I_dependencies = {
 		mainInputRef: null,
