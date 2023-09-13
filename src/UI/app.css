@@ -98,6 +98,18 @@
 	@apply  min-w-[100px] max-w-[70%] pl-3 pr-3 py-2 shadow-md flex justify-between gap-2;
 }
 
+.message-general.user-message {
+	@apply rounded-[10px_10px_0px_10px]
+}
+
+.message-general.bot-message {
+	@apply rounded-[0px_10px_10px_10px];
+}
+
+.message-time {
+	@apply h-full opacity-50 text-[0.60rem] text-right flex items-end;
+}
+
 /**Only text (plain) messages have these*/
 .message-text.user-message {
 	@apply bg-l-prim text-l-prim-txt dark:bg-d-prim dark:text-d-prim-txt rounded-[10px_10px_0px_10px];
@@ -115,18 +127,6 @@
 	@apply text-l-secnd-txt dark:text-d-secnd-txt;
 }
 
-.message-time {
-	@apply h-full opacity-50 text-[0.60rem] text-right flex items-end;
-}
-
 .message-error-text {
-	@apply text-l-prim-error dark:text-d-prim-error;
-}
-
-.message-error.user-message {
-	@apply rounded-[10px_10px_0px_10px]
-}
-
-.message-error.bot-message {
-	@apply rounded-[0px_10px_10px_10px];
+	@apply text-l-prim-errorTxt dark:text-d-prim-errorTxt;
 }

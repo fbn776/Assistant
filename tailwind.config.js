@@ -20,7 +20,8 @@ export default {
 						DEFAULT: "#0070FF",
 						txt: "#F0F8FF",
 						variant: "#CED4DA",
-						error: "#FE0000",
+						errorTxt: "#ee140f",
+						errorBg: "#ec0000",
 						cont: {
 							bg: "#FFFFFF",
 							variant: "#F5F5F5",
@@ -44,7 +45,8 @@ export default {
 						DEFAULT: "#007FFF",
 						txt: "#FFFFFF",
 						variant: "#475569",
-						error: "#ff1a1a",
+						errorBg: "#8E2121",
+						errorTxt: "#ff4747",
 						cont: {
 							bg: "#212529",
 							variant: "#2B3035",
