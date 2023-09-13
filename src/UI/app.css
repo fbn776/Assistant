@@ -55,7 +55,8 @@
 }
 
 @keyframes play-success {
-	0%, 100% {
+	0%,
+	100% {
 		transform: scale(0);
 		opacity: 0;
 	}
@@ -95,11 +96,11 @@
 
 /**All message have this style**/
 .message-general {
-	@apply  min-w-[100px] max-w-[70%] pl-3 pr-3 py-2 shadow-md flex justify-between gap-2;
+	@apply min-w-[100px] max-w-[70%] pl-3 pr-3 py-2 shadow-md flex justify-between gap-2;
 }
 
 .message-general.user-message {
-	@apply rounded-[10px_10px_0px_10px]
+	@apply rounded-[10px_10px_0px_10px];
 }
 
 .message-general.bot-message {
@@ -119,14 +120,32 @@
 	@apply bg-l-secnd dark:bg-d-secnd rounded-[0px_10px_10px_10px];
 }
 
-.message-text.user-message , .message-text.user-message .message-time {
+.message-text.user-message,
+.message-text.user-message .message-time {
 	@apply text-l-prim-txt dark:text-d-prim-txt;
 }
 
-.message-text.bot-message, .message-text.bot-message .message-time {
+.message-text.bot-message,
+.message-text.bot-message .message-time {
 	@apply text-l-secnd-txt dark:text-d-secnd-txt;
 }
 
 .message-error-text {
 	@apply text-l-prim-errorTxt dark:text-d-prim-errorTxt;
+}
+
+.error-marker {
+	@apply bg-l-prim-errorTxt dark:bg-d-prim-errorTxt bg-opacity-20 dark:bg-opacity-20 rounded-md relative;
+}
+
+.error-marker::after {
+	content: "";
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	top: 100%;
+	left: calc(50% - 7.5px);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='rgb(200,0,0)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'%3E%3C/path%3E%3Cpath d='M12 5l0 14'%3E%3C/path%3E%3Cpath d='M18 11l-6 -6'%3E%3C/path%3E%3Cpath d='M6 11l6 -6'%3E%3C/path%3E%3C/svg%3E");
+	background-position: center;
+	background-size: 100%;
 }

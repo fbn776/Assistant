@@ -1,7 +1,13 @@
-import { BracketMismatchError, EmptyBracketsError, InvalidQuotesError, NoClosingQuoteFoundError, QuotesMismatchError, SpaceNotFoundError } from "./errors";
+import {
+	BracketMismatchError,
+	EmptyBracketsError,
+	InvalidBracketError,
+	InvalidQuotesError,
+	NoClosingQuoteFoundError,
+	QuotesMismatchError,
+	SpaceNotFoundError,
+} from "../errors";
 import { SyntaxTree } from "./syntax";
-
-
 
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.
@@ -31,8 +37,7 @@ export default class ParserUtils {
 					result.push(str[i] + str.substring(i + 1, nextIndex) + str[i]);
 					i = nextIndex + 1;
 
-					if (i < str.length && str[i] != " ")
-						throw new SpaceNotFoundError(i);
+					if (i < str.length && str[i] != " ") throw new SpaceNotFoundError(i);
 
 					continue;
 				}
@@ -137,6 +142,9 @@ export default class ParserUtils {
 		}
 
 		if (currentChunk.trim() !== "") {
+			if (!Array.isArray(stack[stack.length - 1]))
+				throw new InvalidBracketError(input.length - 1);
+
 			stack[stack.length - 1].push(currentChunk.trim());
 		}
 

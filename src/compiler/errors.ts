@@ -5,6 +5,7 @@ export enum E_ParseErrorType {
 	emptyBrackets,
 	bracketMismatch,
 	quotesMismatch,
+	InvalidBracket
 }
 
 export default class ParseError extends Error {
@@ -52,5 +53,11 @@ export class BracketMismatchError extends ParseError {
 export class QuotesMismatchError extends ParseError {
 	constructor(errorAt: number) {
 		super("Quotes mismatch", errorAt, E_ParseErrorType.quotesMismatch);
+	}
+}
+
+export class InvalidBracketError extends ParseError {
+	constructor(errorAt: number) {
+		super("Invalid bracket found", errorAt, E_ParseErrorType.InvalidBracket);
 	}
 }

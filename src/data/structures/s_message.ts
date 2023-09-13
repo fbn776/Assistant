@@ -20,6 +20,18 @@ export enum MESSAGE_TYPE {
 	FORMATTED_ERROR
 }
 
+export interface I_AdditionalMsgDataBase {
+
+}
+
+export interface I_FormattedErrorMsgData extends I_AdditionalMsgDataBase {
+	heading: string;
+	errorMsg: string;
+	position: number;
+}
+
+type T_AdditionalMsgData = I_FormattedErrorMsgData;
+
 export interface I_Message {
 	id: string;
 	source: MESSAGE_SOURCE;
@@ -27,5 +39,11 @@ export interface I_Message {
 	text: string;
 	type: MESSAGE_TYPE;
 	/**For special cases; this should can be a string, number, boolean, object etc. But the important part is, it should be JSON parsable  */
-	additionalData?: any;
+	additionalData?: T_AdditionalMsgData;
+}
+
+/**The react prop for MessageTypeComponent */
+export interface I_MessageTypeProp {
+	data: I_Message;
+	isBot: boolean;
 }

@@ -1,6 +1,6 @@
 import { MessageController } from "..";
+import ParseError from "../../compiler/errors";
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
-
 
 export class MessageQuickiesHandler {
 	private _parent;
@@ -17,7 +17,7 @@ export class MessageQuickiesHandler {
 			type: MESSAGE_TYPE.TEXT,
 			unixTime: time,
 			id: this._parent.generateRandomID(),
-		})
+		});
 	}
 
 	/**A simple plain text reply from the bot */
@@ -35,7 +35,7 @@ export class MessageQuickiesHandler {
 	 * This is used when there is an error/typo in the command
 	 * This displays the position along with the command at which the error occurred. This is sent by the bot
 	 */
-	commandError(error: string) {
+	errorMsg(error: string) {
 		this._parent.addMessage({
 			source: MESSAGE_SOURCE.BOT,
 			text: error,
@@ -46,7 +46,7 @@ export class MessageQuickiesHandler {
 	}
 
 	/**The same as command error, but has additional formatting */
-	commandTypo(command: string, error: string, pos: number) {
+	commandTypo(command: string, error: ParseError) {
 		this._parent.addMessage({
 			source: MESSAGE_SOURCE.BOT,
 			text: command,
@@ -54,10 +54,10 @@ export class MessageQuickiesHandler {
 			unixTime: Date.now(),
 			id: this._parent.generateRandomID(),
 			additionalData: {
-				heading: "Command Error",
-				error: error,
-				position: pos,
-			}
+				heading: "Command Typo",
+				errorMsg: error.message,
+				position: error.position,
+			},
 		});
 	}
 }

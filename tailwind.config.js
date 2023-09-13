@@ -29,7 +29,7 @@ export default {
 						},
 					},
 					secnd: {
-						DEFAULT: "#F5F5F5",
+						DEFAULT: "#F2F3F4",
 						txt: "#000000",
 						variant: "#B9D9EB",
 						cont: {

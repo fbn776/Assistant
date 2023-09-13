@@ -1,4 +1,5 @@
 import { UIController } from "./c_UIController";
+import ParseError from "../../compiler/errors";
 
 export class UIInputHandler {
 	private _parent;
@@ -176,9 +177,8 @@ export class UIInputHandler {
 	}
 
 	/**Submission event; pushes a new message to the message controller, the executes and then push the result message
-	 * @param text An optional parameter; The text to be submitted; if not given then the text in the input is used; (Used mainly for testing purposes)
 	 */
-	submit() {	
+	evalInputText() {
 		const text = this.getText();
 		if (this.isEmpty()) return;
 		const _msgCtrl = this._globCtrl.messageController;
@@ -189,11 +189,10 @@ export class UIInputHandler {
 		let parsed = this._globCtrl.parser.parse(text);
 
 		//If the parsed is an error, then display the error message; else do the rest;
-		if(parsed instanceof Error) {
-			// if(parsed instanceof ParseError)
-			// 	_msgCtrl.quickies.commandTypo(text, parsed.message, parsed.position);
-			// else 
-				_msgCtrl.quickies.commandError(parsed.message);
+		if (parsed instanceof Error) {
+			if (parsed instanceof ParseError)
+				_msgCtrl.quickies.commandTypo(text, parsed);
+			else throw parsed; //_msgCtrl.quickies.errorMsg(parsed.message);
 		} else {
 			_msgCtrl.quickies.botTextReply(JSON.stringify(parsed));
 		}

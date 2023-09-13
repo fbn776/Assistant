@@ -1,11 +1,8 @@
 import { FC } from "react";
-import { I_Message } from "../../data/structures/s_message";
+import { I_MessageTypeProp } from "../../data/structures/s_message";
 import { convertUnixTime } from "../utils/utils";
-export interface I_MessageTypeProp {
-	data: I_Message;
-	isBot: boolean;
-}
 
+/**A regular message */
 export const TextMessage: FC<I_MessageTypeProp> = (props) => {
 	return (
 		<p
@@ -22,6 +19,7 @@ export const TextMessage: FC<I_MessageTypeProp> = (props) => {
 	);
 };
 
+/**A error message; same as a regular message, but the font color is red (defined at tailwind config file) */
 export const ErrorMessage: FC<I_MessageTypeProp> = (props) => {
 	return (
 		<p
@@ -30,7 +28,7 @@ export const ErrorMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<div className="message-error-text">{props.data.text}</div>
+			<span className="message-error-text">{props.data.text}</span>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>
@@ -38,7 +36,21 @@ export const ErrorMessage: FC<I_MessageTypeProp> = (props) => {
 	);
 };
 
+/**An error message, but is formatted; the formatting is done in accordance with `additionalData` */
 export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
+	let pos = props.data.additionalData!.position;
+	let cmd = props.data.text;
+	let start = pos - 1;
+	let end = pos + 1 >= cmd.length - 1 ? cmd.length : pos + 1;
+
+	let txt = (
+		<>
+			{cmd.substring(0, start)}
+			<i className="error-marker">{cmd.substring(start, end)}</i>
+			{cmd.substring(end)}
+		</>
+	);
+
 	return (
 		<p
 			className={
@@ -46,11 +58,13 @@ export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<div className="message-error-text">
-				<h2>{props.data.additionalData.heading}</h2>
-				{props.data.text}
-				<p>{props.data.additionalData.message}</p>
-			</div>
+			<span className="message-error-text">
+				<b>{props.data.additionalData?.heading}</b>
+				<br />
+				<span className="mb-[8px] block">{txt}</span>
+				<b>Reason: </b>
+				{props.data.additionalData?.errorMsg}
+			</span>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>

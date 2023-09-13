@@ -67,7 +67,7 @@ export const LowerSection: FC = () => {
 					size={35}
 					onClick={(e) => {
 						e.preventDefault();
-						globalController.uiController.input.submit();
+						globalController.uiController.input.evalInputText();
 					}}
 				/>
 			</div>

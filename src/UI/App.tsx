@@ -3,10 +3,15 @@ import { FC, useEffect, useState } from "react";
 import { LowerSection, UpperSection } from "./sections";
 import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
-import { CommandController, GlobalController, GlobalSettingsController, MessageController, UIController } from "../controllers";
+import {
+	CommandController,
+	GlobalController,
+	GlobalSettingsController,
+	MessageController,
+	UIController,
+} from "../controllers";
 import command_registry_instance from "../command_lists/registry_instance";
 import "../command_lists";
-
 
 //Global controller for the app;
 const globalController = new GlobalController(
@@ -16,7 +21,6 @@ const globalController = new GlobalController(
 	new CommandController()
 );
 globalController.commandController.initRegistry(command_registry_instance);
-
 
 export const App: FC = () => {
 	//Sets the state controller for the messages;
@@ -37,12 +41,18 @@ export const App: FC = () => {
 	//! REMOVE THIS;
 	useEffect(() => {
 		window.onkeydown = (e) => {
+			if(e.key === "d" && e.ctrlKey) {
+				let curr = globalController.globalSettingsController.getValue("theme")
+				globalController.globalSettingsController.setValue("theme", curr === "dark" ? "light" : "dark");
+
+				e.preventDefault();
+			}
 			if (e.key === "Enter") {
 				if (
 					document.activeElement ===
 					globalController.uiController.dependencies.mainInputRef?.current
 				) {
-					globalController.uiController.input.submit();
+					globalController.uiController.input.evalInputText();
 				}
 			}
 		};
