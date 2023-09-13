@@ -26,4 +26,6 @@ export interface I_Message {
 	unixTime: number;
 	text: string;
 	type: MESSAGE_TYPE;
+	/**For special cases; this should can be a string, number, boolean, object etc. But the important part is, it should be JSON parsable  */
+	additionalData?: any;
 }

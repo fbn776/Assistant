@@ -47,16 +47,17 @@ export class MessageQuickiesHandler {
 
 	/**The same as command error, but has additional formatting */
 	commandTypo(command: string, error: string, pos: number) {
-		let message = `Command:<br> ${command}\n`;
-		message += " ".repeat(pos) + "^" + "\n";
-		message += `Error: ${error}`;
-
 		this._parent.addMessage({
 			source: MESSAGE_SOURCE.BOT,
-			text: message,
-			type: MESSAGE_TYPE.ERROR,
+			text: command,
+			type: MESSAGE_TYPE.FORMATTED_ERROR,
 			unixTime: Date.now(),
 			id: this._parent.generateRandomID(),
+			additionalData: {
+				heading: "Command Error",
+				error: error,
+				position: pos,
+			}
 		});
 	}
 }

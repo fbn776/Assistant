@@ -1,8 +1,8 @@
 import { GlobalSettingsController } from "./settings/c_GlobalSettingsController";
 import { MessageController } from "./messages/c_MessageController";
 import { BaseController } from "./c_BaseController";
-import { UIController } from "./frontend/c_UIController";
-import { CommandController } from './commands/c_CommandController';
+import { UIController } from "./UI/c_UIController";
+import { CommandController } from "./commands/c_CommandController";
 import { Parser } from "../compiler/parser/parser";
 
 /**
@@ -42,7 +42,7 @@ export class GlobalController {
 			this.messageController,
 			this.globalSettingsController,
 			this.uiController,
-			this.commandController
+			this.commandController,
 		];
 
 		for (let controller of this._controllerList) {

@@ -11,10 +11,7 @@ export class Parser {
 	parse(input: string): SyntaxTree | Error {
 		try {
 			let stage1 = ParserUtils.tertiaryParser(input);
-			let stage2 = ParserUtils.primaryParser(stage1);
-
-			console.log(this._globalController)
-			
+			let stage2 = ParserUtils.primaryParser(stage1);			
 			return stage2;
 		} catch (error) {
 			return error as Error;

@@ -42,10 +42,15 @@ export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
 	return (
 		<p
 			className={
-				"message-general " + (props.isBot ? "bot-message" : "user-message")
+				"message-general message-text " +
+				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			{props.data.text}
+			<div className="message-error-text">
+				<h2>{props.data.additionalData.heading}</h2>
+				{props.data.text}
+				<p>{props.data.additionalData.message}</p>
+			</div>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>
