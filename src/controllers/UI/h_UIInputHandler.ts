@@ -1,5 +1,6 @@
 import { UIController } from "./c_UIController";
 import ParseError from "../../compiler/errors";
+import { debounce } from '../../utils/utils';
 
 export class UIInputHandler {
 	private _parent;
@@ -209,4 +210,7 @@ export class UIInputHandler {
 
 		this._historyIndex = -1;
 	}
+
+	/**A debounced eval, this does the same thing as the `evalInputText`, but is wrapped in a debounce, the denouncer is set at 150ms */
+	debouncedEval = debounce(this.evalInputText, 150);
 }

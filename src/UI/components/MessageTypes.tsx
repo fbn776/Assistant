@@ -11,7 +11,7 @@ export const TextMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			{props.data.text}
+			<span className="break-all">{props.data.text}</span>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>
@@ -28,7 +28,7 @@ export const ErrorMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<span className="message-error-text">{props.data.text}</span>
+			<span className="message-error-text break-all">{props.data.text}</span>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>
@@ -45,9 +45,9 @@ export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
 
 	let txt = (
 		<>
-			{cmd.substring(0, start)}
+			<span className="opacity-50">{cmd.substring(0, start)}</span>
 			<i className="error-marker">{cmd.substring(start, end)}</i>
-			{cmd.substring(end)}
+			<span className="opacity-50">{cmd.substring(end)}</span>
 		</>
 	);
 
@@ -58,7 +58,7 @@ export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<span className="message-error-text">
+			<span className="message-error-text break-all	">
 				<b>{props.data.additionalData?.heading}</b>
 				<br />
 				<span className="mb-[8px] block">{txt}</span>

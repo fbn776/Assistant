@@ -41,9 +41,12 @@ export const App: FC = () => {
 	//! REMOVE THIS;
 	useEffect(() => {
 		window.onkeydown = (e) => {
-			if(e.key === "d" && e.ctrlKey) {
-				let curr = globalController.globalSettingsController.getValue("theme")
-				globalController.globalSettingsController.setValue("theme", curr === "dark" ? "light" : "dark");
+			if (e.key === "d" && e.ctrlKey) {
+				let curr = globalController.globalSettingsController.getValue("theme");
+				globalController.globalSettingsController.setValue(
+					"theme",
+					curr === "dark" ? "light" : "dark"
+				);
 
 				e.preventDefault();
 			}
@@ -52,7 +55,7 @@ export const App: FC = () => {
 					document.activeElement ===
 					globalController.uiController.dependencies.mainInputRef?.current
 				) {
-					globalController.uiController.input.evalInputText();
+					globalController.uiController.input.debouncedEval();
 				}
 			}
 		};

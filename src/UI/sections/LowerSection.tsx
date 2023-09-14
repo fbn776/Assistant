@@ -2,6 +2,7 @@ import { IconCommand, IconSend } from "@tabler/icons-react";
 import { FC, useContext, useRef } from "react";
 import { ControllersContext } from "../providers/contexts";
 import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
+import { debounce } from "../../utils/utils";
 
 export const LowerSection: FC = () => {
 	const globalController = useContext(ControllersContext);
@@ -67,7 +68,7 @@ export const LowerSection: FC = () => {
 					size={35}
 					onClick={(e) => {
 						e.preventDefault();
-						globalController.uiController.input.evalInputText();
+						globalController.uiController.input.debouncedEval()
 					}}
 				/>
 			</div>
