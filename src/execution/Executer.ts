@@ -1,7 +1,6 @@
 import { Parser } from "./parser/parser";
 import { GlobalController } from "../controllers/c_Controller";
-import { SyntaxCommand, SyntaxLiteral, SyntaxTree } from "./parser/syntax";
-import { SyntaxItemBase } from "./parser/syntax";
+import { SyntaxCommand, SyntaxLiteral } from "./parser/syntax";
 import { CompilerErrors } from "./compileErrors";
 import { E_ArgumentTypes } from "../controllers/commands";
 import { isBoolean, isNumeric } from "../utils/utils";
@@ -17,7 +16,7 @@ export class Executer {
 	compile(str: string) {
 		let parsed = this.Parser.parse(str);
 		if (parsed instanceof Error) return parsed;
-		
+
 		try {
 			let exec = this.execute(parsed.root!);
 			return exec;
