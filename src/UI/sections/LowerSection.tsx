@@ -57,7 +57,7 @@ export const LowerSection: FC = () => {
 					aria-label="Main input box"
 					className="disable-default-search-style w-full h-full outline-none border-none shadow-inner px-4 py-2 rounded-full bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt resize-none"
 					placeholder="Type here.."
-					defaultValue="add 10 30 (sum 10 20) 30"
+					defaultValue="add 10 30"
 					ref={
 						(globalController.uiController.dependencies.mainInputRef =
 							useRef<HTMLInputElement>(null))

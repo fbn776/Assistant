@@ -6,7 +6,7 @@ export class Command {
 	public readonly names: string[];
 	public readonly arguments: ArgumentsData;
 	public readonly metadata: Documentation;
-	public readonly exec: (args: any) => any;
+	public readonly exec: (...args: any[]) => any;
 
 	constructor(
 		names: string[],
