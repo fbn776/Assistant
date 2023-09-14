@@ -3,7 +3,6 @@ import Documentation from "./utils/documentation/Documentation";
 import { ArgumentsData } from "./utils/arguments";
 import { CommandNameError, hasDuplicates } from "./utils/command_utils";
 
-
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
 	/**The name or names of the command; each name points to the same command functionality; that is all the name given are aliases of each other */
@@ -26,7 +25,7 @@ export class CommandRegistry {
 	/**Adds or registers a new command to the command registry;
 	 * This validates the commands before registering and if errors are found then this throws an error */
 	register(data: I_CommandRegistryFormat) {
-		this.Validate(data);
+		this._Validate(data);
 
 		let cmd = new Command(data.name, data.arguments, data.metadata, data.exec);
 		this._addCommand(cmd);
@@ -42,13 +41,8 @@ export class CommandRegistry {
 		}
 	}
 
-	/**Checks if a command exists in the registry */
-	exists(name: string) {
-		return this._commands.has(name);
-	}
-
 	/**A validator that validates a Command object; This is different from the Command name validator, as it only validates the command name, not the object*/
-	private Validate(data: I_CommandRegistryFormat) {
+	private _Validate(data: I_CommandRegistryFormat) {
 		if (data.name.length === 0)
 			throw new Error("Invalid name; there needs be at least one name.");
 
@@ -66,5 +60,15 @@ export class CommandRegistry {
 			if (this.exists(name))
 				throw new CommandNameError("The command already exists.", name);
 		}
+	}
+
+	/**Checks if a command exists in the registry */
+	exists(name: string) {
+		return this._commands.has(name);
+	}
+
+	/**Returns the command data; if not found then null is returned */
+	getCommandData(cmd: string) {
+		return this._commands.get(cmd) || null;
 	}
 }

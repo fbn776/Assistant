@@ -1,5 +1,4 @@
 import { UIController } from "./c_UIController";
-import ParseError from "../../compiler/errors";
 import { debounce } from '../../utils/utils';
 
 export class UIInputHandler {
@@ -187,16 +186,21 @@ export class UIInputHandler {
 		//When submitting, first display the message as user message;
 		this._globCtrl.messageController.quickies.userMessage(text);
 
-		let parsed = this._globCtrl.parser.parse(text);
+		this._globCtrl.compiler.compile(text);
 
 		//If the parsed is an error, then display the error message; else do the rest;
-		if (parsed instanceof Error) {
-			if (parsed instanceof ParseError)
-				_msgCtrl.quickies.commandTypo(text, parsed);
-			else throw parsed; //_msgCtrl.quickies.errorMsg(parsed.message);
-		} else {
-			_msgCtrl.quickies.botTextReply(JSON.stringify(parsed));
-		}
+		// if (parsed instanceof Error) {
+		// 	if (parsed instanceof ParseError)
+		// 		_msgCtrl.quickies.commandTypo(text, parsed);
+		// 	else throw parsed; //_msgCtrl.quickies.errorMsg(parsed.message);
+		// } else {
+		// 	_msgCtrl.quickies.botTextReply(JSON.stringify(parsed));
+		// }
+
+		
+
+		//this._globCtrl.commandController.
+		_msgCtrl.quickies.botTextReply("haha the data now is " + Date.now());
 
 		//If the `clearOnSubmit` setting is set to true, then clear the input;
 		if (this._globCtrl.globalSettingsController.getValue("clearOnSubmit"))

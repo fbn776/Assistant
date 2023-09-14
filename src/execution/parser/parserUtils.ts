@@ -1,12 +1,4 @@
-import {
-	BracketMismatchError,
-	EmptyBracketsError,
-	InvalidBracketError,
-	InvalidQuotesError,
-	NoClosingQuoteFoundError,
-	QuotesMismatchError,
-	SpaceNotFoundError,
-} from "../errors";
+import { ParseErrors } from "./parseErrors";
 import { SyntaxTree } from "./syntax";
 
 /**A utility class;
@@ -28,16 +20,16 @@ export default class ParserUtils {
 				str[i] === "`"
 			) {
 				if (str[i] != delimiter) {
-					if (i > 0 && str[i - 1] != " ") throw new SpaceNotFoundError(i);
+					if (i > 0 && str[i - 1] != " ") throw new ParseErrors.SpaceNotFound(i);
 
 					let nextIndex = str.indexOf(str[i], i + 1);
 
-					if (nextIndex === -1) throw new NoClosingQuoteFoundError(i);
+					if (nextIndex === -1) throw new ParseErrors.NoClosingQuoteFound(i);
 
 					result.push(str[i] + str.substring(i + 1, nextIndex) + str[i]);
 					i = nextIndex + 1;
 
-					if (i < str.length && str[i] != " ") throw new SpaceNotFoundError(i);
+					if (i < str.length && str[i] != " ") throw new ParseErrors.SpaceNotFound(i);
 
 					continue;
 				}
@@ -84,7 +76,7 @@ export default class ParserUtils {
 						input[i + 1] !== " " &&
 						input[i + 1] !== ")"
 					)
-						throw new InvalidQuotesError(i);
+						throw new ParseErrors.InvalidQuotes(i);
 
 					currentChunk += char;
 					inString = false;
@@ -97,7 +89,7 @@ export default class ParserUtils {
 
 				//Checks for invalid quotes in the opening part. Eg: Hello"World"
 				if (i > 0 && input[i - 1] !== " " && input[i - 1] !== "(")
-					throw new InvalidQuotesError(i);
+					throw new ParseErrors.InvalidQuotes(i);
 
 				inString = true;
 				stringChar = char;
@@ -105,11 +97,11 @@ export default class ParserUtils {
 			} else if (char === "(") {
 				//Checks for space/(bracket?) before opening bracket;
 				if (i > 0 && input[i - 1] !== " " && input[i - 1] !== "(")
-					throw new SpaceNotFoundError(i);
+					throw new ParseErrors.SpaceNotFound(i);
 
 				//Checks for "rouge" brackets. That is, if there are closing brackets without opening brackets;
 				if (!Array.isArray(stack[stack.length - 1]))
-					throw new EmptyBracketsError(i);
+					throw new ParseErrors.EmptyBrackets(i);
 
 				Counts.openBracket++;
 				if (currentChunk.trim() !== "") {
@@ -127,7 +119,7 @@ export default class ParserUtils {
 					input[i + 1] !== " " &&
 					input[i + 1] !== ")"
 				) {
-					throw new SpaceNotFoundError(i);
+					throw new ParseErrors.SpaceNotFound(i);
 				}
 				Counts.closeBracket++;
 
@@ -143,18 +135,18 @@ export default class ParserUtils {
 
 		if (currentChunk.trim() !== "") {
 			if (!Array.isArray(stack[stack.length - 1]))
-				throw new InvalidBracketError(input.length - 1);
+				throw new ParseErrors.InvalidBracket(input.length - 1);
 
 			stack[stack.length - 1].push(currentChunk.trim());
 		}
 
 		if (Counts.openBracket !== Counts.closeBracket) {
-			throw new BracketMismatchError(input.length - 1);
+			throw new ParseErrors.BracketMismatch(input.length - 1);
 		}
 
 		//Checks for quote mismatch, ie the same number of quotes should be present;
 		if (Counts.singleQuotes % 2 !== 0 || Counts.doubleQuotes % 2 !== 0) {
-			throw new QuotesMismatchError(input.length - 1);
+			throw new ParseErrors.QuotesMismatch(input.length - 1);
 		}
 
 		return result;
@@ -188,9 +180,11 @@ export default class ParserUtils {
 		return this.combinedSplit(this.splitByBracket(input));
 	}
 
-	static primaryParser(input: any[]) {
+	static secondaryParser(input: any[]) {
 		let tree = new SyntaxTree();
 		SyntaxTree.makeTree(input, tree);
 		return tree;
 	}
+
+	// static primaryParser(input: SyntaxTree) {}
 }

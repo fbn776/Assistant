@@ -18,9 +18,9 @@ const globalController = new GlobalController(
 	new MessageController(),
 	new GlobalSettingsController(),
 	new UIController(),
-	new CommandController()
+	new CommandController(command_registry_instance)
 );
-globalController.commandController.initRegistry(command_registry_instance);
+// console.log(command_registry_instance);
 
 export const App: FC = () => {
 	//Sets the state controller for the messages;

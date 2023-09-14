@@ -3,7 +3,7 @@ import { MessageController } from "./messages/c_MessageController";
 import { BaseController } from "./c_BaseController";
 import { UIController } from "./UI/c_UIController";
 import { CommandController } from "./commands/c_CommandController";
-import { Parser } from "../compiler/parser/parser";
+import { Executer } from "../execution/Executer";
 
 /**
  * This is a global controller class for handling most of the things in the app. This also is an access point accessing for every other controller.
@@ -24,7 +24,7 @@ export class GlobalController {
 	globalSettingsController: GlobalSettingsController;
 	uiController: UIController;
 	commandController: CommandController;
-	parser = new Parser(this);
+	compiler = new Executer(this);
 
 	private _controllerList: BaseController[];
 	constructor(
