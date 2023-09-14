@@ -1,10 +1,6 @@
 import { UIController } from "./c_UIController";
 
-
-interface I_UIEventsMessage {
-	
-}
-
+interface I_UIEventsMessage {}
 
 export class UIMessageHandler implements I_UIEventsMessage {
 	private _parent: UIController;
@@ -25,20 +21,18 @@ export class UIMessageHandler implements I_UIEventsMessage {
 	/**Gets the last or last pushed message element */
 	getLastElement() {
 		const list = this._deps?.messageContainer?.current?.children;
-		if(!list) return null;
-		return list[list?.length - 1]
+		if (!list) return null;
+		return list[list?.length - 1];
 	}
 
-	/**Scrolls the last message into view */
-	scrollToLatest() {
-		let lastElm = this.getLastElement();
-		lastElm?.scrollIntoView({
+	/**Scrolls to the bottom of the message container; used when submission of user input text.
+	 *  The scroll behavior is determined by the settings value of `scrollToMessageBehavior`. */
+	containerScrollToBottom() {
+		this._deps.messageContainer?.current!.scrollIntoView({
 			block: "end",
 			behavior: this._parent.parent.globalSettingsController.getValue(
 				"scrollToMessageBehavior"
 			) as any,
 		});
 	}
-
-	
 }

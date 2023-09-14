@@ -206,7 +206,7 @@ export class UIInputHandler {
 		if (this._globCtrl.globalSettingsController.getValue("scrollToNewMessage"))
 			/*Used a timeout here; because the message added above are not instantly added, they take some time (due to state management by react).
 			So a timeout is used to access the above added message*/
-			setTimeout(() => this._parent.message.scrollToLatest(), 0);
+			setTimeout(() => this._parent.message.containerScrollToBottom(), 0);
 
 		this._historyIndex = -1;
 	}
