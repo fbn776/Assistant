@@ -31,3 +31,21 @@ command_registry_instance.register({
 		return Math.PI;
 	},
 });
+
+command_registry_instance.register({
+	name: ["concat"],
+	arguments: new ArgumentsData(2, types.string, types.string),
+	metadata: new Documentation("Docssss"),
+	exec: (a: string, b: string) => {
+		return a + b;
+	},
+});
+
+command_registry_instance.register({
+	name: ["refresh"],
+	arguments: new ArgumentsData(0),
+	metadata: new Documentation("The value of PI"),
+	exec: () => {
+		location.reload()
+	},
+});

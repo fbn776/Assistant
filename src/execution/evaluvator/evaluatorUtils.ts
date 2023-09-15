@@ -13,8 +13,12 @@ export default class EvaluatorUtils {
 
 			//Since everything is technically a string, just return true; but this can change in the future
 			case E_ArgumentTypes.string:
+			case E_ArgumentTypes.any:
 				return true;
 		}
+
+
+		return true;
 	}
 
 	/**Converts a string value to an expected type; this has no type cast checks, do the checks before using this */
@@ -27,7 +31,11 @@ export default class EvaluatorUtils {
 				return value === "true" ? true : false;
 
 			case E_ArgumentTypes.string:
+			case E_ArgumentTypes.any:
 				return value;
 		}
+
+		
+		return value;
 	}
 }
