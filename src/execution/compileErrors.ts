@@ -1,4 +1,4 @@
-import { Command } from "../controllers/commands/utils/Command";
+import { Command } from "./test/Command.ts";
 import { SyntaxCommand, SyntaxItemBase } from "./parser/syntax";
 export namespace CompilerErrors {
 

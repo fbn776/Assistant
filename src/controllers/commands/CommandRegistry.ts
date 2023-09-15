@@ -1,7 +1,7 @@
-import { Command } from "./utils/Command";
-import Documentation from "./utils/documentation/Documentation";
-import { ArgumentsData } from "./utils/arguments";
-import { CommandNameError, hasDuplicates } from "./utils/command_utils";
+
+import { CommandNameError, hasDuplicates } from "../../execution/test/utils/command_utils";
+import {Command} from "../../execution/test/Command.ts";
+import {ArgumentsData, Documentation} from "../../execution/test";
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
@@ -25,7 +25,7 @@ export class CommandRegistry {
 	/**Adds or registers a new command to the command registry;
 	 * This validates the commands before registering and if errors are found then this throws an error */
 	register(data: I_CommandRegistryFormat) {
-		this._Validate(data);
+		this._validate(data);
 
 		let cmd = new Command(data.name, data.arguments, data.metadata, data.exec);
 		this._addCommand(cmd);
@@ -42,7 +42,7 @@ export class CommandRegistry {
 	}
 
 	/**A validator that validates a Command object; This is different from the Command name validator, as it only validates the command name, not the object*/
-	private _Validate(data: I_CommandRegistryFormat) {
+	private _validate(data: I_CommandRegistryFormat) {
 		if (data.name.length === 0)
 			throw new Error("Invalid name; there needs be at least one name.");
 

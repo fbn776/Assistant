@@ -1,4 +1,4 @@
-import { ArgumentsData, E_ArgumentTypes } from "../../controllers/commands/utils/arguments";
-import Documentation from "../../controllers/commands/utils/documentation/Documentation";
+import { ArgumentsData, E_ArgumentTypes } from "./arguments.ts";
+import Documentation from "./documentation/Documentation.ts";
 
 export {ArgumentsData, Documentation, E_ArgumentTypes}

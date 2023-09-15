@@ -2,7 +2,7 @@ import { Parser } from "./parser/parser";
 import { GlobalController } from "../controllers/c_Controller";
 import { SyntaxCommand, SyntaxLiteral } from "./parser/syntax";
 import { CompilerErrors } from "./compileErrors";
-import { E_ArgumentTypes } from "../controllers/commands";
+import { E_ArgumentTypes } from "./test";
 import { isBoolean, isNumeric } from "../utils/utils";
 
 export class Executer {

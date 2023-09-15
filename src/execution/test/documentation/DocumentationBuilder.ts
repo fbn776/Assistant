@@ -1,4 +1,4 @@
-import Documentation from "./Documentation";
+import Documentation from "./Documentation.ts";
 
 export default class DocumentationBuilder {
 	private _description: string = "";

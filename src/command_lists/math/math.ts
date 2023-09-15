@@ -2,7 +2,7 @@ import {
 	ArgumentsData,
 	Documentation,
 	E_ArgumentTypes as types,
-} from "../../controllers/commands";
+} from "../../execution/test";
 import command_registry_instance from "../registry_instance";
 
 command_registry_instance.register({

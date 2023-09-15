@@ -1,6 +1,6 @@
-import Documentation from "./documentation/Documentation";
-import { ArgumentsData } from "./arguments";
-import { CommandNameError } from "./command_utils";
+import Documentation from "./documentation/Documentation.ts";
+import { ArgumentsData } from "./arguments.ts";
+import { CommandNameError } from "./utils/command_utils.ts";
 
 export class Command {
 	public readonly names: string[];
