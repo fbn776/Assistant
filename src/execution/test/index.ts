@@ -1,4 +1,4 @@
-import { ArgumentsData, E_ArgumentTypes } from "./arguments.ts";
-import Documentation from "./documentation/Documentation.ts";
+import { ArgumentsData, E_ArgumentTypes } from "./ArgumentsData.ts";
+import Documentation from "./Documentation.ts";
 
-export {ArgumentsData, Documentation, E_ArgumentTypes}
+export { ArgumentsData, Documentation, E_ArgumentTypes };

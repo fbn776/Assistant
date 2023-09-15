@@ -1,19 +1,9 @@
-export class CommandNameError extends Error {
-	constructor(str: string, name: string) {
-		super(`Command name error\n\nReason: ${str}\n\nOccurred due to: ${name}\n`);
-	}
-}
 
-/**Checks if two string array has duplicates;
- * Returns the duplicate string if duplicate is found; else false
+/**This error is used only when the command is registered.
+ * This is more like a pre-compilation error.
  */
-export function hasDuplicates(arr: string[]): boolean | string {
-	for (let i = 0; i < arr.length; i++) {
-		for (let j = i + 1; j < arr.length; j++) {
-			if (arr[i] === arr[j]) {
-				return arr[i];
-			}
-		}
+export class CommandValidationError extends Error {
+	constructor(str: string, name: string) {
+		super(`Command validation error\n\nReason: ${str}\n\nOccurred due to: ${name}\n`);
 	}
-	return false;
 }

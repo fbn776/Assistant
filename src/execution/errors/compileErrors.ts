@@ -1,7 +1,6 @@
-import { Command } from "./test/Command.ts";
-import { SyntaxCommand, SyntaxItemBase } from "./parser/syntax";
+import { Command } from "../test/Command.ts";
+import { SyntaxCommand, SyntaxItemBase } from "../syntax/syntax.ts";
 export namespace CompilerErrors {
-
 	/**
 	 TODO is it really necessary to have a enum error type, can I check that with `instanceof`?
 	 TODO Standardized this
@@ -10,14 +9,19 @@ export namespace CompilerErrors {
 		CommandNotFound,
 		Unknown,
 		ArgumentsNumberMismatch,
-		IncorrectType
+		IncorrectType,
 	}
 
 	export class CompileError extends Error {
 		readonly type: E_CompileErrorType;
 		readonly commandData: Command | null = null;
 		readonly foundItem: SyntaxItemBase | null = null;
-		constructor(txt: string, type: E_CompileErrorType, cmdData?: Command, foundData?: SyntaxItemBase) {
+		constructor(
+			txt: string,
+			type: E_CompileErrorType,
+			cmdData?: Command,
+			foundData?: SyntaxItemBase
+		) {
 			super(txt);
 			this.type = type;
 			this.commandData = cmdData || null;
@@ -50,7 +54,7 @@ export namespace CompilerErrors {
 
 	export class IncorrectType extends CompileError {
 		constructor() {
-			super("Incorrect type", E_CompileErrorType.IncorrectType)
+			super("Incorrect type", E_CompileErrorType.IncorrectType);
 		}
 	}
 }

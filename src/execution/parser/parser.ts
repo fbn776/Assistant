@@ -1,5 +1,5 @@
 import ParserUtils from "./parserUtils";
-import { SyntaxTree } from "./syntax";
+import { SyntaxTree } from "../syntax/syntax";
 
 export class Parser {
 	parse(input: string): SyntaxTree | Error {

@@ -1,5 +1,5 @@
-import { ParseErrors } from "./parseErrors";
-import { SyntaxTree } from "./syntax";
+import { ParseErrors } from "../errors/parseErrors";
+import { SyntaxTree } from "../syntax/syntax";
 
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.
@@ -20,7 +20,8 @@ export default class ParserUtils {
 				str[i] === "`"
 			) {
 				if (str[i] != delimiter) {
-					if (i > 0 && str[i - 1] != " ") throw new ParseErrors.SpaceNotFound(i);
+					if (i > 0 && str[i - 1] != " ")
+						throw new ParseErrors.SpaceNotFound(i);
 
 					let nextIndex = str.indexOf(str[i], i + 1);
 
@@ -29,7 +30,8 @@ export default class ParserUtils {
 					result.push(str[i] + str.substring(i + 1, nextIndex) + str[i]);
 					i = nextIndex + 1;
 
-					if (i < str.length && str[i] != " ") throw new ParseErrors.SpaceNotFound(i);
+					if (i < str.length && str[i] != " ")
+						throw new ParseErrors.SpaceNotFound(i);
 
 					continue;
 				}
@@ -185,6 +187,4 @@ export default class ParserUtils {
 		SyntaxTree.makeTree(input, tree);
 		return tree;
 	}
-
-	// static primaryParser(input: SyntaxTree) {}
 }

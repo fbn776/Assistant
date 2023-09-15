@@ -1,7 +1,7 @@
-
-import { CommandNameError, hasDuplicates } from "../../execution/test/utils/command_utils";
-import {Command} from "../../execution/test/Command.ts";
-import {ArgumentsData, Documentation} from "../../execution/test";
+import { CommandValidationError } from "../../execution/test/utils/command_utils";
+import { hasDuplicates } from "../../utils/utils.ts";
+import { Command } from "../../execution/test/Command.ts";
+import { ArgumentsData, Documentation } from "../../execution/test";
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
@@ -41,24 +41,27 @@ export class CommandRegistry {
 		}
 	}
 
-	/**A validator that validates a Command object; This is different from the Command name validator, as it only validates the command name, not the object*/
+	/**A validator that validates a Command object;
+	 * This is different from the Command name validator, as name validator only validates the command name, not the object itself*/
 	private _validate(data: I_CommandRegistryFormat) {
 		if (data.name.length === 0)
 			throw new Error("Invalid name; there needs be at least one name.");
 
+		//Checks if the command name is a duplicate; ie checks if a command name appears more than once in the name	array;
 		let dup = hasDuplicates(data.name);
 		if (dup !== false)
-			throw new CommandNameError(
+			throw new CommandValidationError(
 				"Command alias duplicate found",
 				dup as string
 			);
 
+		//Validate each name in name array;
 		for (let name of data.name) {
-			//Validates the name pattern;
-			Command.ValidateCommandName(name);
-
+			//Checks if the command already exists.
 			if (this.exists(name))
-				throw new CommandNameError("The command already exists.", name);
+				throw new CommandValidationError("The command already exists.", name);
+			//Validates the name pattern;
+			Command.CommandNameValidator(name);
 		}
 	}
 
