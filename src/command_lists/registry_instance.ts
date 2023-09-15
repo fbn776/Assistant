@@ -3,6 +3,5 @@
  */
 import { CommandRegistry } from "../execution/CommandRegistry.ts";
 
-const command_registry_instance = new CommandRegistry();
+export const command_registry_instance = new CommandRegistry();
 
-export default command_registry_instance;

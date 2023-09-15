@@ -1,51 +1,50 @@
 import {
-	ArgumentsData,
-	Documentation,
-	E_ArgumentTypes as types,
+	ArgumentsData as Args,
+	Documentation as Docs,
+	E_ArgumentTypes as type,
 } from "../../execution/syntax/command";
-import command_registry_instance from "../registry_instance";
+import { command_registry_instance as CR} from "../registry_instance";
+/**
+CR.register({
+	name: [],
+	arguments: new Args(),
+	metadata: new Docs(""),
+	exec: (_, ) => {},
+});
+ */
 
-command_registry_instance.register({
-	name: ["add"],
-	arguments: new ArgumentsData(2, types.number, types.number),
-	metadata: new Documentation("Adds twp numbers and returns the result"),
+CR.register({
+	name: ["add", "plus"],
+	arguments: new Args(2, type.number),
+	metadata: new Docs("Adds twp numbers and returns the result"),
 	exec: (_, a, b) => a + b,
 });
 
-command_registry_instance.register({
-	name: ["sum"],
-	arguments: new ArgumentsData(-1, types.number),
-	metadata: new Documentation("Finds sum of n numbers"),
-	exec: (_, ...rest: number[]) => {
-		let sum = 0;
-		for (let a of rest) sum += a;
-		return sum;
-	},
+CR.register({
+	name: ["sub", "subtract", "minus"],
+	arguments: new Args(2, type.number),
+	metadata: new Docs(""),
+	exec: (_, a: number, b: number) => a - b,
 });
 
-command_registry_instance.register({
-	name: ["PI"],
-	arguments: new ArgumentsData(0),
-	metadata: new Documentation("The value of PI"),
-	exec: () => {
-		return Math.PI;
-	},
+CR.register({
+	name: ["mult", "multiply"],
+	arguments: new Args(2, type.number),
+	metadata: new Docs(""),
+	exec: (_, a: number, b: number) => a * b,
 });
 
-command_registry_instance.register({
-	name: ["concat"],
-	arguments: new ArgumentsData(2, types.string, types.string),
-	metadata: new Documentation("Docssss"),
-	exec: (_, a: string, b: string) => {
-		return a + b;
-	},
+CR.register({
+	name: ["div", "divide"],
+	arguments: new Args(2, type.number),
+	metadata: new Docs(""),
+	exec: (_, a: number, b: number) => a / b,
 });
 
-command_registry_instance.register({
-	name: ["refresh"],
-	arguments: new ArgumentsData(0),
-	metadata: new Documentation("The value of PI"),
-	exec: (_) => {
-		location.reload()
-	},
+CR.register({
+	name: ["sqrt", "square_root", "root"],
+	arguments: new Args(1, type.number),
+	metadata: new Docs(""),
+	exec: (_, a: number) => Math.sqrt(a),
 });
+
