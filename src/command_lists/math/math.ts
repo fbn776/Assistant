@@ -16,7 +16,7 @@ command_registry_instance.register({
 	name: ["sum"],
 	arguments: new ArgumentsData(-1, types.number),
 	metadata: new Documentation("Finds sum of n numbers"),
-	exec: (...rest: number[]) => {
+	exec: (_, ...rest: number[]) => {
 		let sum = 0;
 		for (let a of rest) sum += a;
 		return sum;
@@ -36,7 +36,7 @@ command_registry_instance.register({
 	name: ["concat"],
 	arguments: new ArgumentsData(2, types.string, types.string),
 	metadata: new Documentation("Docssss"),
-	exec: (a: string, b: string) => {
+	exec: (_, a: string, b: string) => {
 		return a + b;
 	},
 });
@@ -45,7 +45,7 @@ command_registry_instance.register({
 	name: ["refresh"],
 	arguments: new ArgumentsData(0),
 	metadata: new Documentation("The value of PI"),
-	exec: () => {
+	exec: (_) => {
 		location.reload()
 	},
 });
