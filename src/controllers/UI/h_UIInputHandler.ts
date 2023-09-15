@@ -100,12 +100,12 @@ export class UIInputHandler {
 	setToPreviousHistory() {
 		this._historyIndex++;
 
-		if (this._historyIndex > this._globCtrl.messageController.userCount - 1) {
-			this._historyIndex = this._globCtrl.messageController.userCount - 1;
+		if (this._historyIndex > this._globCtrl.message.userCount - 1) {
+			this._historyIndex = this._globCtrl.message.userCount - 1;
 			return false;
 		}
 
-		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(
+		let msg = this._globCtrl.message.getUserMessageAtIndexFromLast(
 			this._historyIndex
 		);
 		this.setText(msg?.text ?? "");
@@ -124,7 +124,7 @@ export class UIInputHandler {
 			return false;
 		}
 
-		let msg = this._globCtrl.messageController.getUserMessageAtIndexFromLast(
+		let msg = this._globCtrl.message.getUserMessageAtIndexFromLast(
 			this._historyIndex
 		);
 		this.setText(msg?.text ?? "");
@@ -133,9 +133,7 @@ export class UIInputHandler {
 
 	/**Sets the input value to the last user message */
 	setToLastMessage() {
-		this.setText(
-			this._globCtrl.messageController.getLastUserMessage()?.text ?? ""
-		);
+		this.setText(this._globCtrl.message.getLastUserMessage()?.text ?? "");
 	}
 
 	/**Selects the all the text in the main input text box */
@@ -182,12 +180,12 @@ export class UIInputHandler {
 	evalInputText() {
 		const text = this.getText();
 		if (this.isEmpty()) return;
-		const _msgCtrl = this._globCtrl.messageController;
+		const _msgCtrl = this._globCtrl.message;
 
 		//When submitting, first display the message as user message;
-		this._globCtrl.messageController.quickies.userMessage(text);
+		this._globCtrl.message.quickies.userMessage(text);
 
-		let final = this._globCtrl.compiler.execute(text);
+		let final = this._globCtrl.executer.execute(text);
 		if (final instanceof Error) {
 			if (final instanceof ParseErrors.ParseError)
 				_msgCtrl.quickies.commandTypo(text, final);
@@ -197,11 +195,10 @@ export class UIInputHandler {
 		}
 
 		//If the `clearOnSubmit` setting is set to true, then clear the input;
-		if (this._globCtrl.globalSettingsController.getValue("clearOnSubmit"))
-			this.clear();
+		if (this._globCtrl.globalSettings.getValue("clearOnSubmit")) this.clear();
 
 		//Scroll to the last message element
-		if (this._globCtrl.globalSettingsController.getValue("scrollToNewMessage"))
+		if (this._globCtrl.globalSettings.getValue("scrollToNewMessage"))
 			/*Used a timeout here; because the message added above are not instantly added, they take some time (due to state management by react).
 			So a timeout is used to access the above added message*/
 			setTimeout(() => this._parent.message.containerScrollToBottom(), 0);

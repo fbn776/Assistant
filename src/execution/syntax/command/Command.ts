@@ -1,12 +1,13 @@
 import Documentation from "./Documentation.ts";
 import { ArgumentsData } from "./ArgumentsData.ts";
 import { CommandValidationError } from "../../errors/validationErrors.ts";
+import { I_CommandRegistryFormat } from "../../CommandRegistry.ts";
 
 export class Command {
 	public readonly names: string[];
 	public readonly arguments: ArgumentsData;
 	public readonly metadata: Documentation;
-	public readonly exec: (...args: any[]) => any;
+	public readonly exec: I_CommandRegistryFormat['exec']
 
 	constructor(
 		names: string[],

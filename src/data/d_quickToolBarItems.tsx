@@ -35,10 +35,10 @@ class QuickToolBarItem {
 }
 
 function insertText(c?: GlobalController, txt?: string) {
-	if (!c?.uiController.dependencies.mainInputRef?.current) return;
+	if (!c?.ui.dependencies.mainInputRef?.current) return;
 
 	// c.dependencies.mainInputRef.current.focus();
-	c.uiController.input.insertTextAt(txt ?? "");
+	c.ui.input.insertTextAt(txt ?? "");
 }
 
 const specialCharacters = [
@@ -79,35 +79,35 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 
 	/**Controls */
 	new QuickToolBarItem(<IconCaretLeft stroke={1.5} />, (c) => {
-		c?.uiController.input.offsetCursor(-1);
+		c?.ui.input.offsetCursor(-1);
 	}),
 	new QuickToolBarItem(<IconCaretRight stroke={1.5} />, (c) => {
-		c?.uiController.input.offsetCursor(1);
+		c?.ui.input.offsetCursor(1);
 	}),
 	new QuickToolBarItem(<IconCaretUp stroke={1.5} />, (c) => {
-		c?.uiController.input.setToPreviousHistory();
+		c?.ui.input.setToPreviousHistory();
 	}),
 	new QuickToolBarItem(<IconCaretDown stroke={1.5} />, (c) => {
-		c?.uiController.input.setToNextHistory();
+		c?.ui.input.setToNextHistory();
 	}),
 	new QuickToolBarItem(<IconArrowBackUp size={22} />, (c) => {
-		c?.uiController.input.setToLastMessage();
+		c?.ui.input.setToLastMessage();
 	}),
 	new QuickToolBarItem(<IconCopy size={20} />, (c, _txt, ref) => {
-		c?.uiController.input.copyText();
-		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
+		c?.ui.input.copyText();
+		if (ref?.current) c?.ui.initSuccessAnimation(ref?.current);
 	}),
 	new QuickToolBarItem(<IconCut size={20} />, (c, _txt, ref) => {
-		c?.uiController.input.cutText();
-		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
+		c?.ui.input.cutText();
+		if (ref?.current) c?.ui.initSuccessAnimation(ref?.current);
 	}),
 
 	new QuickToolBarItem(<IconClipboard size={20} />, (c, _txt, ref) => {
-		c?.uiController.input.pasteText(
+		c?.ui.input.pasteText(
 			() => {
 				if (ref?.current) {
 					ref.current.classList.remove("disabled");
-					c.uiController.initSuccessAnimation(ref.current);
+					c.ui.initSuccessAnimation(ref.current);
 				}
 			},
 			(e) => {
@@ -118,8 +118,8 @@ export const QuickToolBarItems: Array<QuickToolBarItem> = [
 	}),
 
 	new QuickToolBarItem(<IconTrash size={20} />, (c, _txt, ref) => {
-		c?.uiController.input.clear();
-		c?.uiController.input.focus();
-		if (ref?.current) c?.uiController.initSuccessAnimation(ref?.current);
+		c?.ui.input.clear();
+		c?.ui.input.focus();
+		if (ref?.current) c?.ui.initSuccessAnimation(ref?.current);
 	}),
 ];

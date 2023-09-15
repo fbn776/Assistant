@@ -22,7 +22,7 @@ export class Executer {
 	 * If no errors, then root(SyntaxCommand) of the SyntaxTree is taken and fed into a recursive function `_executeCommand`
 	 * @see _executeCommand
 	 * Again, if errors are found then those errors are returned, the errors returned in this phase are instance of `CompileErrors`.
-	 * 
+	 *
 	 * NOTE: Sometimes the returned errors are not of type `ParseError` or `CompileErrors` they are just plain `Error`.
 	 * If this happens then there's something wrong with the code. Fix it 🥲.
 	 */
@@ -52,12 +52,11 @@ export class Executer {
 			inputArgs = inputCmd.arguments;
 
 		//Check if the root command exists in the registry;
-		if (!this._globCtrl.commandController.registry!.exists(inputCmdName))
+		if (!this._globCtrl.command.registry!.exists(inputCmdName))
 			throw new CompilerErrors.CommandNotFound();
 
 		/**The corresponding command object taken from the command registry */
-		let cmdObj =
-			this._globCtrl.commandController.registry!.getCommandData(inputCmdName)!;
+		let cmdObj = this._globCtrl.command.registry!.getCommandData(inputCmdName)!;
 		/**The corresponding command arguments*/
 		let cmdArgs = cmdObj.arguments;
 		/**The required number of arguments taken from command object in registry */
@@ -77,7 +76,7 @@ export class Executer {
 			generalType = cmdObj.arguments.types[0];
 
 		/**If the required number is 0, then straight up execute and return the value*/
-		if (reqArgsNums === 0) return cmdObj.exec();
+		if (reqArgsNums === 0) return cmdObj.exec(this._globCtrl);
 
 		/**Traverse through the arguments, convert the given arguments to a evaluvatable form.
 		 * ie the `inputArgs` is made of SyntaxLiteral or SyntaxCommand;
@@ -101,6 +100,6 @@ export class Executer {
 		});
 
 		/**Here the input arguments are converted to JS - native stuff, put these values into the command function, defined in the registry*/
-		return cmdObj.exec(...inputArgs);
+		return cmdObj.exec(this._globCtrl, ...inputArgs);
 	}
 }

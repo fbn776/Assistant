@@ -3,9 +3,9 @@ import { FC, useEffect, useState } from "react";
 import { LowerSection, UpperSection } from "./sections";
 import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
+import { GlobalController } from "../controllers/c_Controller";
 import {
 	CommandController,
-	GlobalController,
 	GlobalSettingsController,
 	MessageController,
 	UIController,
@@ -24,17 +24,17 @@ const globalController = new GlobalController(
 
 export const App: FC = () => {
 	//Sets the state controller for the messages;
-	globalController.messageController.init(useState<I_Message[]>([]));
+	globalController.message.init(useState<I_Message[]>([]));
 	//Sets the state controller for the settings;
-	globalController.globalSettingsController.init(
+	globalController.globalSettings.init(
 		useState(GlobalSettingsController.BaseSettings)
 	);
 
 	//For the theme toggling
-	globalController.globalSettingsController.onSettingsChange(() => {
+	globalController.globalSettings.onSettingsChange(() => {
 		document.body.classList.toggle(
 			"dark",
-			globalController.globalSettingsController.getValue("theme") === "dark"
+			globalController.globalSettings.getValue("theme") === "dark"
 		);
 	});
 
@@ -42,8 +42,8 @@ export const App: FC = () => {
 	useEffect(() => {
 		window.onkeydown = (e) => {
 			if (e.key === "d" && e.ctrlKey) {
-				let curr = globalController.globalSettingsController.getValue("theme");
-				globalController.globalSettingsController.setValue(
+				let curr = globalController.globalSettings.getValue("theme");
+				globalController.globalSettings.setValue(
 					"theme",
 					curr === "dark" ? "light" : "dark"
 				);
@@ -53,9 +53,9 @@ export const App: FC = () => {
 			if (e.key === "Enter") {
 				if (
 					document.activeElement ===
-					globalController.uiController.dependencies.mainInputRef?.current
+					globalController.ui.dependencies.mainInputRef?.current
 				) {
-					globalController.uiController.input.debouncedEval();
+					globalController.ui.input.debouncedEval();
 				}
 			}
 		};

@@ -1,4 +1,4 @@
-import { CommandRegistry } from "./CommandRegistry";
+import { CommandRegistry } from "../../execution/CommandRegistry";
 import { BaseController } from "../c_ControllerBase";
 
 export class CommandController extends BaseController {

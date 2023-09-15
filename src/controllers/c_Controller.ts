@@ -1,9 +1,5 @@
-import { GlobalSettingsController } from "./settings/c_GlobalSettingsController";
-import { MessageController } from "./messages/c_MessageController";
-import { BaseController } from "./c_ControllerBase";
-import { UIController } from "./UI/c_UIController";
-import { CommandController } from "./commands/c_CommandController";
-import { Executer } from "../execution/evaluvator/evaluvator";
+import { BaseController, CommandController, GlobalSettingsController, MessageController, UIController } from ".";
+import { Executer } from "../execution/evaluator/evaluator";
 
 /**
  * This is a global controller class for handling most of the things in the app. This also is an access point accessing for every other controller.
@@ -20,29 +16,35 @@ import { Executer } from "../execution/evaluvator/evaluvator";
  ** This might need some refactoring, better structure or other stuff. This is open to changes;
  */
 export class GlobalController {
-	messageController: MessageController;
-	globalSettingsController: GlobalSettingsController;
-	uiController: UIController;
-	commandController: CommandController;
-	compiler = new Executer(this);
+	/**Message controller. For controlling the reading and writing messages.*/
+	message: MessageController;
+	/**Global settings controller. For controlling the getting and setting and storage of global settings */
+	globalSettings: GlobalSettingsController;
+	/**UI controller. For controlling different UI elements like input and messages */
+	ui: UIController;
+	/**Command controller. For handling stuff related to commands */
+	command: CommandController;
+	/**An instance of the executer class. For execution of results */
+	executer = new Executer(this);
 
 	private _controllerList: BaseController[];
+
 	constructor(
 		messageController = new MessageController(),
 		globalSettingsController = new GlobalSettingsController(),
 		uiController = new UIController(),
 		commandController = new CommandController()
 	) {
-		this.messageController = messageController;
-		this.globalSettingsController = globalSettingsController;
-		this.uiController = uiController;
-		this.commandController = commandController;
+		this.message = messageController;
+		this.globalSettings = globalSettingsController;
+		this.ui = uiController;
+		this.command = commandController;
 
 		this._controllerList = [
-			this.messageController,
-			this.globalSettingsController,
-			this.uiController,
-			this.commandController,
+			this.message,
+			this.globalSettings,
+			this.ui,
+			this.command,
 		];
 
 		for (let controller of this._controllerList) {

@@ -5,7 +5,7 @@ import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
 
 export const LowerSection: FC = () => {
 	const globalController = useContext(ControllersContext);
-	const settingsController = globalController.globalSettingsController;
+	const settingsController = globalController.globalSettings;
 
 	return (
 		<section className="w-full fixed h-[var(--btmBarHeight)] bottom-0 border-l-prim-variant dark:border-d-prim-variant border-t-2 bg-l-prim-cont-bg dark:bg-d-prim-cont-bg">
@@ -58,7 +58,7 @@ export const LowerSection: FC = () => {
 					placeholder="Type here.."
 					defaultValue="add 10 30"
 					ref={
-						(globalController.uiController.dependencies.mainInputRef =
+						(globalController.ui.dependencies.mainInputRef =
 							useRef<HTMLInputElement>(null))
 					}
 				/>
@@ -67,7 +67,7 @@ export const LowerSection: FC = () => {
 					size={35}
 					onClick={(e) => {
 						e.preventDefault();
-						globalController.uiController.input.debouncedEval()
+						globalController.ui.input.debouncedEval();
 					}}
 				/>
 			</div>

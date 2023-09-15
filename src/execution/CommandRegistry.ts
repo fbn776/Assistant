@@ -1,10 +1,8 @@
-import { CommandValidationError } from "../../execution/errors/validationErrors.ts";
-import { hasDuplicates } from "../../utils/utils.ts";
-import { Command } from "../../execution/syntax/command/Command.ts";
-import {
-	ArgumentsData,
-	Documentation,
-} from "../../execution/syntax/command/index.ts";
+import { CommandValidationError } from "./errors/validationErrors.ts";
+import { hasDuplicates } from "../utils/utils.ts";
+import { Command } from "./syntax/command/Command.ts";
+import { ArgumentsData, Documentation } from "./syntax/command/index.ts";
+import { GlobalController } from "../controllers/c_Controller.ts";
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
@@ -15,7 +13,7 @@ export interface I_CommandRegistryFormat {
 	/**The documentation for the command; here the description is required, rest are optional */
 	metadata: Documentation;
 	/**The actual code to be executed when the command is executed; this is JS code that runs in back */
-	exec: (...args: any[]) => any;
+	exec: (globalController: GlobalController, ...args: any[]) => any;
 }
 
 /**

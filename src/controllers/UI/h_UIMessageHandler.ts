@@ -30,7 +30,7 @@ export class UIMessageHandler implements I_UIEventsMessage {
 	containerScrollToBottom() {
 		this._deps.messageContainer?.current!.scrollIntoView({
 			block: "end",
-			behavior: this._parent.parent.globalSettingsController.getValue(
+			behavior: this._parent.parent.globalSettings.getValue(
 				"scrollToMessageBehavior"
 			) as any,
 		});

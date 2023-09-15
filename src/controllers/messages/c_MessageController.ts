@@ -187,7 +187,7 @@ export class MessageController extends BaseController {
 	 * Then generates a random integer b/w 100 and some large enough number.
 	 * Then inserts this large random number b/w the unixTime at the first generated random number
 	 *
-	 * This is a quick and dirty implementation of a random string generator.
+	 * This is a quick and not so rigid implementation of a random string generator.
 	 * Highly improbable to generate the same string twice, but not impossible.
 	 * Could be better; open to future changes
 	 */

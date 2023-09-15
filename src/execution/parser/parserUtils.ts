@@ -9,7 +9,7 @@ export default class ParserUtils {
 	/**Splits a given input to an array of string; but this respects quotes
 	 * That is; whatever is inside the quotes is not split, and remains as a single unit.
 	 */
-	private static splitByQuotes(str: string, delimiter: string = " "): string[] {
+	private static _splitByQuotes(str: string, delimiter: string = " "): string[] {
 		let result: string[] = [];
 		let temp = "";
 		for (let i = 0; i < str.length; i++) {
@@ -51,7 +51,7 @@ export default class ParserUtils {
 	 * What this actually does is that whenever a parenthesis is found, the content inside the parenthesis is split to a new array and then added to the original array as a new element.
 	 * This also respects quotes.
 	 */
-	private static splitByBracket(input: string): any[] {
+	private static _splitByBracket(input: string): any[] {
 		const result: any[] = [];
 		let currentChunk = "";
 		const stack: any[] = [result];
@@ -155,15 +155,15 @@ export default class ParserUtils {
 	}
 
 	/**This combines both quote splitting and bracket splitting recursively. This in a sense neatly arranges the string to further processing */
-	private static combinedSplit(input: any[]) {
+	private static _combinedSplit(input: any[]) {
 		let result: any[] = [];
 
 		for (let item of input) {
 			if (typeof item === "string") {
 				//Split the string; this splitting shouldn't split spaces inside the quotes. So splitByQuotes is used.
-				result.push(...this.splitByQuotes(item));
+				result.push(...this._splitByQuotes(item));
 			} else {
-				result.push(this.combinedSplit(item));
+				result.push(this._combinedSplit(item));
 			}
 		}
 
@@ -179,7 +179,7 @@ export default class ParserUtils {
 	 * This returns ["add", "10", "20", ["add", "30", "40"], "30"]
 	 */
 	static tertiaryParser(input: string): any[] {
-		return this.combinedSplit(this.splitByBracket(input));
+		return this._combinedSplit(this._splitByBracket(input));
 	}
 
 	static secondaryParser(input: any[]) {
