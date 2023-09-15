@@ -1,4 +1,4 @@
-import ParserUtils from "./ParserUtils";
+import ParserUtils from "./parserUtils";
 import { SyntaxTree } from "../syntax/syntax";
 
 /**A parser class, that only has one method. 

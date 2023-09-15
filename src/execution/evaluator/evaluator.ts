@@ -1,4 +1,4 @@
-import { Parser } from "../Parser/Parser";
+import { Parser } from "../parser/parser";
 import { GlobalController } from "../../controllers/c_Controller";
 import { SyntaxCommand, SyntaxLiteral } from "../syntax/syntax";
 import { EvalErrors } from "../errors/evalErrors";
