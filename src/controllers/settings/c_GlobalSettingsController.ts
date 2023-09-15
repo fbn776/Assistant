@@ -3,7 +3,7 @@ import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
 } from "../../data/structures/s_globalSettings";
-import { BaseController } from "../c_BaseController";
+import { BaseController } from "../c_ControllerBase";
 
 export class GlobalSettingsController extends BaseController {
 	CONTROLLER_NAME = "GlobalSettingsController";

@@ -1,5 +1,5 @@
 import { I_Message, MESSAGE_SOURCE } from "../../data/structures/s_message";
-import { BaseController } from "../c_BaseController";
+import { BaseController } from "../c_ControllerBase";
 import { GlobalController } from "../c_Controller";
 import { MessageQuickiesHandler } from "./h_MessageQuickies";
 import MessageStorageHandler from "./h_MessageStorageHandler";
@@ -182,11 +182,11 @@ export class MessageController extends BaseController {
 	}
 
 	/**Generates a random string
-	 * Working: 
+	 * Working:
 	 * Gets the current unixTime as a string, then generates a random integer between 0 and the unixTime's length.
 	 * Then generates a random integer b/w 100 and some large enough number.
 	 * Then inserts this large random number b/w the unixTime at the first generated random number
-	 * 
+	 *
 	 * This is a quick and dirty implementation of a random string generator.
 	 * Highly improbable to generate the same string twice, but not impossible.
 	 * Could be better; open to future changes
@@ -194,7 +194,7 @@ export class MessageController extends BaseController {
 	generateRandomID(): string {
 		let time = Date.now().toString(),
 			pos = Math.floor(Math.random() * (time.length - 1)),
-			randomStr = Math.floor((Math.random() * 10000) + 100);
+			randomStr = Math.floor(Math.random() * 10000 + 100);
 
 		return time.substring(0, pos) + randomStr + time.substring(pos);
 	}

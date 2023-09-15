@@ -1,5 +1,5 @@
 import { CommandRegistry } from "./CommandRegistry";
-import { BaseController } from "../c_BaseController";
+import { BaseController } from "../c_ControllerBase";
 
 export class CommandController extends BaseController {
 	CONTROLLER_NAME = "CommandController";
@@ -10,7 +10,7 @@ export class CommandController extends BaseController {
 	 * This function takes in a command registry instance; this instance includes all the registered command.
 	 */
 	constructor(registry?: CommandRegistry) {
-		super()
+		super();
 		this.registry = registry || null;
 	}
 }

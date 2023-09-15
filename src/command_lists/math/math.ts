@@ -2,7 +2,7 @@ import {
 	ArgumentsData,
 	Documentation,
 	E_ArgumentTypes as types,
-} from "../../execution/test";
+} from "../../execution/syntax/command";
 import command_registry_instance from "../registry_instance";
 
 command_registry_instance.register({
@@ -18,8 +18,7 @@ command_registry_instance.register({
 	metadata: new Documentation("Finds sum of n numbers"),
 	exec: (...rest: number[]) => {
 		let sum = 0;
-		for(let a of rest)
-			sum += a;
+		for (let a of rest) sum += a;
 		return sum;
-	}
-})
+	},
+});

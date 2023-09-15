@@ -1,5 +1,5 @@
 import { I_dependencies } from "../../data/structures/s_controllers";
-import { BaseController } from "../c_BaseController";
+import { BaseController } from "../c_ControllerBase";
 import { UIInputHandler } from "./h_UIInputHandler";
 import { UIMessageHandler } from "./h_UIMessageHandler";
 
@@ -31,9 +31,9 @@ export class UIController extends BaseController {
 		this.message = new UIMessageHandler(this);
 	}
 
-	/**Plays a success animation and tick icon; for quick utils 
+	/**Plays a success animation and tick icon; for quick utils
 	 * This automatically plays and then removes the animation;
-	*/
+	 */
 	initSuccessAnimation(elm: HTMLElement) {
 		elm.classList.add("play-success-animation");
 		elm.addEventListener("animationend", () => {

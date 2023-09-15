@@ -1,6 +1,6 @@
 import { GlobalSettingsController } from "./settings/c_GlobalSettingsController";
 import { MessageController } from "./messages/c_MessageController";
-import { BaseController } from "./c_BaseController";
+import { BaseController } from "./c_ControllerBase";
 import { UIController } from "./UI/c_UIController";
 import { CommandController } from "./commands/c_CommandController";
 import { Executer } from "../execution/Executer";

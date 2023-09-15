@@ -1,6 +1,6 @@
 import Documentation from "./Documentation.ts";
 import { ArgumentsData } from "./ArgumentsData.ts";
-import { CommandValidationError } from "./utils/command_utils.ts";
+import { CommandValidationError } from "./errors.ts";
 
 export class Command {
 	public readonly names: string[];
@@ -41,5 +41,4 @@ export class Command {
 				name
 			);
 	}
-	
 }

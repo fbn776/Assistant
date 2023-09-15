@@ -1,7 +1,10 @@
-import { CommandValidationError } from "../../execution/test/utils/command_utils";
+import { CommandValidationError } from "../../execution/syntax/command/errors.ts";
 import { hasDuplicates } from "../../utils/utils.ts";
-import { Command } from "../../execution/test/Command.ts";
-import { ArgumentsData, Documentation } from "../../execution/test";
+import { Command } from "../../execution/syntax/command/Command.ts";
+import {
+	ArgumentsData,
+	Documentation,
+} from "../../execution/syntax/command/index.ts";
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
