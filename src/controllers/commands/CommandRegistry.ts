@@ -1,4 +1,4 @@
-import { CommandValidationError } from "../../execution/syntax/command/errors.ts";
+import { CommandValidationError } from "../../execution/errors/validationErrors.ts";
 import { hasDuplicates } from "../../utils/utils.ts";
 import { Command } from "../../execution/syntax/command/Command.ts";
 import {

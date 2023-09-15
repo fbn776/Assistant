@@ -3,7 +3,7 @@ import { GlobalController } from "../../controllers/c_Controller";
 import { SyntaxCommand, SyntaxLiteral } from "../syntax/syntax";
 import { CompilerErrors } from "../errors/compileErrors";
 import { E_ArgumentTypes } from "../syntax/command";
-import { isBoolean, isNumeric } from "../../utils/utils";
+import EvaluatorUtils from "./evaluatorUtils";
 
 export class Executer {
 	private readonly _globCtrl: GlobalController;
@@ -56,44 +56,15 @@ export class Executer {
 				//If its a general type, then take the general type value; else get the corresponding type value for command definition;
 				let type = generalType || cmd.arguments.types[i];
 
-				if (!Executer.canConvertToType(arg.name, type))
+				if (!EvaluatorUtils.canConvertToType(arg.name, type))
 					throw new CompilerErrors.IncorrectType();
 
-				return Executer.convertToType(arg.name, type);
+				return EvaluatorUtils.convertToType(arg.name, type);
 			}
 			//For now the syntax tree can only contain SyntaxLiteral or SyntaxCommand, but if this changes do stuff here;
 			//If this reaches here, then this means that arg is a SyntaxCommand;
 			return this.execute(arg);
 		});
 		return cmd.exec(...inputArgs);
-	}
-
-	/**Checks if a string can be casted to a type */
-	static canConvertToType(value: string, expectedType: E_ArgumentTypes) {
-		switch (expectedType) {
-			case E_ArgumentTypes.number:
-				return isNumeric(value);
-
-			case E_ArgumentTypes.boolean:
-				return isBoolean(value);
-
-			//Since everything is technically a string, just return true; but this can change in the future
-			case E_ArgumentTypes.string:
-				return true;
-		}
-	}
-
-	/**COnverts a string value to an expected type; this has no type cast checks, do the checks before using this */
-	static convertToType(value: string, expectedType: E_ArgumentTypes) {
-		switch (expectedType) {
-			case E_ArgumentTypes.number:
-				return Number(value);
-
-			case E_ArgumentTypes.boolean:
-				return value === "true" ? true : false;
-
-			case E_ArgumentTypes.string:
-				return value;
-		}
 	}
 }
