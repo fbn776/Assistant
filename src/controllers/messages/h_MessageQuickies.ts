@@ -1,6 +1,6 @@
 import { MessageController } from "..";
-import ParseError from "../../compiler/errors";
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
+import { ParseErrors } from "../../execution/errors/parseErrors";
 
 export class MessageQuickiesHandler {
 	private _parent;
@@ -46,7 +46,7 @@ export class MessageQuickiesHandler {
 	}
 
 	/**The same as command error, but has additional formatting */
-	commandTypo(command: string, error: ParseError) {
+	commandTypo(command: string, error: ParseErrors.ParseError) {
 		this._parent.addMessage({
 			source: MESSAGE_SOURCE.BOT,
 			text: command,

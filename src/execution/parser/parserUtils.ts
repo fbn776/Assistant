@@ -1,4 +1,4 @@
-import { ParseErrors } from "../errors/parseErrors";
+import { ParseErrors } from "../errors/ParseErrors";
 import { SyntaxTree } from "../syntax/syntax";
 
 /**A utility class;
@@ -9,7 +9,10 @@ export default class ParserUtils {
 	/**Splits a given input to an array of string; but this respects quotes
 	 * That is; whatever is inside the quotes is not split, and remains as a single unit.
 	 */
-	private static _splitByQuotes(str: string, delimiter: string = " "): string[] {
+	private static _splitByQuotes(
+		str: string,
+		delimiter: string = " "
+	): string[] {
 		let result: string[] = [];
 		let temp = "";
 		for (let i = 0; i < str.length; i++) {

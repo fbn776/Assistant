@@ -1,24 +1,24 @@
 import { Command } from "../syntax/command/Command.ts";
 import { SyntaxCommand, SyntaxItemBase } from "../syntax/syntax.ts";
-export namespace CompilerErrors {
+export namespace EvalErrors {
 	/**
 	 TODO is it really necessary to have a enum error type, can I check that with `instanceof`?
 	 TODO Standardized this
 	 */
-	export enum E_CompileErrorType {
+	export enum E_EvalErrorType {
 		CommandNotFound,
 		Unknown,
 		ArgumentsNumberMismatch,
 		IncorrectType,
 	}
 
-	export class CompileError extends Error {
-		readonly type: E_CompileErrorType;
+	export class EvalError extends Error {
+		readonly type: E_EvalErrorType;
 		readonly commandData: Command | null = null;
 		readonly foundItem: SyntaxItemBase | null = null;
 		constructor(
 			txt: string,
-			type: E_CompileErrorType,
+			type: E_EvalErrorType,
 			cmdData?: Command,
 			foundData?: SyntaxItemBase
 		) {
@@ -29,33 +29,33 @@ export namespace CompilerErrors {
 		}
 	}
 
-	export class CommandNotFound extends CompileError {
+	export class CommandNotFound extends EvalError {
 		constructor() {
-			super("Command not found", E_CompileErrorType.CommandNotFound);
+			super("Command not found", E_EvalErrorType.CommandNotFound);
 		}
 	}
 
 	/**Represents a an unknown error*/
-	export class Unknown extends CompileError {
+	export class Unknown extends EvalError {
 		constructor() {
-			super("Unknown error has occurred", E_CompileErrorType.Unknown);
+			super("Unknown error has occurred", E_EvalErrorType.Unknown);
 		}
 	}
 
-	export class ArgumentsNumberMismatch extends CompileError {
+	export class ArgumentsNumberMismatch extends EvalError {
 		constructor(cmdData: Command, foundData: SyntaxCommand) {
 			super(
 				`The number of commands expected by command was ${cmdData.arguments.requiredNumber} but input has ${foundData.arguments.length} arguments`,
-				E_CompileErrorType.ArgumentsNumberMismatch,
+				E_EvalErrorType.ArgumentsNumberMismatch,
 				cmdData,
 				foundData
 			);
 		}
 	}
 
-	export class IncorrectType extends CompileError {
+	export class IncorrectType extends EvalError {
 		constructor() {
-			super("Incorrect type", E_CompileErrorType.IncorrectType);
+			super("Incorrect type", E_EvalErrorType.IncorrectType);
 		}
 	}
 }

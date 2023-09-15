@@ -1,7 +1,7 @@
 import { Parser } from "../parser/Parser";
 import { GlobalController } from "../../controllers/c_Controller";
 import { SyntaxCommand, SyntaxLiteral } from "../syntax/syntax";
-import { CompilerErrors } from "../errors/evalErrors";
+import { EvalErrors } from "../errors/EvalErrors";
 import { E_ArgumentTypes } from "../syntax/command";
 import EvaluatorUtils from "./evaluatorUtils";
 
@@ -53,7 +53,7 @@ export class Executer {
 
 		//Check if the root command exists in the registry;
 		if (!this._globCtrl.command.registry!.exists(inputCmdName))
-			throw new CompilerErrors.CommandNotFound();
+			throw new EvalErrors.CommandNotFound();
 
 		/**The corresponding command object taken from the command registry */
 		let cmdObj = this._globCtrl.command.registry!.getCommandData(inputCmdName)!;
@@ -66,7 +66,7 @@ export class Executer {
 		 * @see ArgumentsData rule 2 (c)
 		 */
 		if (reqArgsNums > 0 && inputArgs.length !== reqArgsNums)
-			throw new CompilerErrors.ArgumentsNumberMismatch(cmdObj, inputCmd);
+			throw new EvalErrors.ArgumentsNumberMismatch(cmdObj, inputCmd);
 
 		/**If number of arg types is 1 then the type but `cmdArgs` length != 1 then take this type to be the type of all other arguments
 		 * Take the type to be uniform
@@ -90,7 +90,7 @@ export class Executer {
 
 				//If the Literal cannot be converted to the type, then throw error;
 				if (!EvaluatorUtils.canConvertToType(arg.name, type))
-					throw new CompilerErrors.IncorrectType();
+					throw new EvalErrors.IncorrectType();
 
 				return EvaluatorUtils.convertToType(arg.name, type);
 			}
