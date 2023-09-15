@@ -35,6 +35,7 @@ export namespace CompilerErrors {
 		}
 	}
 
+	/**Represents a an unknown error*/
 	export class Unknown extends CompileError {
 		constructor() {
 			super("Unknown error has occurred", E_CompileErrorType.Unknown);

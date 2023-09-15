@@ -1,8 +1,9 @@
 /**Represents the argument data types */
 export enum E_ArgumentTypes {
-	number,
-	string,
-	boolean,
+	number = "number",
+	string = "string",
+	boolean = "boolean",
+	any = "any"
 }
 
 /**
@@ -12,15 +13,15 @@ export enum E_ArgumentTypes {
  * ### RULES:
  * 
  * 1. The number of arguments(requiredNumber) given should be equal to the number of arguments passed into the rest parameter;
- *   If the argument types are unique; the only one type is needed;
- *   This implies => if the length of arguments passed is 1 then the types are taken as uniform;
+ *   If the argument types are uniform; then only one type is needed;
+ *   ie if the length of arg type is 1 (but required number is not 1) then the type is taken as the type for all other arguments;
  *
  * 2. The number of arguments can be a negative, zero or positive integer;
  *	a. negative integer => This means the number of arguments are variable and can be as many as possible; In this case; the number of argument types passed should be 1. This type is taken as the type for all other arguments;
  *	b. zero => This means the command takes no arguments;
  *	c. positive integer => This means the command takes a fixed number of arguments;
  * 
- * 3. Number of arguments cannot be 0
+ * 3. Number of arguments cannot be 0, if required number is not 0;
  */
 export class ArgumentsData {
 	public readonly requiredNumber: number;

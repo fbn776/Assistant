@@ -187,9 +187,9 @@ export class UIInputHandler {
 		//When submitting, first display the message as user message;
 		this._globCtrl.messageController.quickies.userMessage(text);
 
-		let final = this._globCtrl.compiler.compile(text);
+		let final = this._globCtrl.compiler.execute(text);
 		if (final instanceof Error) {
-			if (final instanceof ParseErrors.ParseErrorBase)
+			if (final instanceof ParseErrors.ParseError)
 				_msgCtrl.quickies.commandTypo(text, final);
 			_msgCtrl.quickies.errorMsg(final.message);
 		} else {

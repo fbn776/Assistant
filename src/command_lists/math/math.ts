@@ -22,3 +22,12 @@ command_registry_instance.register({
 		return sum;
 	},
 });
+
+command_registry_instance.register({
+	name: ["PI"],
+	arguments: new ArgumentsData(0),
+	metadata: new Documentation("The value of PI"),
+	exec: () => {
+		return Math.PI;
+	},
+});

@@ -9,7 +9,7 @@ export namespace ParseErrors {
 		InvalidBracket,
 	}
 
-	export class ParseErrorBase extends Error {
+	export class ParseError extends Error {
 		/**The string index at which the error occurred */
 		readonly position: number;
 		readonly errorType: E_ParseErrorType;
@@ -21,13 +21,13 @@ export namespace ParseErrors {
 		}
 	}
 
-	export class SpaceNotFound extends ParseErrorBase {
+	export class SpaceNotFound extends ParseError {
 		constructor(errorAt: number) {
 			super("Space not found", errorAt, E_ParseErrorType.spaceNotFound);
 		}
 	}
 
-	export class NoClosingQuoteFound extends ParseErrorBase {
+	export class NoClosingQuoteFound extends ParseError {
 		constructor(errorAt: number) {
 			super(
 				"No closing quote found",
@@ -37,31 +37,31 @@ export namespace ParseErrors {
 		}
 	}
 
-	export class InvalidQuotes extends ParseErrorBase {
+	export class InvalidQuotes extends ParseError {
 		constructor(errorAt: number) {
 			super("Invalid quotes", errorAt, E_ParseErrorType.InvalidQuotes);
 		}
 	}
 
-	export class EmptyBrackets extends ParseErrorBase {
+	export class EmptyBrackets extends ParseError {
 		constructor(errorAt: number) {
 			super("Empty brackets found", errorAt, E_ParseErrorType.emptyBrackets);
 		}
 	}
 
-	export class BracketMismatch extends ParseErrorBase {
+	export class BracketMismatch extends ParseError {
 		constructor(errorAt: number) {
 			super("Bracket mismatch", errorAt, E_ParseErrorType.bracketMismatch);
 		}
 	}
 
-	export class QuotesMismatch extends ParseErrorBase {
+	export class QuotesMismatch extends ParseError {
 		constructor(errorAt: number) {
 			super("Quotes mismatch", errorAt, E_ParseErrorType.quotesMismatch);
 		}
 	}
 
-	export class InvalidBracket extends ParseErrorBase {
+	export class InvalidBracket extends ParseError {
 		constructor(errorAt: number) {
 			super("Invalid bracket found", errorAt, E_ParseErrorType.InvalidBracket);
 		}
