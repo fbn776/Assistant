@@ -1,9 +1,9 @@
-import { Parser } from "./parser/parser";
-import { GlobalController } from "../controllers/c_Controller";
-import { SyntaxCommand, SyntaxLiteral } from "./syntax/syntax";
-import { CompilerErrors } from "./errors/compileErrors";
-import { E_ArgumentTypes } from "./syntax/command";
-import { isBoolean, isNumeric } from "../utils/utils";
+import { Parser } from "../parser/Parser";
+import { GlobalController } from "../../controllers/c_Controller";
+import { SyntaxCommand, SyntaxLiteral } from "../syntax/syntax";
+import { CompilerErrors } from "../errors/compileErrors";
+import { E_ArgumentTypes } from "../syntax/command";
+import { isBoolean, isNumeric } from "../../utils/utils";
 
 export class Executer {
 	private readonly _globCtrl: GlobalController;
