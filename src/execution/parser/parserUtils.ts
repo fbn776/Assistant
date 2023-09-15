@@ -1,4 +1,4 @@
-import { ParseErrors } from "../errors/ParseErrors";
+import { ParseErrors } from "../errors/parseErrors";
 import { SyntaxTree } from "../syntax/syntax";
 
 /**A utility class;

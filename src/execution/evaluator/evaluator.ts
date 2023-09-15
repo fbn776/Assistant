@@ -1,7 +1,7 @@
 import { Parser } from "../parser/Parser";
 import { GlobalController } from "../../controllers/c_Controller";
 import { SyntaxCommand, SyntaxLiteral } from "../syntax/syntax";
-import { EvalErrors } from "../errors/EvalErrors";
+import { EvalErrors } from "../errors/evalErrors";
 import { E_ArgumentTypes } from "../syntax/command";
 import EvaluatorUtils from "./evaluatorUtils";
 
