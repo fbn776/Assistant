@@ -11,7 +11,7 @@ export const TextMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<span className="break-all">{props.data.text}</span>
+			<span className="msg-general-span">{props.data.text}</span>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>
@@ -28,7 +28,7 @@ export const ErrorMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<span className="message-error-text break-all">{props.data.text}</span>
+			<span className="message-error-text msg-general-span">{props.data.text}</span>
 			<span className="message-time">
 				{convertUnixTime(props.data.unixTime)}
 			</span>
@@ -58,7 +58,7 @@ export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
 				(props.isBot ? "bot-message" : "user-message")
 			}
 		>
-			<span className="message-error-text break-all	">
+			<span className="message-error-text msg-general-span">
 				<b>{props.data.additionalData?.heading}</b>
 				<br />
 				<span className="mb-[8px] block">{txt}</span>
@@ -71,3 +71,5 @@ export const FormattedErrorMessage: FC<I_MessageTypeProp> = (props) => {
 		</p>
 	);
 };
+//   white-space: normal; /* Text wraps normally when it reaches the width */
+//   word-wrap: break-word;

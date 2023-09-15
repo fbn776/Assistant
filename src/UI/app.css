@@ -149,3 +149,8 @@
 	background-position: center;
 	background-size: 100%;
 }
+
+.msg-general-span {
+	white-space: normal;
+	word-wrap: break-word;
+}

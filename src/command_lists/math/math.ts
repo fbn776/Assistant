@@ -9,7 +9,7 @@ command_registry_instance.register({
 	name: ["add"],
 	arguments: new ArgumentsData(2, types.number, types.number),
 	metadata: new Documentation("Adds twp numbers and returns the result"),
-	exec: (a, b) => a + b,
+	exec: (_, a, b) => a + b,
 });
 
 command_registry_instance.register({
