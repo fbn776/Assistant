@@ -176,9 +176,10 @@ export class MessageController extends BaseController {
 
 	/**
 	 * Deletes the messages stored locally.
+	 * TODO - Add a function to delete the messages stored in the storage(if its implemented in the future)
 	 */
 	deleteLocalData() {
-		//TODO
+		this._setMessages([]);
 	}
 
 	/**Generates a random string

@@ -1,5 +1,5 @@
-const request = window.indexedDB.open("MyTestDatabase", 3);
+// const request = window.indexedDB.open("MyTestDatabase", 3);
 
 
 
-export default request;
+// export default request;

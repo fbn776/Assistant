@@ -3,7 +3,7 @@ export enum E_ArgumentTypes {
 	number = "number",
 	string = "string",
 	boolean = "boolean",
-	any = "any"
+	any = "any",
 }
 
 /**
