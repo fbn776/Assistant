@@ -20,7 +20,7 @@ const globalController = new GlobalController(
 	new UIController(),
 	new CommandController(command_registry_instance)
 );
-// console.log(command_registry_instance);
+
 
 export const App: FC = () => {
 	//Sets the state controller for the messages;
