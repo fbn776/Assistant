@@ -1,4 +1,4 @@
-import { RC, RC_NoArgs, RC_monoArgs, RC_triArgs, RC_biArgs } from '../registry_instance';
+import { RC_NoArgs, RC_triArgs } from '../registry_instance';
 import { E_ArgumentTypes as types } from "../../execution/syntax/command/ArgumentsData";
 
 
