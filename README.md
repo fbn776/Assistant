@@ -4,7 +4,7 @@ The Assistant is a personal project for learning and experimenting with `typescr
 
 ## Usage
 
-The web application is hosted [here](https://assistant-ebon.vercel.app/). Once opened, you can type commands. Currently[^1] there are only a few commands supported.
+The web application is hosted [here](https://assistant-ebon.vercel.app/). Once opened, you can type commands. Currently [^date] there are only a few commands supported.
 
 Eg:
 ```
@@ -50,4 +50,4 @@ npm run dev
 - [ ] Refactors
 
 
-[^1] Last updated at 22/09/2023
+[^date]: Last updated at 22/09/2023
