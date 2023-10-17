@@ -9,3 +9,12 @@ RC(
 		return a + b;
 	}
 );
+
+RC(
+	["sub"],
+	[2, types.number, types.number],
+	["Subtract two numbers together", "number1", "number2"],
+	(_, a: number, b: number) => {
+		return a - b;
+	}
+);
