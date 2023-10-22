@@ -6,5 +6,6 @@
  * This file is imported in the `App.tsx` file.
 */
 
-import "./math/basics/arithmetic.ts"
+import "./math/arithmetic.ts"
+import "./math/trig.ts"
 import "./std/std"
