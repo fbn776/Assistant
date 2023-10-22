@@ -5,16 +5,17 @@
 - [x] Multiplication (Multiply)
 - [x] Division (Divide)
 - [x] Modulo (Modulus)
-- [ ] Exponentiation (Power)
-- [ ] Square Root
-- [ ] Absolute Value
-- [ ] Trigonometric Functions
-    - [ ] Sine
-    - [ ] Cosine
-    - [ ] Tangent
-    - [ ] Arcsine
-    - [ ] Arccosine
-    - [ ] Arctangent
+- [x] Exponentiation (Power)
+- [x] Square Root
+- [x] Absolute Value
+- [x] Trigonometric Functions
+    - [x] Degree to radians and vise-versa 
+    - [x] Sine
+    - [x] Cosine
+    - [x] Tangent
+    - [x] Arc-sine
+    - [x] Arc-cosine
+    - [x] Arc-tangent
 - [ ] Logarithmic Functions
     - [ ] Natural Logarithm (ln)
     - [ ] Base-10 Logarithm (log)
@@ -30,4 +31,6 @@
     - [ ] Median
     - [ ] Variance
     - [ ] Standard Deviation
-- [ ] Custom Functions (as needed)
+- [ ] Constants
+  - [ ] PI
+  - [ ] e
