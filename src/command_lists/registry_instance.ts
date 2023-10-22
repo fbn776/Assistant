@@ -46,6 +46,12 @@ export class CR {
         return this;
     }
 
+    /**Mono argument**/
+    addMonoArgs(type: E_ArgumentTypes) {
+        this.args = [1, type];
+        return this;
+    }
+
     /**(OPTIONAL) Adds the documentation data*/
     addDocs(desc: string, syntax?: string, example?: string) {
         this.metadata = [desc, syntax, example];
