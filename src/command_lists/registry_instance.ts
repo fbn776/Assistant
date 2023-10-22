@@ -1,93 +1,58 @@
 /**The registry instance class. This has the registry instance that is used to store the commands.
  * This same instance is used in the command controller
  */
-import {
-	CommandRegistry,
-	I_CommandRegistryFormat,
-} from "../execution/CommandRegistry.ts";
+import {CommandRegistry, I_CommandRegistryFormat,} from "../execution/CommandRegistry.ts";
 import Documentation from "../execution/syntax/syntaxdata/Documentation.ts";
-import { ArgumentsData } from "../execution/syntax/syntaxdata/ArgumentsData.ts";
-import { E_ArgumentTypes } from "../execution/syntax/syntaxdata/ArgumentsData.ts";
+import {ArgumentsData, E_ArgumentTypes} from "../execution/syntax/syntaxdata";
 
 export const command_registry_instance = new CommandRegistry();
 
-/**A shorthand function to register a command to the command register (RC -> Register Command)
- * @param name The name of the command
+/**
+ * CR - Command Registry; a command builder class, that builds a command and then registers it to the command registry when `build` is called;
+ * @param names The name of the command
  * @param args The arguments data
  * @see {@link ArgumentsData}
  * @param metadata The documentation data
  * @see {@link Documentation}
  * @param exec The function to execute when the command is called
  */
-export const RC = (
-	name: string[],
-	args: [number, ...E_ArgumentTypes[]],
-	metadata: [string, string?, string?],
-	exec: I_CommandRegistryFormat["exec"]
-) => {
-	command_registry_instance.register({
-		name,
-		arguments: new ArgumentsData(...args),
-		metadata: new Documentation(...metadata),
-		exec,
-	});
-};
+export class CR {
+    private names!: string[];
+    private args!: [number, ...E_ArgumentTypes[]];
+    private metadata: [string, string?, string?] = ["", "", ""];
+    private exec!: I_CommandRegistryFormat["exec"];
 
-/**A shorthand for representing a command registerer for commands having 0 arguments */
-export const RC_NoArgs = (
-	name: string[],
-	metadata: [string, string?, string?],
-	exec: I_CommandRegistryFormat["exec"]
-) => {
-	command_registry_instance.register({
-		name,
-		arguments: new ArgumentsData(0),
-		metadata: new Documentation(...metadata),
-		exec,
-	});
-};
+    /**Adds the name of the command, more than one names are treated as command aliases*/
+    addAlias(...names: string[]) {
+        this.names = names;
+        return this;
+    }
 
-/**A shorthand for representing a command registerer for a command having 1 argument */
-export const RC_monoArgs = (
-	name: string[],
-	arg: E_ArgumentTypes,
-	metadata: [string, string?, string?],
-	exec: I_CommandRegistryFormat["exec"]
-) => {
-	command_registry_instance.register({
-		name,
-		arguments: new ArgumentsData(1, arg),
-		metadata: new Documentation(...metadata),
-		exec,
-	});
-};
+    /**Adds the arguments data*/
+    addArgs(num: number, ...types: E_ArgumentTypes[]) {
+        this.args = [num, ...types];
+        return this;
+    }
 
-/**A shorthand for representing a command registerer for a command having 2 arguments */
-export const RC_biArgs = (
-	name: string[],
-	args: [E_ArgumentTypes, E_ArgumentTypes],
-	metadata: [string, string?, string?],
-	exec: I_CommandRegistryFormat["exec"]
-) => {
-	command_registry_instance.register({
-		name,
-		arguments: new ArgumentsData(2, ...args),
-		metadata: new Documentation(...metadata),
-		exec,
-	});
-};
+    /**(OPTIONAL) Adds the documentation data*/
+    addDocs(desc: string, syntax?: string, example?: string) {
+        this.metadata = [desc, syntax, example];
+        return this;
+    }
 
-/**A shorthand for representing a command registerer for a command having 2 arguments */
-export const RC_triArgs = (
-	name: string[],
-	args: [E_ArgumentTypes, E_ArgumentTypes, E_ArgumentTypes],
-	metadata: [string, string?, string?],
-	exec: I_CommandRegistryFormat["exec"]
-) => {
-	command_registry_instance.register({
-		name,
-		arguments: new ArgumentsData(3, ...args),
-		metadata: new Documentation(...metadata),
-		exec,
-	});
-};
+    /**Adds the function to execute when the command is called*/
+    addExec(exec: I_CommandRegistryFormat["exec"]) {
+        this.exec = exec;
+        return this;
+    }
+
+    /**Builds the command and registers it to the command registry*/
+    build() {
+        command_registry_instance.register({
+            name: this.names,
+            arguments: new ArgumentsData(...this.args),
+            metadata: new Documentation(...this.metadata),
+            exec: this.exec,
+        });
+    }
+}
