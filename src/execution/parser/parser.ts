@@ -7,10 +7,11 @@ import { SyntaxTree } from "../syntax/syntax";
  * The return value is taken by a executer/
  **/
 export class Parser {
-	parse(input: string): SyntaxTree | Error {
+	static parse(input: string): SyntaxTree | Error {
 		try {
-			return ParserUtils.secondaryParser(ParserUtils.tertiaryParser(input));
+			return ParserUtils.combineParse(input);
 		} catch (error) {
+			console.error(error);
 			return error as Error;
 		}
 	}

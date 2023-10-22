@@ -56,7 +56,7 @@ export const RC_monoArgs = (
 ) => {
 	command_registry_instance.register({
 		name,
-		arguments: new ArgumentsData(0, arg),
+		arguments: new ArgumentsData(1, arg),
 		metadata: new Documentation(...metadata),
 		exec,
 	});
@@ -71,7 +71,7 @@ export const RC_biArgs = (
 ) => {
 	command_registry_instance.register({
 		name,
-		arguments: new ArgumentsData(0, ...args),
+		arguments: new ArgumentsData(2, ...args),
 		metadata: new Documentation(...metadata),
 		exec,
 	});
@@ -86,7 +86,7 @@ export const RC_triArgs = (
 ) => {
 	command_registry_instance.register({
 		name,
-		arguments: new ArgumentsData(0, ...args),
+		arguments: new ArgumentsData(3, ...args),
 		metadata: new Documentation(...metadata),
 		exec,
 	});

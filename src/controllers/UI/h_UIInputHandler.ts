@@ -68,7 +68,7 @@ export class UIInputHandler {
 	 * ! **NOTE: Has doubt regarding the compatibility of this function.**
 	 */
 	setCursorPosition(caretPos: number) {
-		var elm = this._mainInputRef?.current;
+		const elm = this._mainInputRef?.current;
 		if (!elm) return;
 		if (elm.selectionStart != null) {
 			elm.focus();
@@ -160,7 +160,7 @@ export class UIInputHandler {
 
 	/** Cuts text from the main input to the clipboard */
 	async cutText() {
-		this.copyText();
+		await this.copyText();
 		this.clear();
 	}
 
@@ -189,7 +189,10 @@ export class UIInputHandler {
 		if (final instanceof Error) {
 			if (final instanceof ParseErrors.ParseError)
 				_msgCtrl.quickies.commandTypo(text, final);
-			_msgCtrl.quickies.errorMsg(final.message);
+			else
+				_msgCtrl.quickies.errorMsg(final.message);
+		} else if(final == null) {
+			console.info("Null message");
 		} else {
 			_msgCtrl.quickies.botTextReply(final);
 		}
@@ -206,6 +209,5 @@ export class UIInputHandler {
 		this._historyIndex = -1;
 	}
 
-	/**A debounced eval, this does the same thing as the `evalInputText`, but is wrapped in a debounce, the denouncer is set at 150ms */
 	debouncedEval = debounce(this.evalInputText, 150);
 }

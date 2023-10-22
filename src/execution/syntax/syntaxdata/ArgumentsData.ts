@@ -3,6 +3,7 @@ export enum E_ArgumentTypes {
 	number = "number",
 	string = "string",
 	boolean = "boolean",
+	command = "command",
 	any = "any",
 }
 
@@ -31,6 +32,10 @@ export class ArgumentsData {
 		this.requiredNumber = number;
 		this.types = rest;
 
+		this.validate();
+	}
+
+	private validate() {
 		//Rule 3
 		if(this.types.length === 0 && this.requiredNumber != 0)
 			throw new Error("Number of argument types cannot be zero, when the no of arguments are not 0");
@@ -40,7 +45,7 @@ export class ArgumentsData {
 			throw new Error(
 				"Invalid number of argument types; Only one type is needed for variable number of arguments"
 			);
-		
+
 		//Rule 1 and 2 (c)
 		if (
 			this.requiredNumber > 0 &&
