@@ -1,5 +1,5 @@
 import { isBoolean, isNumeric } from "../../utils/utils";
-import { E_ArgumentTypes } from "../syntax/command";
+import { E_ArgumentTypes } from "../syntax/syntaxdata";
 
 export default class EvaluatorUtils {
 	/**Checks if a string can be casted to a type */
@@ -16,7 +16,6 @@ export default class EvaluatorUtils {
 			case E_ArgumentTypes.any:
 				return true;
 		}
-
 
 		return true;
 	}
@@ -35,7 +34,6 @@ export default class EvaluatorUtils {
 				return value;
 		}
 
-		
 		return value;
 	}
 }

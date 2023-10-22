@@ -1,5 +1,5 @@
 import { RC } from "../registry_instance";
-import { E_ArgumentTypes as types } from "../../execution/syntax/command/ArgumentsData";
+import { E_ArgumentTypes as types } from "../../execution/syntax/syntaxdata/ArgumentsData";
 
 RC(
 	["add", "plus"],

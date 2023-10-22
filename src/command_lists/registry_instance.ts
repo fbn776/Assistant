@@ -5,9 +5,9 @@ import {
 	CommandRegistry,
 	I_CommandRegistryFormat,
 } from "../execution/CommandRegistry.ts";
-import Documentation from "../execution/syntax/command/Documentation";
-import { ArgumentsData } from "../execution/syntax/command/ArgumentsData";
-import { E_ArgumentTypes } from "../execution/syntax/command/ArgumentsData.ts";
+import Documentation from "../execution/syntax/syntaxdata/Documentation.ts";
+import { ArgumentsData } from "../execution/syntax/syntaxdata/ArgumentsData.ts";
+import { E_ArgumentTypes } from "../execution/syntax/syntaxdata/ArgumentsData.ts";
 
 export const command_registry_instance = new CommandRegistry();
 
@@ -91,4 +91,3 @@ export const RC_triArgs = (
 		exec,
 	});
 };
-

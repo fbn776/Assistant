@@ -1,4 +1,4 @@
-import { Command } from "../syntax/command/Command.ts";
+import { Command } from "../syntax/syntaxdata/Command.ts";
 import { SyntaxCommand, SyntaxItemBase } from "../syntax/syntax.ts";
 export namespace EvalErrors {
 	/**

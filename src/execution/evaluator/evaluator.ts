@@ -2,7 +2,7 @@ import { Parser } from "../parser/parser";
 import { GlobalController } from "../../controllers/c_Controller";
 import { SyntaxCommand, SyntaxLiteral } from "../syntax/syntax";
 import { EvalErrors } from "../errors/evalErrors";
-import { E_ArgumentTypes } from "../syntax/command";
+import { E_ArgumentTypes } from "../syntax/syntaxdata";
 import EvaluatorUtils from "./evaluatorUtils";
 
 /**Execution class, executes the command string to a fixed value */
