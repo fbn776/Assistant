@@ -1,0 +1,33 @@
+# Maths Commands TODO
+
+- [x] Addition (Add)
+- [x] Subtraction (Subtract)
+- [x] Multiplication (Multiply)
+- [x] Division (Divide)
+- [x] Modulo (Modulus)
+- [ ] Exponentiation (Power)
+- [ ] Square Root
+- [ ] Absolute Value
+- [ ] Trigonometric Functions
+    - [ ] Sine
+    - [ ] Cosine
+    - [ ] Tangent
+    - [ ] Arcsine
+    - [ ] Arccosine
+    - [ ] Arctangent
+- [ ] Logarithmic Functions
+    - [ ] Natural Logarithm (ln)
+    - [ ] Base-10 Logarithm (log)
+- [ ] Factorial
+- [ ] Greatest Common Divisor (GCD)
+- [ ] Least Common Multiple (LCM)
+- [ ] Rounding Functions
+    - [ ] Nearest Integer
+    - [ ] Ceiling Rounding
+    - [ ] Floor Rounding
+- [ ] Statistics Functions (optional)
+    - [ ] Mean
+    - [ ] Median
+    - [ ] Variance
+    - [ ] Standard Deviation
+- [ ] Custom Functions (as needed)
