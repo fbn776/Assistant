@@ -17,20 +17,32 @@ export const command_registry_instance = new CommandRegistry();
  * @param exec The function to execute when the command is called
  */
 export class CR {
-    private names!: string[];
+    private names: string[] = [];
     private args!: [number, ...E_ArgumentTypes[]];
     private metadata: [string, string?, string?] = ["", "", ""];
     private exec!: I_CommandRegistryFormat["exec"];
 
     /**Adds the name of the command, more than one names are treated as command aliases*/
     addAlias(...names: string[]) {
-        this.names = names;
+        this.names = [...this.names, ...names];
         return this;
     }
 
     /**Adds the arguments data*/
     addArgs(num: number, ...types: E_ArgumentTypes[]) {
         this.args = [num, ...types];
+        return this;
+    }
+
+    /**Variable arguments, only type required**/
+    addVarArgs(type: E_ArgumentTypes) {
+        this.args = [-1, type];
+        return this;
+    }
+
+    /**No arguments taken**/
+    addNoArgs() {
+        this.args = [0];
         return this;
     }
 
