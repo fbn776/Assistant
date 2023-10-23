@@ -52,6 +52,11 @@ export class CR {
         return this;
     }
 
+    noArgs() {
+        this.args = [0];
+        return this;
+    }
+
     /**(OPTIONAL) Adds the documentation data*/
     addDocs(desc: string, syntax?: string, example?: string) {
         this.metadata = [desc, syntax, example];

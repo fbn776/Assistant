@@ -16,12 +16,13 @@
     - [x] Arc-sine
     - [x] Arc-cosine
     - [x] Arc-tangent
-- [ ] Logarithmic Functions
-    - [ ] Natural Logarithm (ln)
-    - [ ] Base-10 Logarithm (log)
-- [ ] Factorial
-- [ ] Greatest Common Divisor (GCD)
-- [ ] Least Common Multiple (LCM)
+- [x] Logarithmic Functions
+    - [x] Natural Logarithm (ln)
+    - [x] Base-10 Logarithm (log)
+    - [x] Base-2 Logarithm (log2)
+- [x] Factorial
+- [x] Greatest Common Divisor (GCD)
+- [x] Least Common Multiple (LCM)
 - [ ] Rounding Functions
     - [ ] Nearest Integer
     - [ ] Ceiling Rounding
@@ -31,6 +32,6 @@
     - [ ] Median
     - [ ] Variance
     - [ ] Standard Deviation
-- [ ] Constants
-  - [ ] PI
-  - [ ] e
+- [x] Constants
+  - [x] PI
+  - [x] e
