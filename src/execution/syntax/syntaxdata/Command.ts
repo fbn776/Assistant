@@ -29,16 +29,16 @@ export class Command {
 	 */
 	static CommandNameValidator(name: string) {
 		//Checks if the staring with a number; throw error if yes;
-		if (name[0] >= "0" && name[0] <= "9")
+		if (name[0] >= '0' && name[0] <= '9')
 			throw new CommandValidationError(
 				"Command names shouldn't start with a ",
 				name
 			);
 
 		//Checks if a character has non-alphanumeric(+underscore) characters
-		if (!/^[a-zA-Z0-9_]+$/.test(name))
+		if (!/^[a-zA-Z0-9_-]+$/.test(name))
 			throw new CommandValidationError(
-				"Command name should only include alphanumeric and underscore characters. Found characters that doesn't meet this condition",
+				"Command name should only include alphanumeric, underscore and hyphen characters. Found characters that doesn't meet this condition",
 				name
 			);
 	}

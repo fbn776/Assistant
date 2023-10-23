@@ -35,8 +35,8 @@ export class CR {
     }
 
     /**Variable arguments, only type required**/
-    addVarArgs(type: E_ArgumentTypes) {
-        this.args = [-1, type];
+    addVarArgs(...types: E_ArgumentTypes[]) {
+        this.args = [-1, ...types];
         return this;
     }
 

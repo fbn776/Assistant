@@ -30,8 +30,8 @@ export namespace EvalErrors {
 	}
 
 	export class CommandNotFound extends EvalError {
-		constructor() {
-			super("Command not found", E_EvalErrorType.CommandNotFound);
+		constructor(additionalInfo: string = '') {
+			super("Command not found" + (additionalInfo? ": " + additionalInfo : ''), E_EvalErrorType.CommandNotFound);
 		}
 	}
 
@@ -54,8 +54,8 @@ export namespace EvalErrors {
 	}
 
 	export class IncorrectType extends EvalError {
-		constructor() {
-			super("Incorrect type", E_EvalErrorType.IncorrectType);
+		constructor(additionalInfo: string = '') {
+			super("Incorrect type\n" + (additionalInfo? ": " + additionalInfo : ''), E_EvalErrorType.IncorrectType);
 		}
 	}
 }

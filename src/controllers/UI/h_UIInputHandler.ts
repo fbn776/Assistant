@@ -194,7 +194,7 @@ export class UIInputHandler {
 		} else if(final == null) {
 			console.info("Null message");
 		} else {
-			_msgCtrl.quickies.botTextReply(final);
+			_msgCtrl.quickies.botTextReply(String(final));
 		}
 
 		//If the `clearOnSubmit` setting is set to true, then clear the input;

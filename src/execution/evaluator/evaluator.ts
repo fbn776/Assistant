@@ -52,7 +52,7 @@ export class Executer {
 
         //Check if the root command exists in the registry;
         if (!this._globCtrl.command.registry!.exists(inputCmdName))
-            throw new EvalErrors.CommandNotFound();
+            throw new EvalErrors.CommandNotFound(`${inputCmdName}`);
 
         /**The corresponding command object taken from the command registry */
         let cmdObj = this._globCtrl.command.registry!.getCommandData(inputCmdName)!;
@@ -85,6 +85,11 @@ export class Executer {
         inputArgs = inputArgs.map((arg, i) => {
             let type = generalType || cmdObj.arguments.types[i];
 
+            if(type === E_ArgumentTypes.command && arg instanceof SyntaxLiteral) throw new EvalErrors.IncorrectType(
+                "Expected a command, but found a literal at argument position " + i
+            );
+
+
             if (arg instanceof SyntaxLiteral) {
                 //If it's a general type, then take the general type value; else get the corresponding type value for command definition;
 
@@ -97,9 +102,10 @@ export class Executer {
 
 			if(type == E_ArgumentTypes.command) {
 				return () => {
-					this._executeCommand(arg);
+					return this._executeCommand(arg);
 				}
 			}
+
             //For now the syntax tree can only contain SyntaxLiteral or SyntaxCommand, but if any future changes happen, change stuff here;
             //If this reaches here, then this means that arg is a SyntaxCommand;
             return this._executeCommand(arg);

@@ -60,4 +60,19 @@ export class MessageQuickiesHandler {
 			},
 		});
 	}
+
+	// helpText(data: I_HelpMessageFormat) {
+	// 	this._parent.addMessage({
+	// 		source: MESSAGE_SOURCE.BOT,
+	// 		text: command,
+	// 		type: MESSAGE_TYPE.FORMATTED_ERROR,
+	// 		unixTime: Date.now(),
+	// 		id: this._parent.generateRandomID(),
+	// 		additionalData: {
+	// 			heading: "Command Typo",
+	// 			errorMsg: error.message,
+	// 			position: error.position,
+	// 		},
+	// 	});
+	// }
 }

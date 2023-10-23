@@ -175,10 +175,10 @@ export class MessageController extends BaseController {
 	}
 
 	/**
-	 * Deletes the messages stored locally.
+	 * Clears messages from the screen
 	 * TODO - Add a function to delete the messages stored in the storage(if its implemented in the future)
 	 */
-	deleteLocalData() {
+	clearMessages() {
 		this._setMessages([]);
 	}
 
