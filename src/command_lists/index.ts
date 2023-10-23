@@ -9,4 +9,4 @@
 import "./math/arithmetic.ts"
 import "./math/trig.ts"
 import "./math/consts.ts"
-import "./std/std"
+import "./std/std.ts"

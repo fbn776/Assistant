@@ -23,10 +23,10 @@
 - [x] Factorial
 - [x] Greatest Common Divisor (GCD)
 - [x] Least Common Multiple (LCM)
-- [ ] Rounding Functions
-    - [ ] Nearest Integer
-    - [ ] Ceiling Rounding
-    - [ ] Floor Rounding
+- [x] Rounding Functions
+    - [x] Nearest Integer
+    - [x] Ceiling Rounding
+    - [x] Floor Rounding
 - [ ] Statistics Functions (optional)
     - [ ] Mean
     - [ ] Median
@@ -35,3 +35,7 @@
 - [x] Constants
   - [x] PI
   - [x] e
+- [ ] Random Number Generator
+  - [ ] Random Integer
+  - [ ] Random Float
+  - [ ] Random Range
