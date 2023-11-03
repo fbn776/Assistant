@@ -1,5 +1,5 @@
-import {ParseErrors} from "../errors/parseErrors";
-import {SyntaxTree} from "../syntax/syntax";
+import {ParseErrors} from "../errors/parseErrors.ts";
+import {SyntaxTree} from "../syntax/syntax.ts";
 
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.

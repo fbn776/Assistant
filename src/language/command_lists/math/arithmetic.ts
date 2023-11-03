@@ -1,6 +1,6 @@
 import {CR} from "../registry_instance.ts";
 import {E_ArgumentTypes as types} from "../../execution/syntax/syntaxdata/ArgumentsData.ts";
-import {GCDList, ProdList} from "../../utils/command_helpers/helpers.ts";
+import {GCDList, ProdList} from "../../../utils/command_helpers/helpers.ts";
 
 //ADDITION
 new CR()

@@ -1,9 +1,9 @@
-import {Parser} from "../parser/parser";
-import {GlobalController} from "../../controllers/c_Controller";
-import {SyntaxCommand, SyntaxLiteral} from "../syntax/syntax";
+import {Parser} from "../parser/parser.ts";
+import {GlobalController} from "../../../controllers/c_Controller.ts";
+import {SyntaxCommand, SyntaxLiteral} from "../syntax/syntax.ts";
 import {EvalErrors} from "../errors/cmdErrors.ts";
 import {E_ArgumentTypes} from "../syntax/syntaxdata";
-import EvaluatorUtils from "./evaluatorUtils";
+import EvaluatorUtils from "./evaluatorUtils.ts";
 
 /**Execution class, executes the command string to a fixed value */
 export class Executer {

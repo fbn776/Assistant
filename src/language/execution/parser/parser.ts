@@ -1,5 +1,5 @@
-import ParserUtils from "./parserUtils";
-import { SyntaxTree } from "../syntax/syntax";
+import ParserUtils from "./parserUtils.ts";
+import { SyntaxTree } from "../syntax/syntax.ts";
 
 /**A parser class, that only has one method. 
  * This takes in a string (most probably from the input text box) and then returns a `SyntaxTree` or an `Error` if there is an error.

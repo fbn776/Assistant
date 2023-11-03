@@ -1,8 +1,8 @@
 import { CommandValidationError } from "./errors/validationErrors.ts";
-import { hasDuplicates } from "../utils/utils.ts";
+import { hasDuplicates } from "../../utils/utils.ts";
 import { Command } from "./syntax/syntaxdata/Command.ts";
-import { ArgumentsData, Documentation } from "./syntax/syntaxdata/index.ts";
-import { GlobalController } from "../controllers/c_Controller.ts";
+import { ArgumentsData, Documentation } from "./syntax/syntaxdata";
+import { GlobalController } from "../../controllers/c_Controller.ts";
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {

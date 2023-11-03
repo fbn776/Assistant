@@ -1,8 +1,8 @@
-import { isBoolean, isNumeric } from "../../utils/utils";
+import { isBoolean, isNumeric } from "../../../utils/utils.ts";
 import { E_ArgumentTypes } from "../syntax/syntaxdata";
 
 export default class EvaluatorUtils {
-	/**Checks if a string can be casted to a type */
+	/**Checks if a string can be cast to a type */
 	static canConvertToType(value: string, expectedType: E_ArgumentTypes) {
 		switch (expectedType) {
 			case E_ArgumentTypes.number:
@@ -27,7 +27,7 @@ export default class EvaluatorUtils {
 				return Number(value);
 
 			case E_ArgumentTypes.boolean:
-				return value === "true" ? true : false;
+				return value === "true";
 
 			case E_ArgumentTypes.string:
 			case E_ArgumentTypes.any:

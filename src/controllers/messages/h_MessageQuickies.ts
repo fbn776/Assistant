@@ -1,6 +1,6 @@
 import { MessageController } from "..";
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
-import { ParseErrors } from "../../execution/errors/parseErrors";
+import { ParseErrors } from "../../language/execution/errors/parseErrors";
 
 export class MessageQuickiesHandler {
 	private _parent;

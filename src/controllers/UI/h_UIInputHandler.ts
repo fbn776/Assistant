@@ -1,6 +1,6 @@
 import { UIController } from "./c_UIController";
 import { debounce } from "../../utils/utils";
-import { ParseErrors } from "../../execution/errors/parseErrors";
+import { ParseErrors } from "../../language/execution/errors/parseErrors";
 
 export class UIInputHandler {
 	private _parent;

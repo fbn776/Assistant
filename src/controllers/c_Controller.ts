@@ -1,5 +1,5 @@
 import { BaseController, CommandController, GlobalSettingsController, MessageController, UIController } from ".";
-import { Executer } from "../execution/evaluator/evaluator";
+import { Executer } from "../language/execution/evaluator/evaluator";
 
 /**
  * This is a global controller class for handling most of the things in the app. This also is an access point accessing for every other controller.
