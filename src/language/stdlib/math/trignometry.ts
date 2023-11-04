@@ -1,7 +1,6 @@
 import {CR} from "../registry_instance.ts";
 import { E_ArgumentTypes as types } from "../../execution/syntax/syntaxdata/ArgumentsData.ts";
 
-
 //DEG TO RAD
 new CR()
     .addAlias("rad", "radians", "radOf", "toRad")

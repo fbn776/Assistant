@@ -10,8 +10,8 @@ import {
 	MessageController,
 	UIController,
 } from "../controllers";
-import "../language/command_lists";
-import { command_registry_instance } from "../language/command_lists/registry_instance";
+import "../language/stdlib";
+import { command_registry_instance } from "../language/stdlib/registry_instance";
 
 //Global controller for the app;
 const globalController = new GlobalController(
