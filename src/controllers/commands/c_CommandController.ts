@@ -1,13 +1,15 @@
-import { CommandRegistry } from "../../language/execution/CommandRegistry";
+import { CommandRegistry } from "./CommandRegistry.ts";
 import { BaseController } from "../c_ControllerBase";
+import {CommandsLocalStore} from "./CommandsLocalStore.ts";
 
 export class CommandController extends BaseController {
 	CONTROLLER_NAME = "CommandController";
 
 	registry: CommandRegistry | null;
+	localStore = new CommandsLocalStore();
 
-	/**This needs to be initialized first; this is a dependency;
-	 * This function takes in a command registry instance; this instance includes all the registered command.
+	/**
+	 * The constructor takes in a command registry instance; this instance includes all the registered command.
 	 */
 	constructor(registry?: CommandRegistry) {
 		super();

@@ -82,36 +82,41 @@ export class Executer {
          * if SyntaxLiteral, then convert the literal to the required JS type and place it in the argument position, and continue.
          * else (it's a Syntax Command), then recursive call this function, but with input as current value and then resolve this function to a single value, and continue
          */
-        inputArgs = inputArgs.map((arg, i) => {
+        const evalArgs: any[] = inputArgs.map((arg, i) => {
             let type = generalType || cmdObj.arguments.types[i];
 
             if(type === E_ArgumentTypes.command && arg instanceof SyntaxLiteral) throw new EvalErrors.IncorrectType(
                 "Expected a command, but found a literal at argument position " + i
             );
 
-
             if (arg instanceof SyntaxLiteral) {
                 //If it's a general type, then take the general type value; else get the corresponding type value for command definition;
-
                 //If the Literal cannot be converted to the type, then throw error;
                 if (!EvaluatorUtils.canConvertToType(arg.name, type))
-                    throw new EvalErrors.IncorrectType();
+                    throw new EvalErrors.IncorrectType(`Cannot convert ${arg.name} to ${type} at argument position ${i + 1}`);
 
                 return EvaluatorUtils.convertToType(arg.name, type);
             }
 
+            //If this is true, the parameter type is command; So this is meant to be executed by the logic of the parent command, so we wrap it in a function and return it;
+            //This function is executed by the parent command's logic;
 			if(type == E_ArgumentTypes.command) {
 				return () => {
 					return this._executeCommand(arg);
 				}
 			}
 
+            console.log("Arguments is: ", arg)
+
             //For now the syntax tree can only contain SyntaxLiteral or SyntaxCommand, but if any future changes happen, change stuff here;
-            //If this reaches here, then this means that arg is a SyntaxCommand;
-            return this._executeCommand(arg);
+            //If this reaches here, then this means that arg is a SyntaxCommand, but parameter type is not command, so execute this here and return the result here itself;
+            const result = this._executeCommand(arg);
+            //Convert the result to the required type and return it;
+            if(!EvaluatorUtils.canConvertToType(result, type)) throw new EvalErrors.IncorrectType(`Cannot convert return of command '${arg.name}' with value '${result}' to type ${type} at argument position ${i + 1}`);
+            return EvaluatorUtils.convertToType(result, type);
         });
 
         /**Here the input arguments are converted to JS - native stuff, put these values into the command function, defined in the registry*/
-        return cmdObj.exec(this._globCtrl, ...inputArgs);
+        return cmdObj.exec(this._globCtrl, ...evalArgs);
     }
 }

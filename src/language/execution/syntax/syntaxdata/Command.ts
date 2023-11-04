@@ -1,7 +1,7 @@
 import Documentation from "./Documentation.ts";
 import { ArgumentsData } from "./ArgumentsData.ts";
 import { CommandValidationError } from "../../errors/validationErrors.ts";
-import { I_CommandRegistryFormat } from "../../CommandRegistry.ts";
+import { I_CommandRegistryFormat } from "../../../../controllers/commands/CommandRegistry.ts";
 
 export class Command {
 	public readonly names: string[];
@@ -25,7 +25,7 @@ export class Command {
 	 * - It starts with an alphabet or an underscore
 	 * - The name should only contain alphanumeric characters and underscores only
 	 *
-	 * NOTE: If the above mentioned are not met, then this throws an error.
+	 * NOTE: If the above-mentioned are not met, then this throws an error.
 	 */
 	static CommandNameValidator(name: string) {
 		//Checks if the staring with a number; throw error if yes;
