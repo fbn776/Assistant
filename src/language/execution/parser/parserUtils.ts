@@ -169,6 +169,15 @@ export default class ParserUtils {
                 result.push(this._combinedSplit(item));
             }
         }
+
+        /**This is a special case;
+         * Sometimes the result array may not contain a initial command string.
+         * ie the result may be like [<argument 1>, <argument 2>, ...] instead of [<command name>, <argument1>, <argument 2>...]
+         * So we assume that this can be evaluated as an eval command (ie evaluate all and return the last command), so we add the 'eval' command at first.
+         */
+        if(result.length > 1 && (typeof result[0]) != "string") {
+            return ["eval", ...result];
+        }
         return result;
     }
 
