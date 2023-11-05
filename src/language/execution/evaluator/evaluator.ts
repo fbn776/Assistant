@@ -106,8 +106,6 @@ export class Executer {
 				}
 			}
 
-            console.log("Arguments is: ", arg)
-
             //For now the syntax tree can only contain SyntaxLiteral or SyntaxCommand, but if any future changes happen, change stuff here;
             //If this reaches here, then this means that arg is a SyntaxCommand, but parameter type is not command, so execute this here and return the result here itself;
             const result = this._executeCommand(arg);

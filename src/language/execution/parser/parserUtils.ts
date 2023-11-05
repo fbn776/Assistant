@@ -51,8 +51,6 @@ export default class ParserUtils {
         //Only push if there is something in temp; (short circuit evaluation)
         temp && result.push(temp);
 
-        console.log("Result is: ", result);
-
         return result;
     }
 

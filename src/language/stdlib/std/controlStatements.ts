@@ -30,18 +30,23 @@ new CR()
     .build();
 
 /**
- * // Simple while statement
+ * Simple while statement
  while (lt (get i) 10) (
- (get i)
- (set i (add (get i) 1))
+    (p "Current i = " (get i))
+    (set i (add (get i) 1))
  )
+ * This translates to;
+ while (i < 10) {
+    print "current i = " + i
+    i = i + 1
+ }
  */
 new CR()
     .addAlias("while")
-    .addDocs("")
+    .addDocs("WHILE statement; this runs a statement until a condition is false", "while (<condition/>) (<statements/>)", "(set i 0) (while (lt (get i) 10) ((p hello) (set i (add (get i) 1))))")
     .addArgs(2, types.command)
     .addExec((_, a: () => boolean, b: () => any) => {
-        const MAX_ITERATIONS = 10000;
+        const MAX_ITERATIONS = 100;
         let i = 0;
         while (a() && MAX_ITERATIONS > i) {
             b();
@@ -49,3 +54,4 @@ new CR()
         }
     })
     .build()
+
