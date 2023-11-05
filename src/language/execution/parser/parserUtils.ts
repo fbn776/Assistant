@@ -3,7 +3,7 @@ import {SyntaxTree} from "../syntax/syntax.ts";
 
 /**A utility class;
  * Functions defined here are not at all optimized; they may be slow and need to be optimized.
- * But currently they work and its all that matter; (guess I'm too lazy :P)
+ * But currently they work, and it's all that matter; (guess I'm too lazy :P)
  */
 export default class ParserUtils {
     /**Splits a given input to an array of string; but this respects quotes
@@ -30,7 +30,11 @@ export default class ParserUtils {
 
                     if (nextIndex === -1) throw new ParseErrors.NoClosingQuoteFound(i);
 
-                    result.push(str[i] + str.substring(i + 1, nextIndex) + str[i]);
+                    //This contains strings that are within quotes;
+                    let quotedStr = str[i] + str.substring(i + 1, nextIndex) + str[i];
+                    //Remove the starting and ending quotes and push it onto the result array;
+                    result.push(quotedStr.substring(1, quotedStr.length - 1));
+
                     i = nextIndex + 1;
 
                     if (i < str.length && str[i] != " ")
@@ -47,10 +51,12 @@ export default class ParserUtils {
         //Only push if there is something in temp; (short circuit evaluation)
         temp && result.push(temp);
 
+        console.log("Result is: ", result);
+
         return result;
     }
 
-    /**Splits a given input of string to an array/multi dimensional array of string; but this respects brackets
+    /**Splits a given input of string to an array/multidimensional array of string; but this respects brackets
      * What this actually does is that whenever a parenthesis is found, the content inside the parenthesis is split to a new array and then added to the original array as a new element.
      * This also respects quotes.
      */
@@ -171,7 +177,7 @@ export default class ParserUtils {
         }
 
         /**This is a special case;
-         * Sometimes the result array may not contain a initial command string.
+         * Sometimes the result array may not contain an initial command string.
          * ie the result may be like [<argument 1>, <argument 2>, ...] instead of [<command name>, <argument1>, <argument 2>...]
          * So we assume that this can be evaluated as an eval command (ie evaluate all and return the last command), so we add the 'eval' command at first.
          */
