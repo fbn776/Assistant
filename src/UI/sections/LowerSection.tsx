@@ -1,7 +1,7 @@
 import { IconCommand, IconSend } from "@tabler/icons-react";
 import { FC, useContext, useRef } from "react";
 import { ControllersContext } from "../providers/contexts";
-import { QuickToolBarItems } from "../../data/d_quickToolBarItems";
+import QuickToolbar from "../components/lowerSection/QuickToolbar.tsx";
 
 export const LowerSection: FC = () => {
 	const globalController = useContext(ControllersContext);
@@ -17,27 +17,7 @@ export const LowerSection: FC = () => {
 						stroke={1.5}
 					/>
 				</div>
-				<div className="no-scrollbar flex flex-grow overflow-x-scroll overflow-y-hidden h-full bg-opacity-70 dark:bg-opacity-70 bg-l-prim-cont-variant dark:bg-d-prim-cont-variant text-l-prim-cont-txt dark:text-d-prim-cont-txt">
-					{QuickToolBarItems.map((item, index) => {
-						let elm = useRef<HTMLDivElement>(null);
-						return (
-							<div
-								key={index}
-								className="select-none font-semibold cursor-pointer aspect-square flex justify-center items-center quick-toolbar-items primary-color-on-hover hover:scale-125"
-								ref={elm}
-								onClick={() => {
-									item.onClick(
-										globalController,
-										item.displayItem as string,
-										elm
-									);
-								}}
-							>
-								{item.displayItem}
-							</div>
-						);
-					})}
-				</div>
+				<QuickToolbar globalController={globalController} />
 			</div>
 			<div className="w-full h-[60%] flex justify-center items-center p-3 gap-3">
 				<div

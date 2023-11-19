@@ -1,5 +1,5 @@
 import { FC, useContext, useRef } from "react";
-import { Message } from "../components/Messages";
+import { Message } from "../components/messages/Messages.tsx";
 import { ControllersContext } from "../providers/contexts";
 
 export const UpperSection: FC = () => {
