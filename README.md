@@ -5,6 +5,9 @@ The Assistant is a personal project for learning and experimenting with `typescr
 ## Usage
 
 The web application is hosted [here](https://assistant-ebon.vercel.app/). Once opened, you can type commands. Currently [^date] there are only a few commands supported.
+Assistant is like a interpreter, it takes in string of text, via the text box and interprets the result and displays the result.
+
+The language assistant interprets is called 
 
 Eg:
 ```
@@ -43,11 +46,11 @@ npm run dev
 ## TODO
 
 - [ ] Documentations
-- [ ] Keyboard controlls
+- [ ] Keyboard controls
 - [ ] Better command parsing
 - [ ] More commands
 - [ ] Better desktop UI
 - [ ] Refactors
 
 
-[^date]: Last updated at 22/09/2023
+[^date]: Last updated at 19/11/2023
