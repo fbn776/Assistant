@@ -7,7 +7,8 @@ The Assistant is a personal project for learning and experimenting with `typescr
 The web application is hosted [here](https://assistant-ebon.vercel.app/). Once opened, you can type commands. Currently [^date] there are only a few commands supported.
 Assistant is like a interpreter, it takes in string of text, via the text box and interprets the result and displays the result.
 
-The language assistant interprets is called 
+The language assistant interprets is called `AssistScript`
+Read more about it [here](./docs/Language/lang.md).
 
 Eg:
 ```
@@ -15,7 +16,7 @@ add 10 20
 ```
 Outputs 30
 
-  NOTE: More documentation is needed
+    NOTE: More documentation is needed
 
 ## Workings
 
