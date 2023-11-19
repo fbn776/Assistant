@@ -13,3 +13,4 @@
 - [ ] Input Autocomplete
   - [ ] Bracket, Quotes autocomplete
   - [ ] Command autocomplete
+- [ ] Keyboard control
