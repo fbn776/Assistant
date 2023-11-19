@@ -20,11 +20,11 @@
   - [x] And
   - [x] Or
   - [x] Not
-- [ ] Assignment
+- [x] Assignment
   - [x] Assign
   - [x] Increment
   - [x] Decrement
-  - [ ] Get
+  - [x] Get
 
 ## Maths Commands TODO
 

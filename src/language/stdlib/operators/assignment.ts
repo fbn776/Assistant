@@ -1,5 +1,6 @@
 import {CR} from "../registry_instance.ts";
 import {E_ArgumentTypes as types} from "../../execution/syntax/syntaxdata/ArgumentsData.ts";
+import EvaluatorUtils from "../../execution/evaluator/evaluatorUtils.ts";
 
 //ASSIGNMENT
 new CR()
@@ -25,5 +26,33 @@ new CR()
     .addExec((_, a: string) => {
         if(!_.command.localStore.hasVar(a)) throw new Error(`Variable '${a}' does not exist`)
         return _.command.localStore.getVar(a)
+    })
+    .build();
+
+//INCREMENT
+new CR()
+    .addAlias("inc", "increment", "plusplus", "incr")
+    .addDocs("This increments a variable by 1", "inc <varible name>", "inc a")
+    .addMonoArgs(types.string)
+    .addExec((_, a: string) => {
+        if(!_.command.localStore.hasVar(a)) throw new Error(`Variable '${a}' does not exist`)
+        let value = _.command.localStore.getVar(a);
+        //Check if the value is a number, if not throw an error; this is to prevent incrementing a non-number
+        if(!EvaluatorUtils.canConvertToType(value, types.number)) throw new Error(`The value of variable '${a}' cannot be incremented because it is not a number`);
+
+        return _.command.localStore.setVar(a, (+value) + 1);
+    })
+    .build();
+
+//DECREMENT
+new CR()
+    .addAlias("decr", "dec", "decrement", "minusminus")
+    .addDocs("This decrements a variable by 1", "dec <varible name>", "dec a")
+    .addMonoArgs(types.string)
+    .addExec((_, a: string) => {
+        if(!_.command.localStore.hasVar(a)) throw new Error(`Variable '${a}' does not exist`)
+        let value = _.command.localStore.getVar(a);
+        if(!EvaluatorUtils.canConvertToType(value, types.number)) throw new Error(`The value of variable '${a}' cannot be incremented because it is not a number`);
+        return _.command.localStore.setVar(a, (+value) - 1);
     })
     .build();
