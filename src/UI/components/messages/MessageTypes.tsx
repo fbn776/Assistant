@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {I_MessageTypeProp} from "../../data/structures/s_message";
-import {convertUnixTime} from "../../utils/utils";
+import {I_MessageTypeProp} from "../../../data/structures/s_message.ts";
+import {convertUnixTime} from "../../../utils/utils.ts";
 
 /**A regular message */
 export const TextMessage: FC<I_MessageTypeProp> = (props) => {

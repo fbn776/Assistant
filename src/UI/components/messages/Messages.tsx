@@ -3,8 +3,8 @@ import {
 	MESSAGE_SOURCE,
 	I_Message,
 	MESSAGE_TYPE,
-} from "../../data/structures/s_message";
-import { ErrorMessage, FormattedErrorMessage, TextMessage } from "./MessageTypes";
+} from "../../../data/structures/s_message.ts";
+import { ErrorMessage, FormattedErrorMessage, TextMessage } from "./MessageTypes.tsx";
 
 export interface I_MessageProps {
 	data: I_Message;
