@@ -25,21 +25,16 @@ const globalController = new GlobalController(
 export const App: FC = () => {
 	//Sets the state controller for the messages;
 	globalController.message.init(useState<I_Message[]>([]));
-	//Sets the state controller for the settings;
-	globalController.globalSettings.init(
-		useState(GlobalSettingsController.BaseSettings)
-	);
 
-	//For the theme toggling
-	globalController.globalSettings.onSettingsChange(() => {
-		document.body.classList.toggle(
-			"dark",
-			globalController.globalSettings.getValue("theme") === "dark"
-		);
-	});
-
-	//! REMOVE THIS;
 	useEffect(() => {
+		//For the theme toggling
+		globalController.globalSettings.onChange("theme", () => {
+			document.body.classList.toggle(
+				"dark",
+				globalController.globalSettings.getValue("theme") === "dark"
+			);
+		});
+		//! REMOVE THIS; THIS IS FOR TESTING PURPOSES ONLY; Change this to a proper shortcut system;
 		window.onkeydown = (e) => {
 			if (e.key === "d" && e.ctrlKey) {
 				let curr = globalController.globalSettings.getValue("theme");

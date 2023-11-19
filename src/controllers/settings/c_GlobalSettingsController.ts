@@ -1,17 +1,10 @@
-import { useEffect } from "react";
 import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
 } from "../../data/structures/s_globalSettings";
 import { BaseController } from "../c_ControllerBase";
 
-/**
- * TODO
- * In a bit of a confusion here. I chose to store settings as a react state. So that whenever a setting change, it automatically updates the UI.
- * But the issue is, since the settings are provided by a Context and that context is at the root, any changes made to settings updates the UI, always.
- * So kinda torn between storing settings as a react state or just a plain object.
- * My idea is, like using a listener to listen to changes in settings and then provide an updater, which then can be used to update the UI. But I don't know how to do that.
- */
+type GSKeys = keyof I_GlobalSettings;
 
 /**
  * Controller for managing global settings.
@@ -19,52 +12,40 @@ import { BaseController } from "../c_ControllerBase";
 export class GlobalSettingsController extends BaseController {
 	CONTROLLER_NAME = "GlobalSettingsController";
 
-	private _settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
-	private _setSettings: React.Dispatch<React.SetStateAction<I_GlobalSettings>> =
-		() => {};
+	/**Keeps tracks of the setting values that, when changed should call back.
+	 * The setting is the key and list of all functions to call back are the values**/
+	private _listenersFlag: Map<GSKeys, (() => void)[]> = new Map();
 
-	/**
-	 * This initializes the message state.
-	 * @param state The return value of a useState() hook of type Array of messages
-	 */
-	init(
-		state: [
-			I_GlobalSettings,
-			React.Dispatch<React.SetStateAction<I_GlobalSettings>>,
-		]
-	) {
-		[this._settings, this._setSettings] = state;
+	/**Settings storage*/
+	private _settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
+
+	/**An event listener that listens to changes in settings */
+	public onChange(listenFor: GSKeys, callback: () => void) {
+		let arr = [];
+		let pre = this._listenersFlag.get(listenFor);
+		if(pre) {
+			arr.push(...pre);
+		}
+		arr.push(callback);
+			this._listenersFlag.set(listenFor, arr);
+	}
+
+	/**Changes a settings values specified by the `key` param, this also calls any listeners that listen to this change*/
+	public setValue(key: GSKeys, value: I_GlobalSettings[GSKeys]) {
+		//Set the value of the specified setting
+		// @ts-ignore
+		this._settings[key] = value;
+		//Call all the callbacks that listen to this specific settings
+		this._listenersFlag.get(key)?.forEach((callback) => callback());
 	}
 
 	/**Returns the value of the specified setting
 	 * ? Open to name changes
 	 */
-	getValue(
-		name: keyof I_GlobalSettings
-	): I_GlobalSettings[keyof I_GlobalSettings] {
+	public getValue(
+		name: GSKeys
+	): I_GlobalSettings[GSKeys] {
 		return this._settings[name];
-	}
-
-	/**Sets the value of the specified setting
-	 * ? Open to name changes
-	 */
-	setValue(
-		name: keyof I_GlobalSettings,
-		value: I_GlobalSettings[keyof I_GlobalSettings]
-	) {
-		this._setSettings((prevState) => ({ ...prevState, [name]: value }));
-	}
-
-	deleteLocalData() {
-		//TODO
-	}
-
-	/**Runs when any of the settings change.
-	 *
-	 *   **`NOTE: Use this only inside of a React component.`**
-	 */
-	onSettingsChange(callback: () => void) {
-		useEffect(callback, [this._settings]);
 	}
 
 	/**Base settings getter */

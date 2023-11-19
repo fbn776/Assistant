@@ -11,7 +11,7 @@ import { Executer } from "../language/execution/evaluator/evaluator";
  * For these events to occur the UI needs to submit some dependencies to the controller.
  *
  * NOTE: This is a controller class; this is supposed to provide a singular source of control, so the UI doesn't have any behavior logic build into it.
- * This modularize the code more. This means certain events, functions, operations are available as simple functions, so usage of those events, operations are abstracted away.
+ * This modularizes the code more. This means certain events, functions, operations are available as simple functions, so usage of those events, operations are abstracted away.
  *
  ** This might need some refactoring, better structure or other stuff. This is open to changes;
  */
