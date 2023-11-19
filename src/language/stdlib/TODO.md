@@ -25,7 +25,7 @@
   - [x] Increment
   - [x] Decrement
   - [x] Get
-
+g
 ## Maths Commands TODO
 
 - [ ] Main maths functions
@@ -58,8 +58,8 @@
   - [x] Constants
     - [x] PI
     - [x] e
-  - [ ] Random Number Generator
-    - [ ] Random Integer
-    - [ ] Random Float
-    - [ ] Random Range
+  - [x] Random Number Generator
+    - [x] Random Integer
+    - [x] Random Float
+    - [x] Random Range
 
