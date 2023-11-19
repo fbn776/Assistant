@@ -21,7 +21,7 @@ TODO; This section is incomplete and will be updated soon.
 
 Try reading
 
-- [file naming scheme](./docs/file_naming_scheme.md)
+- [file naming scheme](./docs/File_naming_scheme.md)
 - [controllers and handlers](./docs/What%20are%20controller%20and%20handlers.md)
 
 ## Tech stack
