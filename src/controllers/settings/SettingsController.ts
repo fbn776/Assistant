@@ -17,9 +17,6 @@ export default class SettingsController extends BaseController {
     /**Settings storage*/
     private _settingStore = new SettingsLocalStore();
 
-    // private _settings: I_SettingsFormat = this._settingStore.settings;
-
-
     /**An event listener that listens to changes in settings */
     public onChange(listenFor: GSKeys, callback: () => void) {
         let arr = [];
