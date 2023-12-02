@@ -1,4 +1,4 @@
-export interface I_GlobalSettings {
+export interface I_SettingsFormat {
 	/** Controls the theme */
 	theme: "light" | "dark";
 
@@ -15,7 +15,7 @@ export interface I_GlobalSettings {
 	clearOnSubmit: boolean;
 }
 
-export const DefaultGlobalSettings: I_GlobalSettings = {
+export const DefaultSettings: I_SettingsFormat = {
 	theme: "light",
 
 	showMessageDate: true,
