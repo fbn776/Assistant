@@ -7,7 +7,7 @@ export default class MessageStorageHandler {
 	constructor(parent: MessageController) {
 		this._parent = parent;
 
-		console.log(this._parent)
+		console.log("TODO:", this._parent);
 	}
 
 }	
