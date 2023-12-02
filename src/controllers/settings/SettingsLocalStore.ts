@@ -2,7 +2,7 @@ import {DefaultSettings, I_SettingsFormat} from "../../data/structures/s_globalS
 
 
 export default class SettingsLocalStore {
-    private _localData: I_SettingsFormat = DefaultSettings;
+    private readonly _localData: I_SettingsFormat = DefaultSettings;
 
     private _key = "Settings"
     constructor() {
@@ -30,6 +30,7 @@ export default class SettingsLocalStore {
         }
     }
 
+    /**Updates local storage**/
     public update(): void {
         window.localStorage.setItem(this._key, JSON.stringify(this._localData));
         console.info("Updated data");

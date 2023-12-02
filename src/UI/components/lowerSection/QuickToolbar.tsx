@@ -1,6 +1,6 @@
 import {QuickToolBarItems} from "../../../data/d_quickToolBarItems.tsx";
 import {FC, memo, useRef} from "react";
-import {GlobalController} from "../../../controllers/GlobalController.ts";
+import GlobalController from "../../../controllers/GlobalController.ts";
 
 type prop = {
     globalController: GlobalController;
