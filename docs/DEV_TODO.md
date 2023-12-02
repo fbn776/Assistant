@@ -4,9 +4,9 @@
 
 - [x] Make settings controller not reactive in the reactjs way
   - Use updaters or callbacks that trigger listeners.
-- [ ] Settings local storage
-  - [ ] Save settings to local storage
-  - [ ] Load settings from local storage
+- [x] Settings local storage
+  - [x] Save settings to local storage
+  - [x] Load settings from local storage
 - [ ] Message local storage
   - [ ] Save messages to local storage
   - [ ] Load messages from local storage
