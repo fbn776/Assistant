@@ -1,5 +1,9 @@
 # Assistant ✨
 
+<p>
+    <img src="./public/favicon.svg" alt="Assistant logo"/>
+</p>
+
 The Assistant is a personal project for learning and experimenting with `typescript`. The project is a chatbot like application that responds to user given commands. These commands are defined using a custom built instruction language. The commands can be chained together to create more complex instructions. These are then executed by a custom executor, and the results are returned to the user via messages in the chat.
 
 ## Usage
