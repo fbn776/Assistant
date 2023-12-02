@@ -1,8 +1,8 @@
-import { UIController } from "./c_UIController";
+import UIController from "./UIController.ts";
 
 interface I_UIEventsMessage {}
 
-export class UIMessageHandler implements I_UIEventsMessage {
+export default class MessageUIHandler implements I_UIEventsMessage {
 	private _parent: UIController;
 	//Alias
 	private get _deps() {

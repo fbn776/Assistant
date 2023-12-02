@@ -1,4 +1,4 @@
-import { GlobalController } from "./c_Controller";
+import { GlobalController } from "./GlobalController.ts";
 
 export class BaseController {
 	CONTROLLER_NAME: string = "BaseController";

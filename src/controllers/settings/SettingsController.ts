@@ -2,14 +2,14 @@ import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
 } from "../../data/structures/s_globalSettings";
-import { BaseController } from "../c_ControllerBase";
+import { BaseController } from "../BaseController.ts";
 
 type GSKeys = keyof I_GlobalSettings;
 
 /**
  * Controller for managing global settings.
  */
-export class GlobalSettingsController extends BaseController {
+export default class SettingsController extends BaseController {
 	CONTROLLER_NAME = "GlobalSettingsController";
 
 	/**Keeps tracks of the setting values that, when changed should call back.
@@ -17,17 +17,17 @@ export class GlobalSettingsController extends BaseController {
 	private _listenersFlag: Map<GSKeys, (() => void)[]> = new Map();
 
 	/**Settings storage*/
-	private _settings: I_GlobalSettings = GlobalSettingsController.BaseSettings;
+	private _settings: I_GlobalSettings = SettingsController.BaseSettings;
 
 	/**An event listener that listens to changes in settings */
 	public onChange(listenFor: GSKeys, callback: () => void) {
 		let arr = [];
 		let pre = this._listenersFlag.get(listenFor);
-		if(pre) {
+		if (pre) {
 			arr.push(...pre);
 		}
 		arr.push(callback);
-			this._listenersFlag.set(listenFor, arr);
+		this._listenersFlag.set(listenFor, arr);
 	}
 
 	/**Changes a settings values specified by the `key` param, this also calls any listeners that listen to this change*/
@@ -42,9 +42,7 @@ export class GlobalSettingsController extends BaseController {
 	/**Returns the value of the specified setting
 	 * ? Open to name changes
 	 */
-	public getValue(
-		name: GSKeys
-	): I_GlobalSettings[GSKeys] {
+	public getValue(name: GSKeys): I_GlobalSettings[GSKeys] {
 		return this._settings[name];
 	}
 

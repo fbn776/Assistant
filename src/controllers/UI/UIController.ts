@@ -1,9 +1,9 @@
 import { I_dependencies } from "../../data/structures/s_controllers";
-import { BaseController } from "../c_ControllerBase";
-import { UIInputHandler } from "./h_UIInputHandler";
-import { UIMessageHandler } from "./h_UIMessageHandler";
+import { BaseController } from "../BaseController.ts";
+import InputUIHandler from "./InputUIHandler.ts";
+import MessageUIHandler from "./MessageUIHandler.ts";
 
-export class UIController extends BaseController {
+export default class UIController extends BaseController {
 	CONTROLLER_NAME = "UIController";
 
 	/**Dependencies object for storing different dependencies to which the different events the controller depends on.
@@ -22,13 +22,13 @@ export class UIController extends BaseController {
 	 * ! Could be refactored to a better way; but currently too lazy, I guess.
 	 * @see I_UIEvents for adding new methods
 	 */
-	readonly input: UIInputHandler;
-	readonly message: UIMessageHandler;
+	readonly input: InputUIHandler;
+	readonly message: MessageUIHandler;
 
 	constructor() {
 		super();
-		this.input = new UIInputHandler(this);
-		this.message = new UIMessageHandler(this);
+		this.input = new InputUIHandler(this);
+		this.message = new MessageUIHandler(this);
 	}
 
 	/**Plays a success animation and tick icon; for quick utils

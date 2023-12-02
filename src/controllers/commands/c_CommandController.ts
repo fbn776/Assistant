@@ -1,5 +1,5 @@
 import { CommandRegistry } from "./CommandRegistry.ts";
-import { BaseController } from "../c_ControllerBase";
+import { BaseController } from "../BaseController.ts";
 import {CommandsLocalStore} from "./CommandsLocalStore.ts";
 
 export class CommandController extends BaseController {

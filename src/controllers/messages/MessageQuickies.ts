@@ -2,7 +2,10 @@ import { MessageController } from "..";
 import { MESSAGE_SOURCE, MESSAGE_TYPE } from "../../data/structures/s_message";
 import { ParseErrors } from "../../language/execution/errors/parseErrors";
 
-export class MessageQuickiesHandler {
+/**
+ * A utility class that helps for quick message dispatch
+ */
+export class MessageQuickies {
 	private _parent;
 
 	constructor(parent: MessageController) {

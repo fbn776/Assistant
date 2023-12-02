@@ -1,8 +1,8 @@
-import { UIController } from "./c_UIController";
+import UIController from "./UIController.ts";
 import { debounce } from "../../utils/utils";
 import { ParseErrors } from "../../language/execution/errors/parseErrors";
 
-export class UIInputHandler {
+export default class InputUIHandler {
 	private _parent;
 
 	//Alias

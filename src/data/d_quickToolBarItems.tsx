@@ -9,7 +9,7 @@ import {
 	IconTrash,
 	IconClipboard,
 } from "@tabler/icons-react";
-import { GlobalController } from "../controllers/c_Controller";
+import { GlobalController } from "../controllers/GlobalController.ts";
 
 class QuickToolBarItem {
 	/**Text/Element to be displayed in the tool bar;*/

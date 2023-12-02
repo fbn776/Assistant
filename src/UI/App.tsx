@@ -3,10 +3,10 @@ import { FC, useEffect, useState } from "react";
 import { LowerSection, UpperSection } from "./sections";
 import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
-import { GlobalController } from "../controllers/c_Controller";
+import { GlobalController } from "../controllers/GlobalController.ts";
 import {
 	CommandController,
-	GlobalSettingsController,
+	SettingsController,
 	MessageController,
 	UIController,
 } from "../controllers";
@@ -16,7 +16,7 @@ import { command_registry_instance } from "../language/stdlib/registry_instance"
 //Global controller for the app;
 const globalController = new GlobalController(
 	new MessageController(),
-	new GlobalSettingsController(),
+	new SettingsController(),
 	new UIController(),
 	new CommandController(command_registry_instance)
 );

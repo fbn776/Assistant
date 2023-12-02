@@ -1,12 +1,12 @@
-import { GlobalSettingsController } from "./settings/c_GlobalSettingsController";
-import { MessageController } from "./messages/c_MessageController";
-import { UIController } from "./UI/c_UIController";
+import SettingsController from "./settings/SettingsController.ts";
+import MessageController from "./messages/MessageController.ts";
+import UIController from "./UI/UIController.ts";
 import { CommandController } from "./commands/c_CommandController";
-import { BaseController } from "./c_ControllerBase";
+import { BaseController } from "./BaseController.ts";
 
 export {
 	BaseController,
-	GlobalSettingsController,
+	SettingsController,
 	MessageController,
 	UIController,
 	CommandController,

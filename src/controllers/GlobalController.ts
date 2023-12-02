@@ -1,4 +1,4 @@
-import { BaseController, CommandController, GlobalSettingsController, MessageController, UIController } from ".";
+import { BaseController, CommandController, SettingsController, MessageController, UIController } from ".";
 import { Executer } from "../language/execution/evaluator/evaluator";
 
 /**
@@ -19,7 +19,7 @@ export class GlobalController {
 	/**Message controller. For controlling the reading and writing messages.*/
 	message: MessageController;
 	/**Global settings controller. For controlling the getting and setting and storage of global settings */
-	globalSettings: GlobalSettingsController;
+	globalSettings: SettingsController;
 	/**UI controller. For controlling different UI elements like input and messages */
 	ui: UIController;
 	/**Command controller. For handling stuff related to commands */
@@ -31,7 +31,7 @@ export class GlobalController {
 
 	constructor(
 		messageController = new MessageController(),
-		globalSettingsController = new GlobalSettingsController(),
+		globalSettingsController = new SettingsController(),
 		uiController = new UIController(),
 		commandController = new CommandController()
 	) {

@@ -1,8 +1,8 @@
-import { MessageController } from "./c_MessageController";
+import MessageController from "./MessageController.ts";
 
 
 export default class MessageStorageHandler {
-	private _parent: MessageController;
+	private readonly _parent: MessageController;
 
 	constructor(parent: MessageController) {
 		this._parent = parent;

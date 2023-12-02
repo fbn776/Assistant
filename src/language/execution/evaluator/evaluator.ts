@@ -1,5 +1,5 @@
 import {Parser} from "../parser/parser.ts";
-import {GlobalController} from "../../../controllers/c_Controller.ts";
+import {GlobalController} from "../../../controllers/GlobalController.ts";
 import {SyntaxCommand, SyntaxLiteral} from "../syntax/syntax.ts";
 import {EvalErrors} from "../errors/cmdErrors.ts";
 import {E_ArgumentTypes} from "../syntax/syntaxdata";
