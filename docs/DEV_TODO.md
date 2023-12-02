@@ -1,4 +1,4 @@
-# Dev TODOS
+# Dev TODO
 
 ## Internal Stuffs
 
@@ -10,7 +10,6 @@
 - [ ] Message local storage
   - [ ] Save messages to local storage
   - [ ] Load messages from local storage
-
 
 ## UI stuff
 

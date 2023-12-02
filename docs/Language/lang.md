@@ -18,26 +18,30 @@ eg: `command1 (command2 arg1 (command3 arg1 arg2)) arg3`
 
 Each command has predefined functionality. And takes in a set of arguments and returns a result; that are governed by the implementation. 
 
-##### Command chaining
+## Command chaining
 
 To execute command one after another, enclose each command with a `()` and separate than with spaces. This is called command chaining. 
 eg: `(command1 arg1 arg2) (command2 arg1 arg2) (command3 arg1 arg2)`
 
 ## Supported commands
+
 /// TODO
 
 ## Examples
 
 A simple while loop that prints the value of i until it reaches 10
-```
- (set i 0)
- while (lt (get i) 10) (
-    (p "Current i = " (get i))
+
+```assistScript
+(set i 0)
+(while (lt (get i) 10) (
+    (p "Current i = " (get i)) 
     (set i (add (get i) 1))
- )
+))
 ```
+
 The above code roughly translates to the following pseudocode
-```
+
+```AssistScript
 while (i < 10) {
     print "current i = " + i
     i = i + 1
