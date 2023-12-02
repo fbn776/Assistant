@@ -1,6 +1,6 @@
-import { GlobalController } from "./GlobalController.ts";
+import GlobalController from "./GlobalController.ts";
 
-export class BaseController {
+export default class BaseController {
 	CONTROLLER_NAME: string = "BaseController";
 
 	parent: GlobalController = null as any;

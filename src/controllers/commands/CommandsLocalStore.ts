@@ -2,7 +2,7 @@
  * This is used to store the commands data locally;
  * ie, used to store variables data, preferences data, etc.
  */
-export class CommandsLocalStore {
+export default class CommandsLocalStore {
     /**Variable store*/
     private _varstore: Map<string, any> = new Map();
 

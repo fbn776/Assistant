@@ -1,8 +1,8 @@
-import { CommandRegistry } from "./CommandRegistry.ts";
-import { BaseController } from "../BaseController.ts";
-import {CommandsLocalStore} from "./CommandsLocalStore.ts";
+import CommandRegistry from "./CommandRegistry.ts";
+import BaseController from "../BaseController.ts";
+import CommandsLocalStore from "./CommandsLocalStore.ts";
 
-export class CommandController extends BaseController {
+export default class CommandController extends BaseController {
 	CONTROLLER_NAME = "CommandController";
 
 	registry: CommandRegistry | null;

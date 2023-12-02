@@ -2,7 +2,7 @@ import {
 	DefaultGlobalSettings,
 	I_GlobalSettings,
 } from "../../data/structures/s_globalSettings";
-import { BaseController } from "../BaseController.ts";
+import BaseController from "../BaseController.ts";
 
 type GSKeys = keyof I_GlobalSettings;
 

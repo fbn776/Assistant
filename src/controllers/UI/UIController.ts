@@ -1,5 +1,5 @@
 import { I_dependencies } from "../../data/structures/s_controllers";
-import { BaseController } from "../BaseController.ts";
+import BaseController from "../BaseController.ts";
 import InputUIHandler from "./InputUIHandler.ts";
 import MessageUIHandler from "./MessageUIHandler.ts";
 

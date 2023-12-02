@@ -1,7 +1,7 @@
 /**The registry instance class. This has the registry instance that is used to store the commands.
  * This same instance is used in the command controller
  */
-import {CommandRegistry, I_CommandRegistryFormat,} from "../../controllers/commands/CommandRegistry.ts";
+import CommandRegistry, {I_CommandRegistryFormat,} from "../../controllers/commands/CommandRegistry.ts";
 import Documentation from "../execution/syntax/syntaxdata/Documentation.ts";
 import {ArgumentsData, E_ArgumentTypes} from "../execution/syntax/syntaxdata";
 

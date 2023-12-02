@@ -5,7 +5,7 @@ import { ParseErrors } from "../../language/execution/errors/parseErrors";
 /**
  * A utility class that helps for quick message dispatch
  */
-export class MessageQuickies {
+export default class MessageQuickies {
 	private _parent;
 
 	constructor(parent: MessageController) {

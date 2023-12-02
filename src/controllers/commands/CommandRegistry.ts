@@ -2,7 +2,7 @@ import { CommandValidationError } from "../../language/execution/errors/validati
 import { hasDuplicates } from "../../utils/utils.ts";
 import { Command } from "../../language/execution/syntax/syntaxdata/Command.ts";
 import { ArgumentsData, Documentation } from "../../language/execution/syntax/syntaxdata";
-import { GlobalController } from "../GlobalController.ts";
+import GlobalController from "../GlobalController.ts";
 
 /**The format of the command that is registered to the `CommandRegistry` */
 export interface I_CommandRegistryFormat {
@@ -20,7 +20,7 @@ export interface I_CommandRegistryFormat {
  * _commands stores the key value pair in the format <command_name>: <Command_class>
  * Each alias of the command takes occupies a separate space in the map;
  */
-export class CommandRegistry {
+export default class CommandRegistry {
 	private _commands: Map<string, Command> = new Map();
 
 	/**Adds or registers a new command to the command registry;

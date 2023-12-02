@@ -15,7 +15,7 @@ import { Executer } from "../language/execution/evaluator/evaluator";
  *
  ** This might need some refactoring, better structure or other stuff. This is open to changes;
  */
-export class GlobalController {
+export default class GlobalController {
 	/**Message controller. For controlling the reading and writing messages.*/
 	message: MessageController;
 	/**Global settings controller. For controlling the getting and setting and storage of global settings */

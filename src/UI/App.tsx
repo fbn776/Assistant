@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { LowerSection, UpperSection } from "./sections";
 import { I_Message } from "../data/structures/s_message";
 import { ControllersContext } from "./providers/contexts";
-import { GlobalController } from "../controllers/GlobalController.ts";
+import GlobalController from "../controllers/GlobalController.ts";
 import {
 	CommandController,
 	SettingsController,
