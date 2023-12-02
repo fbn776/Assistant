@@ -2,7 +2,6 @@ import { I_Message, MESSAGE_SOURCE } from "../../data/structures/s_message";
 import BaseController from "../BaseController.ts";
 import GlobalController from "../GlobalController.ts";
 import MessageQuickies from "./MessageQuickies.ts";
-import MessageStorageHandler from "./MessageStorageHandler.ts";
 /**
  * This is a controller class for handling related to messages storing, retrieving, deletion and addition.
  * This makes sure that the messages are handled in a centralized manner, ie this forms a single point of truth for the messages;
@@ -16,7 +15,6 @@ export default class MessageController extends BaseController {
 		() => {};
 
 	/**Storage handler */
-	storage = new MessageStorageHandler(this);
 	/**Some quick message functions */
 	quickies = new MessageQuickies(this);
 
